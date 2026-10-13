@@ -171,6 +171,7 @@ export const GUIDES: Guide[] = [
     publishedAt: "2026-08-28",
     updatedAt: "2026-08-28",
     author: "Frank",
+    relatedTool: "ke-hoach-tra-no",
     content: {
       introduction: "Kiếm tiền đã khó, giữ tiền còn khó hơn gấp mười lần. Ở Việt Nam, lòng tham và nỗi sợ bị bỏ lại phía sau (FOMO) là hai tử huyệt khiến hàng ngàn người mất sạch số tiền tích cóp cả đời.",
       keyTakeaways: [

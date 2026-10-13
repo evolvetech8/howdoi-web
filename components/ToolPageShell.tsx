@@ -129,7 +129,7 @@ export default function ToolPageShell({ tool, intro, calculator, faqs, sources, 
         <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
           <Calculator className="w-5 h-5 text-emerald-600" /> Công cụ khác
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {otherTools.map((t) => (
             <Link
               key={t.slug}

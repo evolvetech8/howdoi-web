@@ -2,13 +2,14 @@
 
 > Giải đáp các câu hỏi tiền bạc của người đi làm Việt Nam, kèm công cụ tính miễn phí.
 
-Mỗi câu hỏi “Làm sao để…?” có một bài hướng dẫn và một công cụ tính đi kèm. Nội dung xoay quanh 4 cụm chủ đề, mỗi cụm có một công cụ trung tâm:
+Mỗi câu hỏi “Làm sao để…?” có một bài hướng dẫn và một công cụ tính đi kèm. Mục tiêu, lộ trình và những việc **không** làm: xem [`MUC-TIEU.md`](MUC-TIEU.md). Nội dung xoay quanh 4 cụm chủ đề, mỗi cụm có một công cụ trung tâm:
 
 | Cụm | Công cụ | Đường dẫn |
 | --- | --- | --- |
 | Lương & Thuế TNCN | Lương Gross ↔ Net | `/cong-cu/luong-gross-net` |
 | Tiết kiệm & Đầu tư | Lãi kép & tích lũy | `/cong-cu/lai-kep` |
 | Vay & Trả nợ | Vay mua nhà / xe | `/cong-cu/tinh-lai-vay` |
+| Vay & Trả nợ | Kế hoạch trả nợ (quả cầu tuyết / tuyết lở) | `/cong-cu/ke-hoach-tra-no` |
 | Ngân sách | 50/30/20 & 6 chiếc lọ | `/cong-cu/ngan-sach-50-30-20` |
 
 `/support` và `/privacy` (cùng `/support/cho-con`, `/privacy/cho-con`) là Support URL và Privacy Policy URL của ứng dụng iOS trên App Store. **Không đổi hay xóa các đường dẫn này.**

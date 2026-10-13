@@ -35,7 +35,12 @@ export const TOPICS: Topic[] = [
   },
 ];
 
-export type ToolSlug = "luong-gross-net" | "lai-kep" | "tinh-lai-vay" | "ngan-sach-50-30-20";
+export type ToolSlug =
+  | "luong-gross-net"
+  | "lai-kep"
+  | "tinh-lai-vay"
+  | "ke-hoach-tra-no"
+  | "ngan-sach-50-30-20";
 
 export interface Tool {
   slug: ToolSlug;
@@ -76,6 +81,16 @@ export const TOOLS: Tool[] = [
     question: "Vay mua nhà mỗi tháng phải trả bao nhiêu?",
     description:
       "Tính số tiền trả hàng tháng và tổng tiền lãi khi vay mua nhà, mua xe. So sánh cách tính lãi trên dư nợ giảm dần và lãi cố định trên dư nợ ban đầu.",
+    updatedAt: "2026-10-13",
+  },
+  {
+    slug: "ke-hoach-tra-no",
+    topic: "vay-tra-no",
+    name: "Kế hoạch trả nợ",
+    title: "Kế hoạch trả nợ: nên trả khoản nào trước? (Quả cầu tuyết & Tuyết lở)",
+    question: "Có nhiều khoản nợ, nên trả khoản nào trước?",
+    description:
+      "Nhập các khoản nợ (thẻ tín dụng, vay tiêu dùng, vay người thân...) để biết nên trả khoản nào trước, bao giờ hết nợ và tốn bao nhiêu tiền lãi theo phương pháp quả cầu tuyết và tuyết lở.",
     updatedAt: "2026-10-13",
   },
   {

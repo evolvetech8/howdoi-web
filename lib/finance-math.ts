@@ -351,3 +351,139 @@ export function calculateLoan(input: LoanCalculationInput) {
     schedule,
   };
 }
+
+// 6. DEBT PAYOFF PLAN (KẾ HOẠCH TRẢ NỢ: QUẢ CẦU TUYẾT / TUYẾT LỞ)
+// Giả định: lãi tính theo tháng trên dư nợ còn lại (lãi năm / 12), khoản trả tối thiểu
+// của mỗi khoản nợ cố định. Với "snowball" và "avalanche", tổng tiền trả mỗi tháng giữ
+// nguyên (tổng tối thiểu + tiền trả thêm): khoản nào trả xong thì phần tối thiểu của nó
+// được dồn sang khoản tiếp theo. "minimum" là phương án đối chứng: chỉ trả tối thiểu.
+export type DebtStrategy = "snowball" | "avalanche" | "minimum";
+
+export interface DebtInput {
+  id: string;
+  name: string;
+  balance: number;        // Dư nợ hiện tại (VND)
+  annualRate: number;     // Lãi suất (%/năm)
+  minPayment: number;     // Trả tối thiểu mỗi tháng (VND)
+}
+
+export interface DebtPayoffItem {
+  id: string;
+  name: string;
+  paidOffMonth: number | null;  // Tháng trả xong (1 = tháng đầu tiên), null nếu không trả xong
+  interestPaid: number;
+}
+
+export interface DebtPayoffResult {
+  strategy: DebtStrategy;
+  feasible: boolean;              // Trả hết trong DEBT_MAX_MONTHS tháng
+  months: number;                 // Số tháng đến khi hết nợ (= DEBT_MAX_MONTHS nếu không trả hết)
+  monthlyPayment: number;         // Tổng tiền trả tháng đầu
+  totalInterest: number;
+  totalPaid: number;
+  items: DebtPayoffItem[];        // Theo thứ tự ưu tiên của phương pháp
+}
+
+export const DEBT_MAX_MONTHS = 600; // 50 năm
+
+// Thứ tự ưu tiên trả thêm, xác định một lần từ đầu:
+// - Quả cầu tuyết: dư nợ nhỏ nhất trước (bằng nhau thì lãi cao hơn trước).
+// - Tuyết lở: lãi suất cao nhất trước (bằng nhau thì dư nợ nhỏ hơn trước).
+export function orderDebts(debts: DebtInput[], strategy: DebtStrategy): DebtInput[] {
+  const sorted = [...debts];
+  if (strategy === "snowball") {
+    sorted.sort((a, b) => a.balance - b.balance || b.annualRate - a.annualRate);
+  } else if (strategy === "avalanche") {
+    sorted.sort((a, b) => b.annualRate - a.annualRate || a.balance - b.balance);
+  }
+  return sorted;
+}
+
+export function simulateDebtPayoff(
+  debts: DebtInput[],
+  extraPayment: number,
+  strategy: DebtStrategy,
+): DebtPayoffResult {
+  const ordered = orderDebts(debts.filter((d) => d.balance > 0), strategy);
+  const balances = ordered.map((d) => d.balance);
+  const interestPaid = ordered.map(() => 0);
+  const paidOffMonth: (number | null)[] = ordered.map(() => null);
+
+  const totalMinimum = ordered.reduce((sum, d) => sum + Math.max(0, d.minPayment), 0);
+  const budget = strategy === "minimum" ? totalMinimum : totalMinimum + Math.max(0, extraPayment);
+
+  let totalInterest = 0;
+  let totalPaid = 0;
+  let months = 0;
+  let firstMonthPayment = 0;
+
+  while (balances.some((b) => b > 0) && months < DEBT_MAX_MONTHS) {
+    months++;
+    let paidThisMonth = 0;
+
+    // 1. Cộng lãi tháng này
+    ordered.forEach((d, i) => {
+      if (balances[i] <= 0) return;
+      const interest = balances[i] * (d.annualRate / 100 / 12);
+      balances[i] += interest;
+      interestPaid[i] += interest;
+      totalInterest += interest;
+    });
+
+    // 2. Trả tối thiểu cho mọi khoản còn nợ
+    let available = budget;
+    ordered.forEach((d, i) => {
+      if (balances[i] <= 0) return;
+      const pay = Math.min(Math.max(0, d.minPayment), balances[i], available);
+      balances[i] -= pay;
+      available -= pay;
+      paidThisMonth += pay;
+    });
+
+    // 3. Phần còn lại dồn vào khoản ưu tiên (chỉ với snowball / avalanche)
+    if (strategy !== "minimum") {
+      for (let i = 0; i < ordered.length && available > 0; i++) {
+        if (balances[i] <= 0) continue;
+        const pay = Math.min(available, balances[i]);
+        balances[i] -= pay;
+        available -= pay;
+        paidThisMonth += pay;
+      }
+    }
+
+    // Dư nợ dưới 1 đồng coi như đã trả xong (sai số làm tròn)
+    balances.forEach((b, i) => {
+      if (b < 1 && paidOffMonth[i] === null) {
+        balances[i] = 0;
+        paidOffMonth[i] = months;
+      }
+    });
+
+    totalPaid += paidThisMonth;
+    if (months === 1) firstMonthPayment = paidThisMonth;
+  }
+
+  return {
+    strategy,
+    feasible: balances.every((b) => b <= 0),
+    months,
+    monthlyPayment: Math.round(firstMonthPayment),
+    totalInterest: Math.round(totalInterest),
+    totalPaid: Math.round(totalPaid),
+    items: ordered.map((d, i) => ({
+      id: d.id,
+      name: d.name,
+      paidOffMonth: paidOffMonth[i],
+      interestPaid: Math.round(interestPaid[i]),
+    })),
+  };
+}
+
+// "27 tháng" → "2 năm 3 tháng"
+export function formatMonths(totalMonths: number): string {
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+  if (years === 0) return `${months} tháng`;
+  if (months === 0) return `${years} năm`;
+  return `${years} năm ${months} tháng`;
+}

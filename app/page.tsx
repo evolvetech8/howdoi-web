@@ -15,7 +15,9 @@ const POPULAR_QUESTIONS = [
   { q: 'Lương 20 triệu thực nhận bao nhiêu năm 2026?', href: `${toolPath('luong-gross-net')}#vi-du` },
   { q: 'Mỗi tháng để dành bao nhiêu để có 1 tỷ?', href: `${toolPath('lai-kep')}#1-ty` },
   { q: 'Vay 1 tỷ mua nhà mỗi tháng trả bao nhiêu?', href: `${toolPath('tinh-lai-vay')}#vay-1-ty` },
+  { q: 'Trả nợ thẻ tín dụng hay khoản vay trước?', href: `${toolPath('ke-hoach-tra-no')}#nen-chon` },
   { q: 'Lương 10 triệu chi tiêu thế nào cho đủ?', href: `${toolPath('ngan-sach-50-30-20')}#bang-chia` },
+  { q: 'Biểu thuế TNCN 2026 có mấy bậc?', href: `${toolPath('luong-gross-net')}#bieu-thue` },
 ];
 
 const million = (amount: number) => (amount / 1_000_000).toLocaleString('vi-VN');
@@ -103,7 +105,7 @@ export default function HomePage() {
             Tất cả →
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {TOOLS.map((tool) => (
             <ToolCard key={tool.slug} tool={tool} />
           ))}

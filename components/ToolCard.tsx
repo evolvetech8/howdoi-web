@@ -1,12 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Building2, PieChart, TrendingUp, Wallet, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Building2, PieChart, Snowflake, TrendingUp, Wallet, type LucideIcon } from 'lucide-react';
 import { toolPath, type Tool, type ToolSlug } from '@/content/tools';
 
 const ICONS: Record<ToolSlug, { icon: LucideIcon; tone: string }> = {
   'luong-gross-net': { icon: Wallet, tone: 'from-blue-600 to-indigo-700' },
   'lai-kep': { icon: TrendingUp, tone: 'from-emerald-600 to-teal-700' },
   'tinh-lai-vay': { icon: Building2, tone: 'from-amber-600 to-orange-700' },
+  'ke-hoach-tra-no': { icon: Snowflake, tone: 'from-rose-600 to-red-700' },
   'ngan-sach-50-30-20': { icon: PieChart, tone: 'from-teal-600 to-cyan-700' },
 };
 
