@@ -1,10 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import { SITE } from '@/lib/site';
 import { Shield, ArrowLeft, Lock, Smartphone, CheckCircle, Mail } from 'lucide-react';
 
 export const metadata = {
   title: 'Chính Sách Quyền Riêng Tư (Privacy Policy) — Ứng Dụng Cho Con',
   description: 'Chính sách bảo mật và quyền riêng tư chính thức của ứng dụng di động Cho Con - Chuẩn Bị Đón Bé.',
+  openGraph: { title: 'Chính Sách Quyền Riêng Tư — Ứng Dụng Cho Con' },
 };
 
 export default function ChoConPrivacyPage() {
@@ -36,9 +38,9 @@ export default function ChoConPrivacyPage() {
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
           <span>Ứng dụng: <strong>Cho Con - Chuẩn Bị Đón Bé</strong> (iOS)</span>
           <span>•</span>
-          <span>Nhà phát triển: <strong>Frank / EvolveTech</strong></span>
+          <span>Nhà phát triển: <strong>Frank</strong></span>
           <span>•</span>
-          <span>Cập nhật lần cuối: <strong>08/09/2026</strong></span>
+          <span>Cập nhật lần cuối: <strong>13/10/2026</strong></span>
         </div>
       </header>
 
@@ -118,8 +120,8 @@ export default function ChoConPrivacyPage() {
             Nếu bạn có bất kỳ câu hỏi hoặc khiếu nại nào về Chính sách quyền riêng tư này, vui lòng liên hệ với nhà phát triển:
           </p>
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-1">
-            <p><strong>Người đại diện:</strong> Frank (EvolveTech)</p>
-            <p><strong>Email:</strong> evolvetech8@outlook.com</p>
+            <p><strong>Người đại diện:</strong> Frank</p>
+            <p><strong>Email:</strong> {SITE.contactEmail}</p>
             <p><strong>Trang web:</strong> https://howdoi.id.vn</p>
           </div>
         </section>

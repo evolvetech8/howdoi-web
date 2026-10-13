@@ -292,7 +292,7 @@ export default function CompoundInterestCalc() {
           {/* Insight Note */}
           <div className="bg-emerald-50 border-l-4 border-emerald-500 p-3.5 rounded-r-lg">
             <p className="text-xs text-emerald-900 leading-relaxed">
-              💡 <strong>Góc nhìn của Frank:</strong> Tiền lãi sinh ra ({formatCompactVND(summary.totalInterest)}) chiếm đến{' '}
+              💡 <strong>Góc nhìn:</strong> Tiền lãi sinh ra ({formatCompactVND(summary.totalInterest)}) chiếm đến{' '}
               <strong>{((summary.totalInterest / Math.max(1, summary.futureValue)) * 100).toFixed(0)}%</strong> tổng tài sản của bạn! Đó chính là lý do vì sao người giàu không làm việc vì tiền, mà để tiền làm việc cho mình.
             </p>
           </div>

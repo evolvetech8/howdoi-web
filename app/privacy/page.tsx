@@ -1,10 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import { SITE } from '@/lib/site';
 import { Shield, ArrowLeft, Lock, Smartphone, CheckCircle, Mail } from 'lucide-react';
 
 export const metadata = {
-  title: 'Chính Sách Quyền Riêng Tư Chung (Privacy Policy) — EvolveTech & Frank Apps',
-  description: 'Chính sách bảo mật và quyền riêng tư chính thức áp dụng cho tất cả ứng dụng di động iOS do Frank / EvolveTech phát triển.',
+  title: 'Chính Sách Quyền Riêng Tư Chung (Privacy Policy) — Ứng dụng của Frank',
+  description: 'Chính sách bảo mật và quyền riêng tư chính thức áp dụng cho tất cả ứng dụng di động iOS do Frank phát triển.',
+  openGraph: { title: 'Chính Sách Quyền Riêng Tư Chung — Ứng dụng của Frank' },
 };
 
 export default function UniversalPrivacyPage() {
@@ -34,11 +36,11 @@ export default function UniversalPrivacyPage() {
         </h1>
 
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
-          <span>Áp dụng cho: <strong>Tất cả ứng dụng di động iOS của Frank / EvolveTech</strong></span>
+          <span>Áp dụng cho: <strong>Tất cả ứng dụng di động iOS của Frank</strong></span>
           <span>•</span>
-          <span>Bao gồm: <em>Cho Con - Chuẩn Bị Đón Bé</em>, <em>HowDoI Finance</em> & các ứng dụng sắp tới</span>
+          <span>Bao gồm: <em>Cho Con - Chuẩn Bị Đón Bé</em> & các ứng dụng sắp tới</span>
           <span>•</span>
-          <span>Cập nhật lần cuối: <strong>08/09/2026</strong></span>
+          <span>Cập nhật lần cuối: <strong>13/10/2026</strong></span>
         </div>
       </header>
 
@@ -68,11 +70,10 @@ export default function UniversalPrivacyPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-slate-900">1. Giới thiệu và Phạm vi áp dụng</h2>
           <p>
-            Chính sách quyền riêng tư này áp dụng cho toàn bộ các ứng dụng di động được phân phối trên Apple App Store bởi nhà phát triển <strong>Frank (EvolveTech / HowDoI Ecosystem)</strong>, bao gồm nhưng không giới hạn ở:
+            Chính sách quyền riêng tư này áp dụng cho toàn bộ các ứng dụng di động được phân phối trên Apple App Store bởi nhà phát triển <strong>Frank</strong>, bao gồm nhưng không giới hạn ở:
           </p>
           <ul className="list-disc pl-5 space-y-1 text-slate-600 text-sm">
             <li><strong>Cho Con - Chuẩn Bị Đón Bé</strong> (Ứng dụng chuẩn bị đồ sơ sinh & ngân sách đón bé)</li>
-            <li><strong>HowDoI Personal Finance</strong> (Ứng dụng quản lý tài chính cá nhân & tích lũy tài sản)</li>
             <li>Các ứng dụng tiện ích khác được phát hành trong tương lai dưới cùng tài khoản nhà phát triển.</li>
           </ul>
         </section>
@@ -116,8 +117,8 @@ export default function UniversalPrivacyPage() {
             Mọi thắc mắc hoặc yêu cầu liên quan đến chính sách bảo mật này, xin vui lòng gửi thư cho chúng tôi:
           </p>
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-1">
-            <p><strong>Nhà phát triển:</strong> Frank (EvolveTech)</p>
-            <p><strong>Email:</strong> evolvetech8@outlook.com</p>
+            <p><strong>Nhà phát triển:</strong> Frank</p>
+            <p><strong>Email:</strong> {SITE.contactEmail}</p>
             <p><strong>Trang hỗ trợ:</strong> https://howdoi.id.vn/support</p>
           </div>
         </section>

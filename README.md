@@ -1,63 +1,48 @@
-# HowDoI.vn — Tiếng Nói Độc Lập Về Tài Chính Cá Nhân Cho Người Việt
+# HowDoI (howdoi.id.vn)
 
-> *"Giúp người Việt không còn sợ hãi tiền bạc, làm chủ tài chính và sống an tâm hơn."* — Frank
+> Làm sao để hết nợ? Từng tháng một.
 
-Nền tảng tài chính cá nhân thực chiến kết hợp giữa:
-1. **Web Platform (`howdoi.id.vn`)**: Bộ công cụ tính tài chính tự động (Lãi kép, Lương Gross-Net 2026, Ngân sách 50/30/20, Vay mua nhà) và kho cẩm nang thực chiến.
-2. **Hệ thống Backend & API dùng chung**: Thiết kế sẵn để kết nối trực tiếp với ứng dụng **iOS App** tiếp theo mà Frank sẽ phát hành.
+HowDoI là sổ trả nợ trên web cho người Việt đang gánh nợ: lập sổ, biết ngày hết nợ, mỗi tháng ghi sổ một lần. Số liệu chỉ lưu trên máy người dùng. Mục tiêu, lộ trình và những việc **không** làm: xem [`MUC-TIEU.md`](MUC-TIEU.md).
 
----
+| Phần | Đường dẫn |
+| --- | --- |
+| **Sổ trả nợ** (sản phẩm chính) | `/so-tra-no` |
+| So sánh cách trả nợ (quả cầu tuyết / tuyết lở) | `/cong-cu/ke-hoach-tra-no` |
+| Lương Gross ↔ Net | `/cong-cu/luong-gross-net` |
+| Lãi kép & tích lũy | `/cong-cu/lai-kep` |
+| Vay mua nhà / xe | `/cong-cu/tinh-lai-vay` |
+| Ngân sách 50/30/20 & 6 chiếc lọ | `/cong-cu/ngan-sach-50-30-20` |
 
-## 🛠️ Công Nghệ Sử Dụng
+`/support` và `/privacy` (cùng `/support/cho-con`, `/privacy/cho-con`) là Support URL và Privacy Policy URL của ứng dụng iOS trên App Store. **Không đổi hay xóa các đường dẫn này.**
 
-- **Frontend**: Next.js 15 (App Router, React 19, TypeScript)
-- **Styling**: Tailwind CSS, Lucide Icons, Inter Font (hỗ trợ tối ưu tiếng Việt)
-- **Biểu đồ tài chính tương tác**: Recharts
-- **Backend & API**: Next.js Route Handlers (`/api/subscribe`)
-- **Tối ưu SEO**: Metadata động, OpenGraph, JSON-LD Schema
+## Cấu trúc
 
----
+- `app/` — các trang (Next.js 15 App Router). `app/sitemap.ts` và `app/robots.ts` tự sinh `/sitemap.xml`, `/robots.txt`.
+- `lib/debt-plan.ts` — logic Sổ trả nợ: lưu trên máy (localStorage), ghi sổ hằng tháng, hoàn tác, sao lưu/khôi phục, tệp nhắc lịch `.ics`. Giao diện ở `components/plan/`.
+- `next.config.ts` — chính sách bảo mật (CSP) chặn mọi script bên ngoài trên toàn trang, vì `localStorage` của Sổ trả nợ dùng chung cho cả tên miền. Đọc mục Tiền trong `MUC-TIEU.md` trước khi thêm bất kỳ script nào.
+- `lib/finance-math.ts` — toàn bộ công thức tính. Số liệu pháp lý (giảm trừ gia cảnh, biểu thuế, lương cơ sở, lương tối thiểu vùng) nằm trong `SALARY_RULES`.
+- `lib/site.ts` — tên trang, khẩu hiệu, email liên hệ.
+- `content/tools.ts` — danh sách cụm chủ đề và công cụ (dùng cho trang chủ, menu, sitemap).
+- `content/guides-data.ts` — bài hướng dẫn.
 
-## 🚀 Chạy Ứng Dụng Trên Máy Local
+## Khi luật thay đổi
 
-1. Mở terminal tại thư mục này:
-   ```bash
-   cd "/Volumes/SIDE HUSTLE/HOWDOI"
-   ```
-2. Khởi động server phát triển:
-   ```bash
-   npm run dev
-   ```
-3. Mở trình duyệt tại: [http://localhost:3000](http://localhost:3000)
+1. Sửa con số trong `SALARY_RULES` (`lib/finance-math.ts`), cập nhật `sources` và `updatedAt`.
+2. Đổi `updatedAt` của công cụ trong `content/tools.ts`.
+3. Rà các bài hướng dẫn có nhắc đến con số cũ và đổi `updatedAt` của bài.
 
----
+## Thêm bài hướng dẫn mới
 
-## 📱 Sẵn Sàng Cho Ứng Dụng iOS Của Frank
+Thêm một mục vào `GUIDES` trong `content/guides-data.ts`: chọn `topic` (cụm chủ đề), `relatedTool` (công cụ đi kèm), ghi `sources` nếu bài có số liệu pháp lý. Bài sẽ tự xuất hiện ở trang chủ, trang Hướng dẫn, trang công cụ liên quan và sitemap.
 
-Kiến trúc thư mục và thuật toán tính toán tại `lib/finance-math.ts` được tách biệt hoàn toàn dưới dạng pure TypeScript/JavaScript.
+## Chạy trên máy
 
-Khi phát triển ứng dụng di động iOS (Flutter hoặc React Native / Swift):
-- Các thuật toán tính lãi kép, tính thuế TNCN, phân bổ 6 chiếc lọ có thể tái sử dụng 100%.
-- Endpoint `/api/subscribe` và cơ sở dữ liệu Supabase kết nối trực tiếp với ứng dụng iOS qua Supabase SDK mà không cần viết lại backend.
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # kiểm tra trước khi triển khai
+```
 
----
+## Google Search Console
 
-## 🌐 Hướng Dẫn Cấu Hình Tên Miền `howdoi.id.vn` & Bật SSL Miễn Phí
-
-Hiện tại tên miền `howdoi.id.vn` đang trỏ vào Netlify nhưng bị lỗi chứng chỉ SSL (`*.netlify.app`). Để trang web hoạt động mượt mà với ổ khóa xanh an toàn:
-
-### Cách 1: Triển khai lên Vercel (Khuyên dùng, 2 phút)
-1. Đẩy mã nguồn lên GitHub:
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: initial HowDoI personal finance platform"
-   git branch -M main
-   # Đẩy lên repo GitHub của bạn
-   ```
-2. Đăng nhập [Vercel.com](https://vercel.com) -> Chọn **Import Git Repository** -> Bấm **Deploy**.
-3. Vào mục **Settings** -> **Domains** -> Nhập `howdoi.id.vn`.
-4. Mở trang quản trị nhà đăng ký tên miền của bạn (ví dụ: PA Việt Nam, Mắt Bão, Tenten, v.v.):
-   - Thêm bản ghi **A**: Host `@` trỏ tới IP `76.76.21.21`
-   - Thêm bản ghi **CNAME**: Host `www` trỏ tới `cname.vercel-dns.com`
-5. Vercel sẽ tự động cấp chứng chỉ SSL HTTPS miễn phí trong vòng 2 phút.
+Xác minh tên miền `howdoi.id.vn` bằng bản ghi DNS (khuyên dùng), hoặc đặt biến môi trường `GOOGLE_SITE_VERIFICATION` bằng mã xác minh để trang tự thêm thẻ meta. Sau đó gửi sitemap: `https://www.howdoi.id.vn/sitemap.xml` (trang chạy trên Vercel, tên miền chính là `www`; `howdoi.id.vn` tự chuyển sang `www`).

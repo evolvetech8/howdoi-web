@@ -181,7 +181,7 @@ export default function LoanCalc() {
           <div className="bg-amber-50/60 p-4 rounded-xl border border-amber-200 flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
             <p className="text-xs text-amber-900 leading-relaxed">
-              <strong>Lưu ý quan trọng từ Frank:</strong> Các ngân hàng Việt Nam thường chỉ cố định lãi suất ưu đãi trong 6-12 tháng đầu (khoảng 6-8%). Sau thời gian ưu đãi, lãi suất sẽ thả nổi = Lãi suất huy động + biên độ (thường vọt lên 10-12%). Hãy luôn trừ hao khả năng trả nợ nếu lãi suất tăng thêm 2-3%!
+              <strong>Lưu ý quan trọng:</strong> Các ngân hàng Việt Nam thường chỉ cố định lãi suất ưu đãi trong 6-12 tháng đầu (khoảng 6-8%). Sau thời gian ưu đãi, lãi suất sẽ thả nổi = Lãi suất huy động + biên độ (thường vọt lên 10-12%). Hãy luôn trừ hao khả năng trả nợ nếu lãi suất tăng thêm 2-3%!
             </p>
           </div>
         </div>

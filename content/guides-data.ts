@@ -1,12 +1,21 @@
+import type { TopicId, ToolSlug } from "./tools";
+
+export interface Source {
+  label: string;
+  url?: string;
+}
+
 export interface Guide {
   slug: string;
   title: string;
   excerpt: string;
-  category: "Tiết kiệm" | "Đầu tư" | "Quản lý nợ" | "Tâm lý tiền bạc" | "Bảo hiểm";
+  topic: TopicId;
   readTime: string;
-  date: string;
+  publishedAt: string;   // ISO date
+  updatedAt: string;     // ISO date, đổi mỗi khi sửa nội dung hoặc số liệu
   author: string;
-  relatedTool?: string;
+  relatedTool?: ToolSlug;
+  sources?: Source[];
   content: {
     introduction: string;
     keyTakeaways: string[];
@@ -24,11 +33,12 @@ export const GUIDES: Guide[] = [
     slug: "quy-khan-cap-3-6-thang",
     title: "Làm thế nào để xây dựng quỹ khẩn cấp 3–6 tháng khi thu nhập còn khiêm tốn?",
     excerpt: "Quỹ khẩn cấp không phải là tiền để giàu lên, mà là 'tấm khiên' giữ cho bạn không rơi vào nợ nần khi biến cố ập đến. Hướng dẫn từng bước cho người mới.",
-    category: "Tiết kiệm",
+    topic: "tiet-kiem-dau-tu",
     readTime: "6 phút đọc",
-    date: "08/09/2026",
-    author: "Frank (HowDoI)",
-    relatedTool: "/cong-cu/50-30-20",
+    publishedAt: "2026-09-08",
+    updatedAt: "2026-09-08",
+    author: "Frank",
+    relatedTool: "ngan-sach-50-30-20",
     content: {
       introduction: "Nhiều người Việt chúng ta thường bắt đầu hành trình tài chính bằng việc hỏi 'Đầu tư gì để nhanh giàu?'. Nhưng sự thật cay đắng là: khi chưa có tấm khiên bảo vệ, một sự cố xe hỏng, ốm đau hay mất việc có thể cuốn phăng toàn bộ số tiền bạn tích góp được, thậm chí đẩy bạn vào vòng xoáy thẻ tín dụng và vay nặng lãi.",
       keyTakeaways: [
@@ -68,11 +78,17 @@ export const GUIDES: Guide[] = [
     slug: "phan-bo-luong-10-15-trieu",
     title: "Phân bổ lương 10–15 triệu: Làm sao để vừa sống thoải mái vừa có tích lũy?",
     excerpt: "Thu nhập 10-15 triệu ở các đô thị lớn như Hà Nội hay TP.HCM là mức lương của hàng triệu bạn trẻ. Đây là công thức chi tiêu thực tế nhất.",
-    category: "Quản lý nợ",
+    topic: "ngan-sach",
     readTime: "7 phút đọc",
-    date: "05/09/2026",
-    author: "Frank (HowDoI)",
-    relatedTool: "/cong-cu/gross-net",
+    publishedAt: "2026-09-05",
+    updatedAt: "2026-10-13",
+    author: "Frank",
+    relatedTool: "ngan-sach-50-30-20",
+    sources: [
+      { label: "Luật Bảo hiểm xã hội số 41/2024/QH15 (tỷ lệ đóng bảo hiểm của người lao động)" },
+      { label: "Nghị quyết 110/2025/UBTVQH15 (giảm trừ gia cảnh từ năm 2026)" },
+      { label: "Luật Thuế thu nhập cá nhân số 109/2025/QH15 (biểu thuế 5 bậc)" },
+    ],
     content: {
       introduction: "Lương 10 đến 15 triệu ở TP.HCM hay Hà Nội có vẻ như 'vừa đủ sống', nhưng nếu không kiểm soát, bạn sẽ rơi vào cái bẫy sống mòn từ kỳ lương này sang kỳ lương khác (Paycheck to paycheck).",
       keyTakeaways: [
@@ -84,7 +100,7 @@ export const GUIDES: Guide[] = [
         {
           heading: "1. Hiểu đúng lương Gross sang Net",
           body: [
-            "Khi thỏa thuận lương 15 triệu Gross, số tiền thực tế vào tài khoản của bạn sau khi trừ 10.5% bảo hiểm (BHXH, BHYT, BHTN) và thuế TNCN sẽ rơi vào khoảng 13.4 triệu.",
+            "Khi thỏa thuận lương 15 triệu Gross, số tiền thực tế vào tài khoản của bạn sau khi trừ 10,5% bảo hiểm (BHXH 8%, BHYT 1,5%, BHTN 1%) là khoảng 13,4 triệu. Từ năm 2026, mức giảm trừ gia cảnh cho bản thân là 15,5 triệu/tháng nên mức lương này chưa phải nộp thuế TNCN.",
             "Hãy luôn lập kế hoạch chi tiêu dựa trên con số Net thực nhận, không tính trên con số Gross.",
           ],
         },
@@ -111,11 +127,12 @@ export const GUIDES: Guide[] = [
     slug: "lai-kep-ky-quan-cho-nguoi-tre",
     title: "Sức mạnh của lãi kép: Tại sao bắt đầu với 1 triệu/tháng lúc 22 tuổi hơn đứt 5 triệu lúc 35 tuổi?",
     excerpt: "Toán học không biết nói dối. Hiểu về lãi kép và thời gian là vũ khí mạnh nhất giúp người bình thường có thể đạt được tự do tài chính.",
-    category: "Đầu tư",
+    topic: "tiet-kiem-dau-tu",
     readTime: "5 phút đọc",
-    date: "01/09/2026",
-    author: "Frank (HowDoI)",
-    relatedTool: "/cong-cu/lai-kep",
+    publishedAt: "2026-09-01",
+    updatedAt: "2026-10-13",
+    author: "Frank",
+    relatedTool: "lai-kep",
     content: {
       introduction: "Albert Einstein từng gọi lãi kép là kỳ quan thứ 8 của thế giới: 'Người hiểu nó sẽ kiếm được tiền từ nó; người không hiểu nó sẽ phải trả tiền cho nó'. Trong tài chính cá nhân, tài sản lớn nhất của bạn không phải là tiền, mà là THỜI GIAN.",
       keyTakeaways: [
@@ -129,7 +146,7 @@ export const GUIDES: Guide[] = [
           body: [
             "Minh bắt đầu đầu tư từ năm 22 tuổi, mỗi tháng đều đặn 1.5 triệu đồng vào chứng chỉ quỹ với lợi nhuận trung bình 11%/năm. Đến năm 30 tuổi (sau 8 năm), Minh dừng góp thêm và để tiền tự sinh lãi đến năm 50 tuổi.",
             "Hùng đợi đến năm 32 tuổi mới bắt đầu, góp mỗi tháng 3 triệu đồng liên tục suốt 18 năm đến năm 50 tuổi.",
-            "Kết quả: Dù Hùng bỏ ra tổng vốn gốc nhiều hơn Minh gấp đôi, nhưng số tài sản cuối cùng của Minh lại vượt trội hơn Hùng nhờ 10 năm sinh lãi kép sớm hơn!",
+            "Kết quả (lãi kép theo tháng): đến năm 50 tuổi, Minh có khoảng 2,07 tỷ, Hùng có khoảng 2,04 tỷ. Hùng bỏ ra 648 triệu tiền gốc, gấp hơn 4 lần con số 144 triệu của Minh, nhưng tài sản cuối cùng vẫn thấp hơn Minh, vì tiền của Minh có thêm 10 năm để sinh lãi.",
           ],
         },
         {
@@ -149,10 +166,12 @@ export const GUIDES: Guide[] = [
     slug: "5-bay-tai-chinh-lua-dao-pho-bien",
     title: "5 bẫy tâm lý và chiêu trò lừa đảo tài chính người Việt hay mắc phải nhất",
     excerpt: "Từ các hội nhóm phím hàng cam kết lợi nhuận khủng 30%/tháng đến bẫy thẻ tín dụng trả góp 0%. Cách nhận diện để giữ chặt đồng tiền mồ hôi nước mắt.",
-    category: "Tâm lý tiền bạc",
+    topic: "bao-ve-tai-chinh",
     readTime: "8 phút đọc",
-    date: "28/08/2026",
-    author: "Frank (HowDoI)",
+    publishedAt: "2026-08-28",
+    updatedAt: "2026-08-28",
+    author: "Frank",
+    relatedTool: "ke-hoach-tra-no",
     content: {
       introduction: "Kiếm tiền đã khó, giữ tiền còn khó hơn gấp mười lần. Ở Việt Nam, lòng tham và nỗi sợ bị bỏ lại phía sau (FOMO) là hai tử huyệt khiến hàng ngàn người mất sạch số tiền tích cóp cả đời.",
       keyTakeaways: [
@@ -190,10 +209,11 @@ export const GUIDES: Guide[] = [
     slug: "bao-hiem-nhan-tho-hieu-dung",
     title: "Bảo hiểm nhân thọ: Mua đúng để bảo vệ gia đình, tránh biến thành gánh nặng tài chính",
     excerpt: "Rất nhiều người Việt bị mua sai gói bảo hiểm, đóng phí quá sức rồi bỏ dở mất trắng. Đây là cẩm nang giúp bạn hiểu đúng bản chất thật của bảo hiểm.",
-    category: "Bảo hiểm",
+    topic: "bao-ve-tai-chinh",
     readTime: "7 phút đọc",
-    date: "20/08/2026",
-    author: "Frank (HowDoI)",
+    publishedAt: "2026-08-20",
+    updatedAt: "2026-08-20",
+    author: "Frank",
     content: {
       introduction: "Bảo hiểm nhân thọ sinh ra không phải để sinh lời hay làm giàu. Mục đích duy nhất của nó là BẢO VỆ THU NHẬP của người trụ cột khi có rủi ro lớn về tính mạng hay sức khỏe xảy ra.",
       keyTakeaways: [

@@ -188,7 +188,7 @@ export default function BudgetCalc() {
         <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex items-start gap-3">
           <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
           <p className="text-xs text-slate-600 leading-relaxed">
-            <strong>Mẹo từ Frank:</strong> Đừng tự ép bản thân phải hoàn hảo ngay tháng đầu tiên. Nếu hiện tại chi phí thiết yếu của bạn đang chiếm 70%, hãy đặt mục tiêu giảm dần về 60%, rồi 50%. Sự kiên định quan trọng hơn sự cực đoan!
+            <strong>Mẹo:</strong> Đừng tự ép bản thân phải hoàn hảo ngay tháng đầu tiên. Nếu hiện tại chi phí thiết yếu của bạn đang chiếm 70%, hãy đặt mục tiêu giảm dần về 60%, rồi 50%. Sự kiên định quan trọng hơn sự cực đoan!
           </p>
         </div>
       </div>
