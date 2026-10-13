@@ -83,14 +83,88 @@ export function calculateCompoundInterest(input: CompoundInterestInput): {
   };
 }
 
+// Số tiền cần góp mỗi tháng để đạt mục tiêu (cùng giả định với calculateCompoundInterest:
+// góp đầu tháng, lãi nhập gốc hàng tháng).
+export function calculateMonthlyContributionForTarget(input: {
+  target: number;
+  initialInvestment: number;
+  annualRate: number;
+  years: number;
+}): number {
+  const { target, initialInvestment, annualRate, years } = input;
+  const monthlyRate = annualRate / 100 / 12;
+  const totalMonths = years * 12;
+  if (totalMonths <= 0) return Math.max(0, target - initialInvestment);
+  if (monthlyRate === 0) return Math.max(0, Math.ceil((target - initialInvestment) / totalMonths));
+  const growth = Math.pow(1 + monthlyRate, totalMonths);
+  const annuityFactor = ((growth - 1) / monthlyRate) * (1 + monthlyRate);
+  return Math.max(0, Math.ceil((target - initialInvestment * growth) / annuityFactor));
+}
+
 // 3. VIETNAMESE GROSS TO NET SALARY (LƯƠNG GROSS SANG NET & THUẾ TNCN)
-// Legal base: Social Insurance max cap = 20 * Basic salary (2,340,000 * 20 = 46,800,000 VND)
-// Unemployment Insurance max cap = 20 * Regional minimum (Region 1 = 4,960,000 * 20 = 99,200,000 VND)
-// Personal deduction: 11,000,000 VND/month; Dependent deduction: 4,400,000 VND/person/month
+// Mọi con số pháp lý nằm trong SALARY_RULES. Khi luật đổi, chỉ cần sửa ở đây
+// (và cập nhật `updatedAt` + `sources` để người đọc biết số liệu lấy từ đâu).
+export type Region = 1 | 2 | 3 | 4;
+
+export const SALARY_RULES = {
+  updatedAt: "2026-10-13",
+  // Lương cơ sở 2.530.000 ₫ từ 01/07/2026 (Nghị định 161/2026/NĐ-CP).
+  // Trần đóng BHXH, BHYT = 20 × lương cơ sở = 50.600.000 ₫.
+  baseSalary: 2_530_000,
+  // Lương tối thiểu vùng từ 01/01/2026 (Nghị định 293/2025/NĐ-CP).
+  // Trần đóng BHTN = 20 × lương tối thiểu vùng.
+  regionalMinimumWage: {
+    1: 5_310_000,
+    2: 4_730_000,
+    3: 4_140_000,
+    4: 3_700_000,
+  } as Record<Region, number>,
+  insuranceCapMultiplier: 20,
+  employeeRates: {
+    socialInsurance: 0.08,        // BHXH
+    healthInsurance: 0.015,       // BHYT
+    unemploymentInsurance: 0.01,  // BHTN
+  },
+  // Giảm trừ gia cảnh từ kỳ tính thuế 2026 (Nghị quyết 110/2025/UBTVQH15).
+  personalDeduction: 15_500_000,
+  dependentDeduction: 6_200_000,
+  // Biểu thuế lũy tiến từng phần 5 bậc (Luật Thuế TNCN số 109/2025/QH15),
+  // áp dụng cho thu nhập từ tiền lương, tiền công từ kỳ tính thuế 2026.
+  taxBrackets: [
+    { upTo: 10_000_000, rate: 0.05 },
+    { upTo: 30_000_000, rate: 0.1 },
+    { upTo: 60_000_000, rate: 0.2 },
+    { upTo: 100_000_000, rate: 0.3 },
+    { upTo: Infinity, rate: 0.35 },
+  ],
+  sources: [
+    { label: "Luật Thuế thu nhập cá nhân số 109/2025/QH15 (biểu thuế 5 bậc)" },
+    { label: "Nghị quyết 110/2025/UBTVQH15 (giảm trừ gia cảnh 15,5 triệu / 6,2 triệu)" },
+    { label: "Nghị định 161/2026/NĐ-CP (lương cơ sở 2.530.000 ₫ từ 01/07/2026)" },
+    { label: "Nghị định 293/2025/NĐ-CP (lương tối thiểu vùng từ 01/01/2026)" },
+    { label: "Luật Bảo hiểm xã hội số 41/2024/QH15 (tỷ lệ đóng BHXH, BHYT, BHTN)" },
+  ],
+} as const;
+
+export const REGION_LABELS: Record<Region, string> = {
+  1: "Vùng I",
+  2: "Vùng II",
+  3: "Vùng III",
+  4: "Vùng IV",
+};
+
 export interface GrossToNetInput {
   grossSalary: number;            // Lương Gross (VND)
   dependents: number;             // Số người phụ thuộc
-  region: 1 | 2 | 3 | 4;          // Vùng (1: Hà Nội, TP.HCM,...)
+  region: Region;                 // Vùng lương tối thiểu (chỉ ảnh hưởng trần đóng BHTN)
+}
+
+export interface TaxBracketBreakdown {
+  rate: number;
+  from: number;
+  to: number;
+  taxedAmount: number;            // Phần thu nhập rơi vào bậc này
+  tax: number;
 }
 
 export interface GrossToNetOutput {
@@ -104,66 +178,92 @@ export interface GrossToNetOutput {
   dependentDeduction: number;
   taxableIncome: number;          // Thu nhập tính thuế
   personalIncomeTax: number;      // Thuế TNCN
+  taxBreakdown: TaxBracketBreakdown[];
   netSalary: number;              // Lương Net thực nhận
 }
 
+export function calculateProgressiveTax(taxableIncome: number): {
+  total: number;
+  breakdown: TaxBracketBreakdown[];
+} {
+  const breakdown: TaxBracketBreakdown[] = [];
+  let lower = 0;
+  let total = 0;
+  for (const { upTo, rate } of SALARY_RULES.taxBrackets) {
+    if (taxableIncome <= lower) break;
+    const taxedAmount = Math.min(taxableIncome, upTo) - lower;
+    const tax = taxedAmount * rate;
+    breakdown.push({ rate, from: lower, to: upTo, taxedAmount, tax: Math.round(tax) });
+    total += tax;
+    lower = upTo;
+  }
+  return { total: Math.round(total), breakdown };
+}
+
 export function calculateGrossToNet(input: GrossToNetInput): GrossToNetOutput {
-  const { grossSalary, dependents } = input;
+  const { grossSalary, dependents, region } = input;
+  const rules = SALARY_RULES;
 
-  // Max cap for BHXH & BHYT
-  const basicSalaryCap = 2_340_000 * 20; // 46,800,000 VND
-  const bhxhBase = Math.min(grossSalary, basicSalaryCap);
-  const socialInsurance = bhxhBase * 0.08;
-  const healthInsurance = bhxhBase * 0.015;
+  // BHXH & BHYT: tối đa 20 × lương cơ sở
+  const bhxhBase = Math.min(grossSalary, rules.baseSalary * rules.insuranceCapMultiplier);
+  const socialInsurance = Math.round(bhxhBase * rules.employeeRates.socialInsurance);
+  const healthInsurance = Math.round(bhxhBase * rules.employeeRates.healthInsurance);
 
-  // Max cap for BHTN (Region 1 standard)
-  const region1Cap = 4_960_000 * 20; // 99,200,000 VND
-  const bhtnBase = Math.min(grossSalary, region1Cap);
-  const unemploymentInsurance = bhtnBase * 0.01;
+  // BHTN: tối đa 20 × lương tối thiểu vùng
+  const bhtnBase = Math.min(
+    grossSalary,
+    rules.regionalMinimumWage[region] * rules.insuranceCapMultiplier,
+  );
+  const unemploymentInsurance = Math.round(bhtnBase * rules.employeeRates.unemploymentInsurance);
 
   const totalInsurance = socialInsurance + healthInsurance + unemploymentInsurance;
   const incomeBeforeTax = Math.max(0, grossSalary - totalInsurance);
 
-  const personalDeduction = 11_000_000;
-  const dependentDeduction = dependents * 4_400_000;
-  const totalDeduction = personalDeduction + dependentDeduction;
+  const personalDeduction = rules.personalDeduction;
+  const dependentDeduction = dependents * rules.dependentDeduction;
+  const taxableIncome = Math.max(0, incomeBeforeTax - personalDeduction - dependentDeduction);
 
-  const taxableIncome = Math.max(0, incomeBeforeTax - totalDeduction);
-
-  // Progressive Tax Calculation (Biểu thuế lũy tiến từng phần 7 bậc)
-  let pit = 0;
-  if (taxableIncome <= 5_000_000) {
-    pit = taxableIncome * 0.05;
-  } else if (taxableIncome <= 10_000_000) {
-    pit = taxableIncome * 0.1 - 250_000;
-  } else if (taxableIncome <= 18_000_000) {
-    pit = taxableIncome * 0.15 - 750_000;
-  } else if (taxableIncome <= 32_000_000) {
-    pit = taxableIncome * 0.2 - 1_650_000;
-  } else if (taxableIncome <= 52_000_000) {
-    pit = taxableIncome * 0.25 - 3_250_000;
-  } else if (taxableIncome <= 80_000_000) {
-    pit = taxableIncome * 0.3 - 5_850_000;
-  } else {
-    pit = taxableIncome * 0.35 - 9_850_000;
-  }
-
-  const personalIncomeTax = Math.max(0, Math.round(pit));
-  const netSalary = Math.round(incomeBeforeTax - personalIncomeTax);
+  const { total: personalIncomeTax, breakdown: taxBreakdown } = calculateProgressiveTax(taxableIncome);
+  const netSalary = incomeBeforeTax - personalIncomeTax;
 
   return {
     grossSalary,
-    socialInsurance: Math.round(socialInsurance),
-    healthInsurance: Math.round(healthInsurance),
-    unemploymentInsurance: Math.round(unemploymentInsurance),
-    totalInsurance: Math.round(totalInsurance),
-    incomeBeforeTax: Math.round(incomeBeforeTax),
+    socialInsurance,
+    healthInsurance,
+    unemploymentInsurance,
+    totalInsurance,
+    incomeBeforeTax,
     personalDeduction,
     dependentDeduction,
-    taxableIncome: Math.round(taxableIncome),
+    taxableIncome,
     personalIncomeTax,
+    taxBreakdown,
     netSalary,
   };
+}
+
+// Tìm mức Gross nhỏ nhất cho ra mức Net mong muốn (dùng khi thỏa thuận lương Net).
+// Lương Net tăng đơn điệu theo Gross nên có thể tìm nhị phân.
+export function calculateNetToGross(input: {
+  netSalary: number;
+  dependents: number;
+  region: Region;
+}): GrossToNetOutput {
+  const { netSalary, dependents, region } = input;
+  let low = Math.max(0, Math.floor(netSalary));
+  let high = Math.max(low, 1) * 2;
+  while (calculateGrossToNet({ grossSalary: high, dependents, region }).netSalary < netSalary) {
+    high *= 2;
+  }
+  while (high - low > 1) {
+    const mid = Math.floor((low + high) / 2);
+    if (calculateGrossToNet({ grossSalary: mid, dependents, region }).netSalary >= netSalary) {
+      high = mid;
+    } else {
+      low = mid;
+    }
+  }
+  return calculateGrossToNet({ grossSalary: high, dependents, region });
 }
 
 // 4. BUDGETING ALLOCATION (50/30/20 & 6 JARS)

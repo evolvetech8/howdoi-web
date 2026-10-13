@@ -1,5 +1,7 @@
 'use client';
 
+// Tạm ẩn khỏi trang chủ: bật lại khi ứng dụng HowDoI iOS gần ra mắt.
+
 import React, { useState } from 'react';
 import { Smartphone, Mail, CheckCircle, ArrowRight, Loader2, Sparkles } from 'lucide-react';
 

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { SITE } from '@/lib/site';
 import {
   HelpCircle,
   Mail,
@@ -43,7 +44,7 @@ export default function ChoConSupportPage() {
     },
     {
       q: 'Tôi muốn đóng góp thêm các món đồ sơ sinh cần thiết hoặc báo lỗi thì làm thế nào?',
-      a: 'Chúng tôi rất trân trọng mọi ý kiến đóng góp từ các ba mẹ! Bạn có thể điền vào biểu mẫu liên hệ bên dưới hoặc gửi email trực tiếp tới evolvetech8@outlook.com. Mọi phản hồi sẽ được ghi nhận để cải tiến trong các bản cập nhật sắp tới.',
+      a: `Chúng tôi rất trân trọng mọi ý kiến đóng góp từ các ba mẹ! Bạn có thể điền vào biểu mẫu liên hệ bên dưới hoặc gửi email trực tiếp tới ${SITE.contactEmail}. Mọi phản hồi sẽ được ghi nhận để cải tiến trong các bản cập nhật sắp tới.`,
     },
     {
       q: 'Ứng dụng có thu phí định kỳ (subscription) không?',
@@ -84,7 +85,7 @@ export default function ChoConSupportPage() {
       setMessage('');
     } catch (err: any) {
       setStatus('error');
-      setFeedbackMsg(err.message || 'Có lỗi xảy ra, vui lòng gửi email trực tiếp tới evolvetech8@outlook.com.');
+      setFeedbackMsg(err.message || `Có lỗi xảy ra, vui lòng gửi email trực tiếp tới ${SITE.contactEmail}.`);
     }
   };
 
@@ -112,7 +113,7 @@ export default function ChoConSupportPage() {
           <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-rose-100">
             <span className="flex items-center gap-1.5">
               <Mail className="w-4 h-4 text-white" />
-              <span>Email: evolvetech8@outlook.com</span>
+              <span>Email: {SITE.contactEmail}</span>
             </span>
             <span>•</span>
             <span className="flex items-center gap-1.5">
@@ -318,14 +319,14 @@ export default function ChoConSupportPage() {
 
       {/* Footer Info for App Reviewers & Users */}
       <div className="pt-4 border-t border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <span>Nhà phát triển: <strong>Frank (EvolveTech / HowDoI)</strong></span>
+        <span>Nhà phát triển: <strong>Frank</strong></span>
         <div className="flex gap-4">
           <Link href="/privacy/cho-con" className="text-slate-600 hover:text-rose-600 underline">
             Chính Sách Quyền Riêng Tư (Privacy Policy)
           </Link>
           <span>•</span>
           <Link href="/" className="text-slate-600 hover:text-rose-600 underline">
-            Trang chủ HowDoI.vn
+            Trang chủ HowDoI
           </Link>
         </div>
       </div>

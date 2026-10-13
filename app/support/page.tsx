@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { SITE } from '@/lib/site';
 import {
   HelpCircle,
   Mail,
@@ -50,8 +51,8 @@ export default function UniversalSupportPage() {
     },
     {
       id: 'general-apps',
-      name: 'Hệ Sinh Thái Ứng Dụng EvolveTech',
-      tagline: 'Các công cụ tiện ích & ứng dụng di động sắp ra mắt',
+      name: 'Ứng dụng khác / Yêu cầu chung',
+      tagline: 'Câu hỏi chung hoặc ứng dụng sắp ra mắt',
       version: 'All iOS Products',
       icon: AppWindow,
       color: 'from-blue-600 to-indigo-600',
@@ -62,7 +63,7 @@ export default function UniversalSupportPage() {
   const generalFaqs = [
     {
       q: 'Làm thế nào để nhận được hỗ trợ nhanh nhất?',
-      a: 'Bạn có thể điền thông tin vào biểu mẫu trực tuyến bên dưới hoặc gửi email trực tiếp tới evolvetech8@outlook.com. Chúng tôi cam kết phản hồi tất cả yêu cầu hỗ trợ trong vòng 24 giờ làm việc.',
+      a: `Bạn có thể điền thông tin vào biểu mẫu trực tuyến bên dưới hoặc gửi email trực tiếp tới ${SITE.contactEmail}. Chúng tôi cam kết phản hồi tất cả yêu cầu hỗ trợ trong vòng 24 giờ làm việc.`,
     },
     {
       q: 'Dữ liệu cá nhân của tôi trong các ứng dụng được lưu trữ và bảo mật như thế nào?',
@@ -115,7 +116,7 @@ export default function UniversalSupportPage() {
       setMessage('');
     } catch (err: any) {
       setStatus('error');
-      setFeedbackMsg(err.message || 'Có lỗi xảy ra, vui lòng gửi email trực tiếp tới evolvetech8@outlook.com.');
+      setFeedbackMsg(err.message || `Có lỗi xảy ra, vui lòng gửi email trực tiếp tới ${SITE.contactEmail}.`);
     }
   };
 
@@ -135,7 +136,7 @@ export default function UniversalSupportPage() {
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
             Trung Tâm Hỗ Trợ Ứng Dụng Di Động <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300">
-              Apps By Frank & EvolveTech
+              Ứng dụng của Frank
             </span>
           </h1>
 
@@ -146,7 +147,7 @@ export default function UniversalSupportPage() {
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 pt-2 text-xs text-slate-300">
             <span className="flex items-center gap-1.5">
               <Mail className="w-4 h-4 text-emerald-400" />
-              <span>Email: <strong>evolvetech8@outlook.com</strong></span>
+              <span>Email: <strong>{SITE.contactEmail}</strong></span>
             </span>
             <span>•</span>
             <span className="flex items-center gap-1.5">
@@ -375,14 +376,14 @@ export default function UniversalSupportPage() {
 
       {/* Bottom Compliance & Policy Bar */}
       <div className="pt-6 border-t border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <span>Nhà phát triển: <strong>Frank • EvolveTech Apps Ecosystem</strong></span>
+        <span>Nhà phát triển: <strong>Frank</strong></span>
         <div className="flex gap-4">
           <Link href="/privacy" className="text-slate-600 hover:text-emerald-700 font-semibold underline">
             Chính Sách Quyền Riêng Tư Chung (Universal Privacy Policy)
           </Link>
           <span>•</span>
           <Link href="/" className="text-slate-600 hover:text-emerald-700 underline">
-            Trang chủ HowDoI.vn
+            Trang chủ HowDoI
           </Link>
         </div>
       </div>

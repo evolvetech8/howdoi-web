@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SITE } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -10,36 +11,30 @@ const inter = Inter({
   display: "swap",
 });
 
+const defaultTitle = "HowDoI — Giải đáp câu hỏi tiền bạc, kèm công cụ tính miễn phí";
+
 export const metadata: Metadata = {
-  title: "Frank — Solo Indie Developer & Product Maker",
-  description:
-    "Trang cá nhân và hệ sinh thái sản phẩm của Frank — Nhà phát triển độc lập (Indie Developer). Tác giả ứng dụng Cho Con (iOS) và bộ công cụ HowDoI.",
-  metadataBase: new URL("https://howdoi.id.vn"),
-  keywords: [
-    "Frank indie developer",
-    "Frank solo maker",
-    "Cho Con app iOS",
-    "HowDoI",
-    "howdoi.id.vn",
-    "lập trình viên độc lập",
-    "indie hacker vietnam",
-    "iOS developer",
-  ],
-  authors: [{ name: "Frank (EvolveTech / HowDoI)" }],
+  metadataBase: new URL(SITE.url),
+  title: { default: defaultTitle, template: "%s | HowDoI" },
+  description: SITE.description,
+  authors: [{ name: SITE.author, url: `${SITE.url}/gioi-thieu` }],
   openGraph: {
-    title: "Frank — Solo Indie Developer & Product Maker",
-    description:
-      "Tự tay thiết kế và phát triển các sản phẩm công nghệ tinh gọn, giải quyết các vấn đề thực tế trong cuộc sống.",
-    url: "https://howdoi.id.vn",
-    siteName: "Frank Indie Developer",
+    title: defaultTitle,
+    description: SITE.description,
+    url: SITE.url,
+    siteName: SITE.name,
     locale: "vi_VN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Frank — Solo Indie Developer & Product Maker",
-    description: "Building focused, useful software for everyday life.",
+    title: defaultTitle,
+    description: SITE.description,
   },
+  // Xác minh Google Search Console bằng thẻ meta (không cần nếu đã xác minh qua DNS).
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export default function RootLayout({
