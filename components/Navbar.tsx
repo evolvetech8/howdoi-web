@@ -2,13 +2,12 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Calculator, BookOpen, Info, Menu, X, Wallet } from 'lucide-react';
-import { toolPath } from '@/content/tools';
+import { Calculator, BookOpen, Info, Menu, X, NotebookPen } from 'lucide-react';
 import Logo from '@/components/Logo';
 
 const NAV_LINKS = [
-  { href: '/cong-cu', label: 'Công cụ tính', icon: Calculator },
   { href: '/huong-dan', label: 'Hướng dẫn', icon: BookOpen },
+  { href: '/cong-cu', label: 'Công cụ tính', icon: Calculator },
   { href: '/gioi-thieu', label: 'Giới thiệu', icon: Info },
 ];
 
@@ -39,11 +38,11 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center">
             <Link
-              href={toolPath('luong-gross-net')}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white text-xs font-semibold shadow-sm transition-colors"
+              href="/so-tra-no"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition-colors"
             >
-              <Wallet className="w-3.5 h-3.5" />
-              <span>Tính lương Net 2026</span>
+              <NotebookPen className="w-3.5 h-3.5" />
+              <span>Sổ trả nợ của tôi</span>
             </Link>
           </div>
 
@@ -77,12 +76,12 @@ export default function Navbar() {
             </Link>
           ))}
           <Link
-            href={toolPath('luong-gross-net')}
+            href="/so-tra-no"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center justify-center gap-2 w-full py-2.5 mt-3 rounded-xl bg-slate-900 text-white text-sm font-semibold shadow"
+            className="flex items-center justify-center gap-2 w-full py-2.5 mt-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold shadow"
           >
-            <Wallet className="w-4 h-4" />
-            Tính lương Net 2026
+            <NotebookPen className="w-4 h-4" />
+            Sổ trả nợ của tôi
           </Link>
         </div>
       )}

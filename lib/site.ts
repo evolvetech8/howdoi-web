@@ -3,9 +3,11 @@ export const SITE = {
   name: "HowDoI",
   // Vercel chuyển howdoi.id.vn sang www, nên mọi URL chuẩn (canonical, sitemap) dùng www.
   url: "https://www.howdoi.id.vn",
-  tagline: "Giải đáp các câu hỏi tiền bạc của người đi làm Việt Nam, kèm công cụ tính miễn phí.",
+  tagline: "Làm sao để hết nợ? Từng tháng một.",
   description:
-    "Làm sao để tính lương Net, để dành đủ 1 tỷ, vay mua nhà hay chia lương mỗi tháng? HowDoI trả lời từng câu hỏi tiền bạc bằng hướng dẫn dễ hiểu và công cụ tính miễn phí, cập nhật theo luật 2026.",
+    "HowDoI giúp người đang gánh nợ lập kế hoạch trả nợ miễn phí: biết ngày hết nợ, nên trả khoản nào trước, và ghi sổ mỗi tháng để theo dõi. Không cần tài khoản, số liệu chỉ lưu trên máy bạn.",
+  // Cam kết công khai, hiện ở chân trang và trang Giới thiệu.
+  pledge: "HowDoI không cho vay và không quảng cáo khoản vay, thẻ tín dụng hay ví trả sau.",
   author: "Frank",
   contactEmail: "archonic88@gmail.com",
 } as const;

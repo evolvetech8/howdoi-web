@@ -372,6 +372,7 @@ export interface DebtPayoffItem {
   name: string;
   paidOffMonth: number | null;  // Tháng trả xong (1 = tháng đầu tiên), null nếu không trả xong
   interestPaid: number;
+  firstMonthPayment: number;    // Số tiền trả cho khoản này trong tháng đầu tiên
 }
 
 export interface DebtPayoffResult {
@@ -408,6 +409,7 @@ export function simulateDebtPayoff(
   const balances = ordered.map((d) => d.balance);
   const interestPaid = ordered.map(() => 0);
   const paidOffMonth: (number | null)[] = ordered.map(() => null);
+  const firstMonthPaid = ordered.map(() => 0);
 
   const totalMinimum = ordered.reduce((sum, d) => sum + Math.max(0, d.minPayment), 0);
   const budget = strategy === "minimum" ? totalMinimum : totalMinimum + Math.max(0, extraPayment);
@@ -438,6 +440,7 @@ export function simulateDebtPayoff(
       balances[i] -= pay;
       available -= pay;
       paidThisMonth += pay;
+      if (months === 1) firstMonthPaid[i] += pay;
     });
 
     // 3. Phần còn lại dồn vào khoản ưu tiên (chỉ với snowball / avalanche)
@@ -448,6 +451,7 @@ export function simulateDebtPayoff(
         balances[i] -= pay;
         available -= pay;
         paidThisMonth += pay;
+        if (months === 1) firstMonthPaid[i] += pay;
       }
     }
 
@@ -475,6 +479,7 @@ export function simulateDebtPayoff(
       name: d.name,
       paidOffMonth: paidOffMonth[i],
       interestPaid: Math.round(interestPaid[i]),
+      firstMonthPayment: Math.round(firstMonthPaid[i]),
     })),
   };
 }

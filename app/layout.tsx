@@ -11,7 +11,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const defaultTitle = "HowDoI — Giải đáp câu hỏi tiền bạc, kèm công cụ tính miễn phí";
+const defaultTitle = "HowDoI — Làm sao để hết nợ? Lập kế hoạch trả nợ miễn phí";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -31,6 +31,8 @@ export const metadata: Metadata = {
     title: defaultTitle,
     description: SITE.description,
   },
+  // Cho phép mở như ứng dụng khi thêm vào Màn hình chính (iPhone), giúp giữ dữ liệu Sổ trả nợ.
+  appleWebApp: { capable: true, title: "Sổ trả nợ", statusBarStyle: "default" },
   // Xác minh Google Search Console bằng thẻ meta (không cần nếu đã xác minh qua DNS).
   verification: process.env.GOOGLE_SITE_VERIFICATION
     ? { google: process.env.GOOGLE_SITE_VERIFICATION }

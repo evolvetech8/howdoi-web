@@ -12,6 +12,7 @@ export default function Footer() {
           <div className="md:col-span-5 space-y-3">
             <Logo />
             <p className="text-slate-500 leading-relaxed max-w-sm">{SITE.tagline}</p>
+            <p className="text-slate-600 font-semibold leading-relaxed max-w-sm">{SITE.pledge}</p>
             <p className="text-slate-400 text-[11px] leading-relaxed max-w-sm">
               Nội dung và công cụ trên HowDoI chỉ nhằm mục đích tham khảo, không phải tư vấn tài chính, thuế hay pháp lý
               cho trường hợp cụ thể của bạn.
@@ -19,8 +20,13 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-3 space-y-2.5">
-            <h4 className="font-semibold text-slate-800 text-xs uppercase tracking-wider">Công cụ tính</h4>
+            <h4 className="font-semibold text-slate-800 text-xs uppercase tracking-wider">Trả nợ</h4>
             <ul className="space-y-2">
+              <li>
+                <Link href="/so-tra-no" className="hover:text-emerald-700 transition-colors font-semibold">
+                  Sổ trả nợ của tôi
+                </Link>
+              </li>
               {TOOLS.map((tool) => (
                 <li key={tool.slug}>
                   <Link href={toolPath(tool.slug)} className="hover:text-emerald-700 transition-colors">
@@ -39,6 +45,9 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/gioi-thieu" className="hover:text-emerald-700 transition-colors">Giới thiệu</Link>
+              </li>
+              <li>
+                <Link href="/gioi-thieu#kiem-tien" className="hover:text-emerald-700 transition-colors">HowDoI kiếm tiền thế nào</Link>
               </li>
               <li>
                 <a href={`mailto:${SITE.contactEmail}`} className="hover:text-emerald-700 transition-colors">Liên hệ</a>

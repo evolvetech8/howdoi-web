@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: SITE.url, lastModified: latest([toolsUpdated, guidesUpdated]) },
+    { url: `${SITE.url}/so-tra-no`, lastModified: '2026-10-13' },
     { url: `${SITE.url}/cong-cu`, lastModified: toolsUpdated },
     ...TOOLS.map((tool) => ({ url: `${SITE.url}${toolPath(tool.slug)}`, lastModified: tool.updatedAt })),
     { url: `${SITE.url}/huong-dan`, lastModified: guidesUpdated },

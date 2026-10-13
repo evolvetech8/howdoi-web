@@ -8,7 +8,7 @@ export default function Logo() {
       </span>
       <span>
         <span className="block font-extrabold text-lg tracking-tight text-slate-900 leading-tight">HowDoI</span>
-        <span className="block text-[11px] text-slate-500 font-medium leading-tight">Làm sao để… với tiền bạc</span>
+        <span className="block text-[11px] text-slate-500 font-medium leading-tight">Làm sao để hết nợ</span>
       </span>
     </span>
   );

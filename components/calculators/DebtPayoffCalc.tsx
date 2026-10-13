@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   simulateDebtPayoff,
   formatMonths,
@@ -11,7 +12,8 @@ import {
 } from '@/lib/finance-math';
 import MoneyInput from '@/components/MoneyInput';
 import { EXAMPLE_DEBTS, EXAMPLE_EXTRA_PAYMENT } from '@/content/debt-example';
-import { Snowflake, Plus, Trash2, AlertTriangle, Award } from 'lucide-react';
+import { DEBT_TYPES, DRAFT_KEY } from '@/lib/debt-plan';
+import { Snowflake, Plus, Trash2, AlertTriangle, Award, NotebookPen } from 'lucide-react';
 
 interface DebtRow {
   id: string;
@@ -73,6 +75,7 @@ export default function DebtPayoffCalc() {
   const [extra, setExtra] = useState<number>(EXAMPLE_EXTRA_PAYMENT);
   const [view, setView] = useState<Strategy>('snowball');
   const nextId = useRef(DEFAULT_DEBTS.length + 1);
+  const router = useRouter();
 
   const inputs: DebtInput[] = useMemo(
     () =>
@@ -130,6 +133,28 @@ export default function DebtPayoffCalc() {
   const shownView: Strategy = results[view].feasible ? view : (onlyFeasible ?? view);
   const selected = results[shownView];
   const plan = results[recommended ?? shownView];
+  // Chuyển các khoản nợ đang nhập sang Sổ trả nợ để theo dõi hằng tháng.
+  const openPlan = () => {
+    try {
+      window.localStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify({
+          debts: activeDebts.map((d) => ({
+            name: d.name,
+            type: DEBT_TYPES.find((t) => t.label.toLowerCase() === d.name.toLowerCase())?.id ?? 'khac',
+            balance: d.balance,
+            annualRate: d.annualRate,
+            minPayment: d.minPayment,
+          })),
+          budget: totalMinimum + extra,
+          strategy: recommended ?? shownView,
+        }),
+      );
+    } catch {
+      /* không lưu được thì vẫn mở sổ trống */
+    }
+    router.push('/so-tra-no');
+  };
   const outOfOrder = selected.items.some(
     (it, i) => i > 0 && (it.paidOffMonth ?? Infinity) < (selected.items[i - 1].paidOffMonth ?? Infinity),
   );
@@ -434,6 +459,22 @@ export default function DebtPayoffCalc() {
               </div>
             )}
           </section>
+        )}
+
+        {activeDebts.length > 0 && (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+            <p className="text-sm text-emerald-950">
+              <strong>Theo dõi kế hoạch này mỗi tháng?</strong> Lưu thành Sổ trả nợ để biết tháng này trả khoản nào bao nhiêu và
+              thấy ngày hết nợ đến gần hơn. Số liệu chỉ lưu trên máy bạn.
+            </p>
+            <button
+              type="button"
+              onClick={openPlan}
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shrink-0"
+            >
+              <NotebookPen className="w-4 h-4" /> Lưu thành sổ trả nợ
+            </button>
+          </div>
         )}
 
         <p className="text-[11px] text-slate-500 leading-relaxed">

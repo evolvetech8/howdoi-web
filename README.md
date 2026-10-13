@@ -1,22 +1,25 @@
 # HowDoI (howdoi.id.vn)
 
-> Giải đáp các câu hỏi tiền bạc của người đi làm Việt Nam, kèm công cụ tính miễn phí.
+> Làm sao để hết nợ? Từng tháng một.
 
-Mỗi câu hỏi “Làm sao để…?” có một bài hướng dẫn và một công cụ tính đi kèm. Mục tiêu, lộ trình và những việc **không** làm: xem [`MUC-TIEU.md`](MUC-TIEU.md). Nội dung xoay quanh 4 cụm chủ đề, mỗi cụm có một công cụ trung tâm:
+HowDoI là sổ trả nợ trên web cho người Việt đang gánh nợ: lập sổ, biết ngày hết nợ, mỗi tháng ghi sổ một lần. Số liệu chỉ lưu trên máy người dùng. Mục tiêu, lộ trình và những việc **không** làm: xem [`MUC-TIEU.md`](MUC-TIEU.md).
 
-| Cụm | Công cụ | Đường dẫn |
-| --- | --- | --- |
-| Lương & Thuế TNCN | Lương Gross ↔ Net | `/cong-cu/luong-gross-net` |
-| Tiết kiệm & Đầu tư | Lãi kép & tích lũy | `/cong-cu/lai-kep` |
-| Vay & Trả nợ | Vay mua nhà / xe | `/cong-cu/tinh-lai-vay` |
-| Vay & Trả nợ | Kế hoạch trả nợ (quả cầu tuyết / tuyết lở) | `/cong-cu/ke-hoach-tra-no` |
-| Ngân sách | 50/30/20 & 6 chiếc lọ | `/cong-cu/ngan-sach-50-30-20` |
+| Phần | Đường dẫn |
+| --- | --- |
+| **Sổ trả nợ** (sản phẩm chính) | `/so-tra-no` |
+| So sánh cách trả nợ (quả cầu tuyết / tuyết lở) | `/cong-cu/ke-hoach-tra-no` |
+| Lương Gross ↔ Net | `/cong-cu/luong-gross-net` |
+| Lãi kép & tích lũy | `/cong-cu/lai-kep` |
+| Vay mua nhà / xe | `/cong-cu/tinh-lai-vay` |
+| Ngân sách 50/30/20 & 6 chiếc lọ | `/cong-cu/ngan-sach-50-30-20` |
 
 `/support` và `/privacy` (cùng `/support/cho-con`, `/privacy/cho-con`) là Support URL và Privacy Policy URL của ứng dụng iOS trên App Store. **Không đổi hay xóa các đường dẫn này.**
 
 ## Cấu trúc
 
 - `app/` — các trang (Next.js 15 App Router). `app/sitemap.ts` và `app/robots.ts` tự sinh `/sitemap.xml`, `/robots.txt`.
+- `lib/debt-plan.ts` — logic Sổ trả nợ: lưu trên máy (localStorage), ghi sổ hằng tháng, hoàn tác, sao lưu/khôi phục, tệp nhắc lịch `.ics`. Giao diện ở `components/plan/`.
+- `next.config.ts` — chính sách bảo mật (CSP) chặn mọi script bên ngoài trên toàn trang, vì `localStorage` của Sổ trả nợ dùng chung cho cả tên miền. Đọc mục Tiền trong `MUC-TIEU.md` trước khi thêm bất kỳ script nào.
 - `lib/finance-math.ts` — toàn bộ công thức tính. Số liệu pháp lý (giảm trừ gia cảnh, biểu thuế, lương cơ sở, lương tối thiểu vùng) nằm trong `SALARY_RULES`.
 - `lib/site.ts` — tên trang, khẩu hiệu, email liên hệ.
 - `content/tools.ts` — danh sách cụm chủ đề và công cụ (dùng cho trang chủ, menu, sitemap).
