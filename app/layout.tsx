@@ -31,7 +31,8 @@ export const metadata: Metadata = {
     title: defaultTitle,
     description: SITE.description,
   },
-  // Cho phép mở như ứng dụng khi thêm vào Màn hình chính (iPhone), giúp giữ dữ liệu Sổ trả nợ.
+  // Cho phép mở như ứng dụng khi thêm vào Màn hình chính. Lưu ý: trên iPhone, biểu tượng đó có bộ nhớ riêng,
+  // tách khỏi Safari, nên người dùng phải chuyển sổ sang bằng tệp sao lưu.
   appleWebApp: { capable: true, title: "Sổ trả nợ", statusBarStyle: "default" },
   // Xác minh Google Search Console bằng thẻ meta (không cần nếu đã xác minh qua DNS).
   verification: process.env.GOOGLE_SITE_VERIFICATION

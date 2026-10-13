@@ -6,6 +6,7 @@ import { Shield, ArrowLeft, Lock, Smartphone, CheckCircle, Mail } from 'lucide-r
 export const metadata = {
   title: 'Chính Sách Quyền Riêng Tư Chung (Privacy Policy) — Ứng dụng của Frank',
   description: 'Chính sách bảo mật và quyền riêng tư chính thức áp dụng cho tất cả ứng dụng di động iOS do Frank phát triển.',
+  openGraph: { title: 'Chính Sách Quyền Riêng Tư Chung — Ứng dụng của Frank' },
 };
 
 export default function UniversalPrivacyPage() {
@@ -37,7 +38,7 @@ export default function UniversalPrivacyPage() {
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
           <span>Áp dụng cho: <strong>Tất cả ứng dụng di động iOS của Frank</strong></span>
           <span>•</span>
-          <span>Bao gồm: <em>Cho Con - Chuẩn Bị Đón Bé</em>, <em>HowDoI Finance</em> & các ứng dụng sắp tới</span>
+          <span>Bao gồm: <em>Cho Con - Chuẩn Bị Đón Bé</em> & các ứng dụng sắp tới</span>
           <span>•</span>
           <span>Cập nhật lần cuối: <strong>13/10/2026</strong></span>
         </div>
@@ -73,7 +74,6 @@ export default function UniversalPrivacyPage() {
           </p>
           <ul className="list-disc pl-5 space-y-1 text-slate-600 text-sm">
             <li><strong>Cho Con - Chuẩn Bị Đón Bé</strong> (Ứng dụng chuẩn bị đồ sơ sinh & ngân sách đón bé)</li>
-            <li><strong>HowDoI Personal Finance</strong> (Ứng dụng quản lý tài chính cá nhân & tích lũy tài sản)</li>
             <li>Các ứng dụng tiện ích khác được phát hành trong tương lai dưới cùng tài khoản nhà phát triển.</li>
           </ul>
         </section>

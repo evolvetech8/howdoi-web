@@ -135,23 +135,29 @@ export default function DebtPayoffCalc() {
   const plan = results[recommended ?? shownView];
   // Chuyển các khoản nợ đang nhập sang Sổ trả nợ để theo dõi hằng tháng.
   const openPlan = () => {
+    const draft = JSON.stringify({
+      debts: activeDebts.map((d) => {
+        // Đoán loại theo tên; không đoán “Trả góp” vì công cụ này nhập dư nợ và lãi suất, không phải số kỳ.
+        const type = DEBT_TYPES.find((t) => t.label.toLowerCase() === d.name.toLowerCase())?.id;
+        return {
+          name: d.name,
+          type: type && type !== 'tra-gop' ? type : 'khac',
+          balance: d.balance,
+          annualRate: d.annualRate,
+          minPayment: d.minPayment,
+        };
+      }),
+      budget: totalMinimum + extra,
+      strategy: recommended ?? shownView,
+    });
     try {
-      window.localStorage.setItem(
-        DRAFT_KEY,
-        JSON.stringify({
-          debts: activeDebts.map((d) => ({
-            name: d.name,
-            type: DEBT_TYPES.find((t) => t.label.toLowerCase() === d.name.toLowerCase())?.id ?? 'khac',
-            balance: d.balance,
-            annualRate: d.annualRate,
-            minPayment: d.minPayment,
-          })),
-          budget: totalMinimum + extra,
-          strategy: recommended ?? shownView,
-        }),
-      );
+      window.localStorage.setItem(DRAFT_KEY, draft);
     } catch {
-      /* không lưu được thì vẫn mở sổ trống */
+      try {
+        window.sessionStorage.setItem(DRAFT_KEY, draft);
+      } catch {
+        /* không lưu được thì vẫn mở sổ trống */
+      }
     }
     router.push('/so-tra-no');
   };

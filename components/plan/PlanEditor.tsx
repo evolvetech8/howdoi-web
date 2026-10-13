@@ -47,7 +47,15 @@ const parseRate = (value: string) => {
 };
 const annualRateOf = (row: Row) =>
   row.type === 'tra-gop' ? 0 : Math.min(parseRate(row.rate) * (row.rateUnit === 'month' ? 12 : 1), 1000);
-const balanceOf = (row: Row) => (row.type === 'tra-gop' ? row.minPayment * row.periods : row.balance);
+const periodsOf = (balance: number, perPeriod: number) => (perPeriod > 0 ? Math.ceil(balance / perPeriod) : 0);
+// Trả góp: dư nợ = tiền mỗi kỳ × số kỳ. Nếu người dùng không đổi hai ô này thì giữ nguyên dư nợ đã lưu,
+// tránh làm tròn lên thành số kỳ chẵn mỗi lần mở “Sửa sổ”.
+const balanceOf = (row: Row) => {
+  if (row.type !== 'tra-gop') return row.balance;
+  const e = row.existing;
+  if (e && e.type === 'tra-gop' && row.minPayment === e.minPayment && row.periods === periodsOf(e.balance, e.minPayment)) return e.balance;
+  return row.minPayment * row.periods;
+};
 const rateText = (n: number) => String(Math.round(n * 1000) / 1000).replace('.', ',');
 
 let rowCounter = 0;
@@ -63,7 +71,7 @@ function rowFromDebt(d: PlanDebt): Row {
     rate: rateText(monthly ? d.annualRate / 12 : d.annualRate),
     rateUnit: d.rateUnit,
     minPayment: d.minPayment,
-    periods: d.type === 'tra-gop' && d.minPayment > 0 ? Math.ceil(d.balance / d.minPayment) : 0,
+    periods: d.type === 'tra-gop' ? periodsOf(d.balance, d.minPayment) : 0,
     existing: d,
   };
 }
@@ -106,7 +114,7 @@ export default function PlanEditor({
         rate: rateText(d.annualRate),
         rateUnit: 'year' as const,
         minPayment: d.minPayment,
-        periods: 0,
+        periods: d.type === 'tra-gop' ? periodsOf(d.balance, d.minPayment) : 0,
       }));
     return [{ id: newId(), name: '', type: 'the-tin-dung', balance: 0, rate: '', rateUnit: 'year', minPayment: 0, periods: 0 }];
   });
@@ -114,11 +122,21 @@ export default function PlanEditor({
   const [budgetTouched, setBudgetTouched] = useState<boolean>(!!plan || !!draft?.budget);
   const [strategy, setStrategy] = useState<PlanStrategy | null>(plan?.strategy ?? draft?.strategy ?? null);
   const [showErrors, setShowErrors] = useState(false);
+  // Chỉ hỏi khi lập sổ mới: dư nợ vừa nhập là trước hay sau kỳ trả tháng này?
+  const [paidThisMonth, setPaidThisMonth] = useState<boolean>(false);
 
   const current = monthKey(today);
   // Tháng trả đầu tiên của kế hoạch: tháng sau nếu tháng này đã ghi sổ.
   const lastCheckIn = plan?.checkIns[plan.checkIns.length - 1];
-  const firstMonth = lastCheckIn && lastCheckIn.month >= current ? addMonths(lastCheckIn.month, 1) : current;
+  const firstMonth = plan
+    ? lastCheckIn && lastCheckIn.month >= current
+      ? addMonths(lastCheckIn.month, 1)
+      : plan.startMonth && plan.startMonth > current && !lastCheckIn
+        ? plan.startMonth
+        : current
+    : paidThisMonth
+      ? addMonths(current, 1)
+      : current;
   const debts: PlanDebt[] = rows.map((r) => {
     const balance = balanceOf(r);
     const startBalance = r.existing && plan?.checkIns.length ? Math.max(r.existing.startBalance, balance) : balance;
@@ -180,11 +198,28 @@ export default function PlanEditor({
     if (r.type !== 'tra-gop' && r.minPayment <= 0 && r.type !== 'vay-nguoi-than') errs.push('Nhập mức trả tối thiểu mỗi tháng');
     return errs;
   };
-  const canSave = active.length > 0 && rows.every((r) => rowErrors(r).length === 0);
+  const budgetMissing = effectiveBudget <= 0;
+  const canSave = active.length > 0 && !budgetMissing && rows.every((r) => rowErrors(r).length === 0);
 
   const save = () => {
     if (!canSave) {
       setShowErrors(true);
+      // Đưa người dùng tới ô đầu tiên còn thiếu (trên điện thoại, nút Lưu ở xa các ô nhập).
+      const bad = rows.find((r) => rowErrors(r).length > 0);
+      const field = bad
+        ? bad.type === 'tra-gop'
+          ? bad.minPayment <= 0
+            ? `${bad.id}-min`
+            : `${bad.id}-periods`
+          : balanceOf(bad) <= 0
+            ? `${bad.id}-balance`
+            : `${bad.id}-min`
+        : 'plan-budget';
+      requestAnimationFrame(() => {
+        const el = document.getElementById(field);
+        el?.scrollIntoView({ block: 'center' });
+        el?.focus();
+      });
       return;
     }
     const nowIso = today.toISOString();
@@ -197,8 +232,12 @@ export default function PlanEditor({
       budget: effectiveBudget,
       strategy: chosen,
       reminderDay: plan?.reminderDay ?? null,
+      startMonth: plan ? plan.startMonth : firstMonth,
       debts: [...paidOff, ...active],
-      checkIns: plan?.checkIns ?? [],
+      // Đánh dấu đã sửa sổ sau lần ghi sổ gần nhất, để khi hoàn tác thì hỏi lại.
+      checkIns: plan
+        ? plan.checkIns.map((c, i) => (i === plan.checkIns.length - 1 ? { ...c, editedAfter: true } : c))
+        : [],
     });
   };
 
@@ -391,6 +430,41 @@ export default function PlanEditor({
             được dồn vào một khoản để trả nhanh hơn.
           </p>
         </div>
+        {showErrors && budgetMissing && (
+          <p role="alert" className="text-[11px] font-semibold text-rose-700">
+            Nhập số tiền bạn dành trả nợ mỗi tháng.
+          </p>
+        )}
+        {!plan && (
+          <fieldset className="pt-1">
+            <legend className="text-xs font-semibold text-slate-700 mb-1.5">
+              {monthLabel(current)} bạn đã trả các khoản này chưa?
+            </legend>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { v: false, label: 'Chưa, sẽ trả sau ngày lương' },
+                { v: true, label: 'Đã trả rồi (dư nợ ở trên là sau khi trả)' },
+              ].map(({ v, label }) => (
+                <button
+                  key={label}
+                  type="button"
+                  aria-pressed={paidThisMonth === v}
+                  onClick={() => setPaidThisMonth(v)}
+                  className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                    paidThisMonth === v ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-200'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <p className="text-[11px] text-slate-500 mt-1">
+              {paidThisMonth
+                ? `Sổ bắt đầu từ ${monthLabel(addMonths(current, 1)).toLowerCase()}, lần ghi sổ đầu tiên là sau ngày lương tháng đó.`
+                : `Sổ bắt đầu từ ${monthLabel(current).toLowerCase()}: trả xong thì ghi sổ tháng này.`}
+            </p>
+          </fieldset>
+        )}
         {gap > 0 && (
           <p className="text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded-lg p-3">
             Số tiền này còn thiếu <strong>{formatVND(gap)}</strong> mỗi tháng so với mức tối thiểu. Bạn vẫn lưu sổ được, và mục

@@ -387,9 +387,11 @@ export interface DebtPayoffResult {
 
 export const DEBT_MAX_MONTHS = 600; // 50 năm
 
-// Thứ tự ưu tiên trả thêm, xác định một lần từ đầu:
+// Thứ tự ưu tiên trả thêm (thứ tự hiển thị là thứ tự ở tháng đầu):
 // - Quả cầu tuyết: dư nợ nhỏ nhất trước (bằng nhau thì lãi cao hơn trước).
 // - Tuyết lở: lãi suất cao nhất trước (bằng nhau thì dư nợ nhỏ hơn trước).
+// Khi mô phỏng, thứ tự được tính lại mỗi tháng theo dư nợ đầu tháng, để dự báo khớp với
+// việc Sổ trả nợ lập lại kế hoạch từ dư nợ thật sau mỗi lần ghi sổ.
 export function orderDebts(debts: DebtInput[], strategy: DebtStrategy): DebtInput[] {
   const sorted = [...debts];
   if (strategy === "snowball") {
@@ -422,6 +424,7 @@ export function simulateDebtPayoff(
   while (balances.some((b) => b > 0) && months < DEBT_MAX_MONTHS) {
     months++;
     let paidThisMonth = 0;
+    const startOfMonth = [...balances];
 
     // 1. Cộng lãi tháng này
     ordered.forEach((d, i) => {
@@ -445,7 +448,15 @@ export function simulateDebtPayoff(
 
     // 3. Phần còn lại dồn vào khoản ưu tiên (chỉ với snowball / avalanche)
     if (strategy !== "minimum") {
-      for (let i = 0; i < ordered.length && available > 0; i++) {
+      const priority = ordered
+        .map((_, i) => i)
+        .sort((i, j) =>
+          strategy === "snowball"
+            ? startOfMonth[i] - startOfMonth[j] || ordered[j].annualRate - ordered[i].annualRate || i - j
+            : ordered[j].annualRate - ordered[i].annualRate || startOfMonth[i] - startOfMonth[j] || i - j,
+        );
+      for (const i of priority) {
+        if (available <= 0) break;
         if (balances[i] <= 0) continue;
         const pay = Math.min(available, balances[i]);
         balances[i] -= pay;

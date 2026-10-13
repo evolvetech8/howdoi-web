@@ -52,8 +52,13 @@ export default function CheckInPanel({
         className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm"
       >
         <CheckCircle2 className="w-5 h-5" />
-        Đã trả đúng kế hoạch ({formatVND(plannedTotal)})
+        {status.gap > 0 ? 'Đã trả đủ mức tối thiểu' : 'Đã trả đúng kế hoạch'} ({formatVND(plannedTotal)})
       </button>
+      {status.gap > 0 && (
+        <p className="text-xs text-slate-600 -mt-2">
+          Chỉ trả được một phần? Mở “Tháng này trả khác kế hoạch” bên dưới và nhập số đã trả thật cho từng khoản.
+        </p>
+      )}
 
       <details className="group">
         <summary className="cursor-pointer text-sm font-semibold text-emerald-800 hover:text-emerald-900">
@@ -66,7 +71,7 @@ export default function CheckInPanel({
                 <span className="text-sm font-semibold text-slate-800 sm:pb-2">{d.name}</span>
                 <div>
                   <label htmlFor={`ci-${d.id}-paid`} className="text-[11px] font-semibold text-slate-500 block mb-1">
-                    Đã trả tháng này
+                    Đã trả tháng này<span className="sr-only"> cho {d.name}</span>
                   </label>
                   <div className="relative">
                     <MoneyInput
@@ -81,7 +86,7 @@ export default function CheckInPanel({
                 {useStatement && (
                   <div>
                     <label htmlFor={`ci-${d.id}-statement`} className="text-[11px] font-semibold text-slate-500 block mb-1">
-                      Dư nợ sau khi trả (sao kê)
+                      Dư nợ sau khi trả (sao kê)<span className="sr-only"> của {d.name}</span>
                     </label>
                     <div className="relative">
                       <MoneyInput

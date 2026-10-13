@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { Lock, Upload, ShieldCheck, NotebookPen } from 'lucide-react';
 import {
   DRAFT_KEY,
+  STORAGE_KEY,
   applyCheckIn,
+  monthKey,
   clearPlan,
   decodeBackup,
   loadPlan,
@@ -25,8 +27,15 @@ type Mode = 'loading' | 'empty' | 'editing' | 'dashboard';
 
 function readDraft(): Draft | null {
   try {
-    const raw = window.localStorage.getItem(DRAFT_KEY);
-    window.localStorage.removeItem(DRAFT_KEY);
+    let raw: string | null = null;
+    for (const store of [window.localStorage, window.sessionStorage]) {
+      try {
+        raw = raw ?? store.getItem(DRAFT_KEY);
+        store.removeItem(DRAFT_KEY);
+      } catch {
+        /* bộ nhớ này bị chặn, thử bộ nhớ còn lại */
+      }
+    }
     if (!raw) return null;
     const d = JSON.parse(raw) as Draft;
     return Array.isArray(d.debts) && d.debts.length > 0 ? d : null;
@@ -52,11 +61,11 @@ export default function DebtPlanApp() {
     setToday(new Date());
 
     // Link khôi phục: dữ liệu nằm sau dấu #, không bao giờ được gửi lên máy chủ.
-    const match = window.location.hash.match(/^#khoi-phuc=([A-Za-z0-9_-]+)$/);
-    if (match) {
+    if (window.location.hash.startsWith('#khoi-phuc=')) {
+      const match = window.location.hash.match(/^#khoi-phuc=([A-Za-z0-9_-]+)/);
       history.replaceState(null, '', window.location.pathname);
-      const restored = decodeBackup(match[1]);
-      if (!restored) setNotice('Link khôi phục không hợp lệ hoặc đã bị cắt mất một phần.');
+      const restored = match ? decodeBackup(match[1]) : null;
+      if (!restored) setNotice('Link khôi phục không hợp lệ hoặc đã bị cắt mất một phần. Hãy sao chép lại toàn bộ link.');
       else if (loaded.plan) setPendingRestore(restored);
       else {
         persist(restored);
@@ -72,15 +81,53 @@ export default function DebtPlanApp() {
       setMode('editing');
       return;
     }
-    if (fromTool && loaded.plan) setNotice('Bạn đã có sổ trên máy này. Bấm “Sửa sổ” nếu muốn cập nhật các khoản nợ.');
+    if (fromTool && loaded.plan)
+      setNotice('Bạn đã có sổ trên máy này, nên các khoản vừa nhập ở công cụ so sánh chưa được thêm vào sổ. Bấm “Sửa sổ” để thêm từng khoản.');
     setMode(loaded.plan ? 'dashboard' : 'empty');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function persist(next: DebtPlan) {
+  useEffect(() => {
+    // Ứng dụng để mở lâu (nhất là khi thêm vào Màn hình chính) vẫn phải biết đã sang tháng mới.
+    const refresh = () => {
+      if (document.visibilityState === 'visible') setToday(new Date());
+    };
+    // Dán link khôi phục vào tab đang mở sổ: tải lại để đọc link.
+    const onHash = () => {
+      if (window.location.hash.startsWith('#khoi-phuc=')) window.location.reload();
+    };
+    // Sổ được sửa ở tab khác: đọc lại để không ghi đè dữ liệu mới bằng dữ liệu cũ.
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== STORAGE_KEY) return;
+      const loaded = loadPlan();
+      setPlan(loaded.plan);
+      setLastResult(null);
+      setToday(new Date());
+      setMode((m) => (loaded.plan ? (m === 'editing' ? m : 'dashboard') : 'empty'));
+    };
+    document.addEventListener('visibilitychange', refresh);
+    window.addEventListener('focus', refresh);
+    window.addEventListener('pageshow', refresh);
+    window.addEventListener('hashchange', onHash);
+    window.addEventListener('storage', onStorage);
+    return () => {
+      document.removeEventListener('visibilitychange', refresh);
+      window.removeEventListener('focus', refresh);
+      window.removeEventListener('pageshow', refresh);
+      window.removeEventListener('hashchange', onHash);
+      window.removeEventListener('storage', onStorage);
+    };
+  }, []);
+
+  function persist(next: DebtPlan): boolean {
     setPlan(next);
-    if (!savePlan(next)) setStorageOk(false);
+    const ok = savePlan(next);
+    if (!ok) setStorageOk(false);
+    return ok;
   }
+
+  const scrollToTop = () =>
+    requestAnimationFrame(() => document.getElementById('so-tra-no-top')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
 
   const importFile = async (file: File) => {
     try {
@@ -99,19 +146,30 @@ export default function DebtPlanApp() {
   const onCheckIn = (input: CheckInInput) => {
     if (!plan) return;
     const now = new Date();
+    if (monthKey(now) !== monthKey(today)) {
+      // Trang mở từ tháng trước: cập nhật lại để người dùng xem đúng tháng trước khi ghi.
+      setToday(now);
+      setNotice('Đã sang tháng mới. Hãy xem lại số tiền rồi ghi sổ.');
+      return;
+    }
     const { plan: next, checkIn } = applyCheckIn(plan, input, now);
-    persist(next);
+    const ok = persist(next);
     setToday(now);
     setLastResult(checkIn);
-    setNotice(null);
+    setNotice(ok ? null : 'Đã ghi sổ cho lần mở trang này nhưng trình duyệt không cho lưu. Hãy bấm “Tải tệp sao lưu” ở bên dưới.');
+    scrollToTop();
   };
 
   if (mode === 'loading') {
     return <div className="p-8 rounded-2xl border border-slate-200 bg-white text-sm text-slate-500">Đang mở sổ…</div>;
   }
 
+  const standalone =
+    typeof window !== 'undefined' &&
+    (window.matchMedia?.('(display-mode: standalone)').matches || (navigator as Navigator & { standalone?: boolean }).standalone === true);
+
   return (
-    <div className="space-y-5">
+    <div id="so-tra-no-top" className="space-y-5 scroll-mt-24">
       {!storageOk && (
         <p role="alert" className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-sm text-rose-800">
           Trình duyệt này không cho lưu dữ liệu (có thể bạn đang dùng chế độ ẩn danh). Sổ sẽ mất khi đóng trang, hãy dùng “Tải tệp
@@ -188,6 +246,12 @@ export default function DebtPlanApp() {
               />
             </label>
           </div>
+          {standalone && (
+            <p className="text-xs text-slate-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
+              Sổ bạn lập trong Safari không tự chuyển sang đây. Trong Safari, bấm “Tải tệp sao lưu”, rồi quay lại đây và bấm “Đã có
+              sổ? Mở tệp sao lưu”.
+            </p>
+          )}
           <p className="text-[11px] text-slate-500">
             Có link khôi phục? Chỉ cần mở link đó trên máy này. Muốn so sánh cách trả trước khi lập sổ, hãy thử{' '}
             <Link href="/cong-cu/ke-hoach-tra-no" className="underline hover:text-emerald-700">
@@ -205,11 +269,18 @@ export default function DebtPlanApp() {
             draft={draft}
             today={today}
             onSave={(next) => {
-              persist(next);
+              const ok = persist(next);
               setDraft(null);
               setLastResult(null);
-              setNotice(plan ? 'Đã lưu thay đổi.' : 'Đã lưu sổ trên máy này. Hãy thêm lịch nhắc và tải bản sao lưu ở bên dưới.');
+              setNotice(
+                !ok
+                  ? 'Đã lập sổ cho lần mở trang này nhưng trình duyệt không cho lưu. Hãy bấm “Tải tệp sao lưu” ở bên dưới trước khi rời trang.'
+                  : plan
+                    ? 'Đã lưu thay đổi.'
+                    : 'Đã lưu sổ trên máy này. Hãy thêm lịch nhắc và tải bản sao lưu ở bên dưới.',
+              );
               setMode('dashboard');
+              scrollToTop();
             }}
             onCancel={plan ? () => setMode('dashboard') : () => setMode('empty')}
           />

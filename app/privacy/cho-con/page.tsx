@@ -6,6 +6,7 @@ import { Shield, ArrowLeft, Lock, Smartphone, CheckCircle, Mail } from 'lucide-r
 export const metadata = {
   title: 'Chính Sách Quyền Riêng Tư (Privacy Policy) — Ứng Dụng Cho Con',
   description: 'Chính sách bảo mật và quyền riêng tư chính thức của ứng dụng di động Cho Con - Chuẩn Bị Đón Bé.',
+  openGraph: { title: 'Chính Sách Quyền Riêng Tư — Ứng Dụng Cho Con' },
 };
 
 export default function ChoConPrivacyPage() {

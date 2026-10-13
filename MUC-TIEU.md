@@ -50,7 +50,7 @@ Người đang trả nợ trả theo tháng. Vì vậy vòng lặp tự nhiên c
 ## Tuần này (13–18/10): đưa lên trước khi làm thêm
 
 1. Merge PR [evolvetech8/howdoi-web#1](https://github.com/evolvetech8/howdoi-web/pull/1) vào `main`, chờ Vercel build xong.
-2. Mở thử `https://www.howdoi.id.vn/so-tra-no` trên **iPhone thật**: lập sổ, bấm “Thêm vào lịch”, “Thêm vào MH chính”, sao chép link khôi phục rồi mở lại.
+2. Mở thử `https://www.howdoi.id.vn/so-tra-no` trên **iPhone thật**: lập sổ, bấm “Thêm vào lịch”, tải tệp sao lưu, sao chép link khôi phục rồi mở lại. Thử cả “Thêm vào MH chính”: biểu tượng đó có bộ nhớ riêng nên mở ra là sổ trống, đó là bình thường; mở tệp sao lưu trong đó để chuyển sổ sang.
 3. Kiểm tra `/support`, `/privacy`, `/support/cho-con`, `/privacy/cho-con` vẫn mở được, và gửi thử một email hỗ trợ từ nút “Soạn email hỗ trợ”.
 4. Xác minh tên miền trong Google Search Console (Domain property, qua DNS) và gửi `https://www.howdoi.id.vn/sitemap.xml`.
 
@@ -60,7 +60,18 @@ Người đang trả nợ trả theo tháng. Vì vậy vòng lặp tự nhiên c
 - **Chỉ số chứng minh đây là ứng dụng:** trong số người lưu sổ tháng này, bao nhiêu phần trăm quay lại ghi sổ tháng sau.
 - **Doanh thu không phải chỉ số trong 9–12 tháng đầu.** Kỳ vọng gần bằng 0 trong thời gian này là bình thường.
 
-Hiện trang chưa đo gì. Khi thêm đo lường, chỉ đếm sự kiện, không bao giờ gửi số tiền hay tên khoản nợ: `plan_saved`, `reminder_added`, `backup_made`, `checkin`, `debt_cleared`. Dùng Umami hoặc GoatCounter (sự kiện tùy chỉnh của Vercel Web Analytics cần gói Pro). Script đo lường phải tự host trên cùng tên miền, vì chính sách bảo mật của trang đang chặn script bên ngoài (xem mục Tiền).
+Hiện trang chưa đo gì. Khi thêm đo lường, chỉ đếm sự kiện, không bao giờ gửi số tiền hay tên khoản nợ:
+
+- `plan_created` (chỉ lần lưu sổ đầu tiên), `reminder_added`, `backup_made`, `debt_cleared`;
+- `checkin` kèm **tháng thứ mấy của sổ** (1, 2, 3+), tính ngay trên máy từ tháng bắt đầu của sổ. GoatCounter không có thuộc tính thì ghi vào tên sự kiện, ví dụ `checkin-thang-2`.
+
+Tỉ lệ quay lại tháng thứ hai ≈ số `checkin` tháng thứ 2 trong tháng M+1 chia cho số `plan_created` trong tháng M.
+
+Cách gắn đo lường mà vẫn giữ lời hứa riêng tư:
+
+- Dùng Umami hoặc GoatCounter (sự kiện tùy chỉnh của Vercel Web Analytics cần gói Pro).
+- Cả script **và** điểm nhận sự kiện phải nằm trên cùng tên miền (ví dụ rewrite `/api/send` sang máy chủ đo lường), vì chính sách bảo mật của trang chặn script và kết nối ra bên ngoài (xem mục Tiền).
+- Nếu dùng Umami: bắt buộc gắn `data-exclude-hash="true"` và `data-exclude-search="true"` vào thẻ script. Mặc định Umami gửi cả phần sau dấu `#`, tức là toàn bộ link khôi phục chứa số nợ.
 
 ## Các mốc
 
@@ -123,6 +134,11 @@ Mỗi bài: trả lời đúng câu người ta gõ, có ví dụ bằng con s�
 
 1. **Hosting:** gói Hobby của Vercel chỉ cho phép dùng cá nhân, phi thương mại, và Vercel coi quảng cáo, affiliate là thương mại. Phải nâng lên gói Pro hoặc chuyển sang nơi cho phép ([Vercel fair use](https://vercel.com/docs/limits/fair-use-guidelines)).
 2. **Tách sổ trả nợ khỏi script quảng cáo:** sổ lưu trong `localStorage`, mà `localStorage` dùng chung cho cả tên miền. Script quảng cáo ở bất kỳ trang nào trên `www.howdoi.id.vn` đều có thể đọc được số nợ. Vì vậy trang đang chặn mọi script bên ngoài (`next.config.ts`). Trước khi gắn quảng cáo, chuyển sổ trả nợ sang tên miền phụ riêng (ví dụ `so.howdoi.id.vn`), rồi mới nới chính sách cho tên miền chính.
+
+   Cách chuyển để người dùng cũ không mất sổ:
+   - Giữ `www.howdoi.id.vn/so-tra-no` chạy. Nếu máy có sổ trong `localStorage`, chuyển hướng sang `https://so.howdoi.id.vn/so-tra-no#khoi-phuc=…` (chỉ qua dấu `#`), rồi xóa bản ở `www` sau khi bên kia mở được. Không có sổ thì chuyển hướng thẳng.
+   - Nút “Lưu thành sổ trả nợ” ở công cụ so sánh chuyển khoản nợ qua dấu `#` thay vì `localStorage`. Đổi URL trong tệp nhắc lịch `.ics`.
+   - Chỉ nới chính sách của `www` sau vài tháng, khi lượt mở sổ ở `www` gần như bằng 0. Người dùng iPhone đã thêm vào Màn hình chính phải mở lại từ Safari hoặc dùng tệp sao lưu.
 
 ## Không làm (ít nhất đến 30/09/2027)
 

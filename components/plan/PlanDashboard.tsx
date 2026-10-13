@@ -20,6 +20,7 @@ import { formatMonths, formatVND } from '@/lib/finance-math';
 import {
   DEBT_TYPES,
   buildReminderIcs,
+  canUndoLastCheckIn,
   computeStatus,
   encodeBackup,
   firstReminderDate,
@@ -126,8 +127,26 @@ export default function PlanDashboard({
   const [copied, setCopied] = useState<'ok' | 'fail' | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const last = plan.checkIns[plan.checkIns.length - 1];
-  const target = status.sim?.items[0];
-  const isIOS = typeof navigator !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent);
+  // Khoản nhận tiền dư: chỉ có khi ngân sách lớn hơn tổng tối thiểu và khoản đó thực sự được trả thêm.
+  const target =
+    plan.budget > status.totalMinimum
+      ? status.sim?.items.find((it) => {
+          const d = plan.debts.find((x) => x.id === it.id);
+          return !!d && it.firstMonthPayment > Math.min(d.minPayment, d.balance);
+        })
+      : undefined;
+  const canUndo = canUndoLastCheckIn(plan, today);
+  const undo = () => {
+    if (
+      last?.editedAfter &&
+      !window.confirm('Bạn đã sửa sổ sau lần ghi sổ này. Hoàn tác sẽ đưa dư nợ các khoản về như trước lần ghi sổ; các khoản mới thêm vẫn được giữ.')
+    )
+      return;
+    onUndo();
+  };
+  const isIOS =
+    typeof navigator !== 'undefined' &&
+    (/iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1));
   const isStandalone =
     typeof window !== 'undefined' &&
     (window.matchMedia?.('(display-mode: standalone)').matches || (navigator as Navigator & { standalone?: boolean }).standalone === true);
@@ -157,6 +176,11 @@ export default function PlanDashboard({
             <Link href="/huong-dan/quy-khan-cap-3-6-thang" className="inline-block text-sm font-semibold text-emerald-700 underline">
               Cách xây quỹ khẩn cấp 3–6 tháng
             </Link>
+            {canUndo && last && (
+              <button type="button" onClick={undo} className="flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-slate-900">
+                <Undo2 className="w-3.5 h-3.5" /> Hoàn tác lần ghi sổ {monthLabel(last.month).toLowerCase()}
+              </button>
+            )}
           </div>
         ) : status.gap > 0 ? (
           <div className="space-y-3">
@@ -223,8 +247,11 @@ export default function PlanDashboard({
       {!status.done && (
         <section className={`${card} space-y-3`}>
           <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="text-base font-bold text-slate-900">{monthLabel(status.nextMonth)} trả gì</h2>
-            {target && status.gap === 0 && (
+            <h2 className="text-base font-bold text-slate-900">
+              {monthLabel(status.nextMonth)}
+              {status.gap > 0 ? ': mức tối thiểu phải trả' : ' trả gì'}
+            </h2>
+            {target && (
               <span className="text-xs text-slate-600">
                 Dồn tiền dư vào: <strong>{plan.debts.find((d) => d.id === target.id)?.name}</strong>
               </span>
@@ -252,15 +279,19 @@ export default function PlanDashboard({
             <span className="tabular-nums">{formatVND(Object.values(status.planned).reduce((s, v) => s + v, 0))}</span>
           </div>
 
-          {status.checkedInThisMonth && last ? (
+          {!status.canCheckIn ? (
             <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 text-sm text-slate-700">
               <span className="flex items-center gap-2">
                 <CalendarCheck className="w-4 h-4 text-emerald-600" />
-                Đã ghi sổ {monthLabel(last.month).toLowerCase()}. Hẹn bạn tháng sau.
+                {status.checkedInThisMonth && last
+                  ? `Đã ghi sổ ${monthLabel(last.month).toLowerCase()}. Hẹn bạn tháng sau.`
+                  : `Lần ghi sổ đầu tiên: ${monthLabel(status.nextMonth).toLowerCase()}, sau ngày lương.`}
               </span>
-              <button type="button" onClick={onUndo} className="inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-slate-900">
-                <Undo2 className="w-3.5 h-3.5" /> Hoàn tác lần ghi sổ này
-              </button>
+              {canUndo && (
+                <button type="button" onClick={undo} className="inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-slate-900">
+                  <Undo2 className="w-3.5 h-3.5" /> Hoàn tác lần ghi sổ này
+                </button>
+              )}
             </div>
           ) : checkingIn ? (
             <CheckInPanel
@@ -314,6 +345,7 @@ export default function PlanDashboard({
                   Ngày {d}
                 </option>
               ))}
+              <option value={-1}>Cuối tháng</option>
             </select>
           </div>
           <button
@@ -321,7 +353,7 @@ export default function PlanDashboard({
             onClick={() => {
               const now = new Date();
               const uid = `${now.getTime().toString(36)}-${Math.random().toString(36).slice(2)}@howdoi.id.vn`;
-              download('HowDoI-nhac-ghi-so.ics', buildReminderIcs(reminderDay, now, `${SITE.url}/so-tra-no`, uid), 'text/calendar;charset=utf-8');
+              download('HowDoI-nhac-ghi-so.ics', buildReminderIcs(reminderDay, now, `${SITE.url}/so-tra-no`, uid, status.nextMonth), 'text/calendar;charset=utf-8');
               onUpdate({ ...plan, reminderDay, updatedAt: now.toISOString() });
             }}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold"
@@ -330,7 +362,7 @@ export default function PlanDashboard({
           </button>
         </div>
         <p className="text-[11px] text-slate-500">
-          Lần nhắc đầu tiên: {firstReminderDate(reminderDay, today).toLocaleDateString('vi-VN')}, sau đó lặp lại hằng tháng. Mở tệp
+          Lần nhắc đầu tiên: {firstReminderDate(reminderDay, today, status.nextMonth).toLocaleDateString('vi-VN')}, sau đó lặp lại hằng tháng. Mở tệp
           vừa tải để thêm vào ứng dụng Lịch.
         </p>
       </section>
@@ -342,14 +374,16 @@ export default function PlanDashboard({
         </h2>
         <p className="text-sm text-slate-600">
           HowDoI không có máy chủ lưu số nợ của bạn. Đổi điện thoại, xóa dữ liệu trình duyệt, hoặc lâu không mở trang trên
-          iPhone đều có thể làm mất sổ. Hãy giữ một bản sao lưu.
+          iPhone đều có thể làm mất sổ. Hãy giữ một bản sao lưu. Tệp và link chỉ lưu sổ ở thời điểm bạn bấm, nên sau mỗi lần
+          ghi sổ hãy sao lưu lại.
         </p>
         {isIOS && !isStandalone && (
           <p className="flex items-start gap-2 text-xs text-slate-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
             <Smartphone className="w-4 h-4 shrink-0 mt-px text-amber-700" />
             <span>
-              Trên iPhone, Safari có thể xóa dữ liệu của trang nếu bạn không mở trang này trong 7 ngày. Bấm nút Chia sẻ rồi chọn
-              “Thêm vào MH chính” để mở sổ như một ứng dụng, và vẫn nên giữ bản sao lưu.
+              Trên iPhone, Safari có thể xóa dữ liệu của trang nếu bạn không mở trang này trong 7 ngày, nên hãy tải tệp sao lưu
+              sau mỗi lần ghi sổ. Nếu bạn “Thêm vào MH chính”, biểu tượng đó có bộ nhớ riêng và chưa có sổ: hãy tải tệp sao lưu
+              trước, rồi mở biểu tượng và chọn “Đã có sổ? Mở tệp sao lưu”. Từ đó chỉ ghi sổ trong biểu tượng này.
             </span>
           </p>
         )}
@@ -391,7 +425,8 @@ export default function PlanDashboard({
         {copied === 'ok' && (
           <p role="status" className="text-xs text-slate-700">
             Đã sao chép. Link này chứa số nợ của bạn: chỉ lưu ở nơi riêng tư (ví dụ Zalo “Cloud của tôi” hoặc ghi chú trên điện
-            thoại), đừng gửi cho người khác. Mở link trên máy mới để khôi phục sổ.
+            thoại), đừng gửi cho người khác. Mở link trên máy mới để khôi phục sổ. Link chỉ chứa sổ ở thời điểm sao chép, và
+            link đã mở trên máy nào sẽ nằm lại trong lịch sử trình duyệt của máy đó.
           </p>
         )}
         {copied === 'fail' && (
@@ -423,7 +458,9 @@ export default function PlanDashboard({
         <button
           type="button"
           onClick={() => {
-            if (window.confirm('Xóa toàn bộ sổ trả nợ trên máy này? Không thể hoàn tác nếu bạn chưa có bản sao lưu.')) onDelete();
+            if (window.confirm(
+                'Xóa toàn bộ sổ trả nợ trên máy này? Không thể hoàn tác nếu bạn chưa có bản sao lưu. Nếu bạn từng mở link khôi phục trên máy này, link đó vẫn nằm trong lịch sử trình duyệt: hãy xóa lịch sử duyệt web của howdoi.id.vn.',
+              )) onDelete();
           }}
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-700 hover:text-rose-800"
         >

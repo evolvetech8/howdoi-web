@@ -29,10 +29,10 @@ export default function UniversalSupportPage() {
       badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
     },
     {
-      id: 'howdoi-finance',
-      name: 'HowDoI — Tài Chính Cá Nhân',
-      tagline: 'Quản lý thu chi, tích lũy lãi kép & thoát khỏi âu lo tiền bạc',
-      version: 'iOS / Web Ecosystem',
+      id: 'howdoi-so-tra-no',
+      name: 'HowDoI — Sổ trả nợ (web)',
+      tagline: 'Lập kế hoạch trả nợ và ghi sổ mỗi tháng trên howdoi.id.vn',
+      version: 'Web',
       icon: Wallet,
       color: 'from-emerald-600 to-teal-600',
       badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
@@ -92,7 +92,7 @@ export default function UniversalSupportPage() {
           </h1>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-            Trang hỗ trợ chính thức cho tất cả các ứng dụng trên hệ sinh thái iOS của chúng tôi (bao gồm <strong>Cho Con - Chuẩn Bị Đón Bé</strong>, <strong>HowDoI Personal Finance</strong> và các dự án tiện ích sắp tới). Chúng tôi luôn ở đây để giúp bạn có trải nghiệm mượt mà nhất.
+            Trang hỗ trợ chính thức cho các ứng dụng của Frank (bao gồm ứng dụng iOS <strong>Cho Con - Chuẩn Bị Đón Bé</strong>, Sổ trả nợ HowDoI trên web và các dự án sắp tới). Chúng tôi luôn ở đây để giúp bạn có trải nghiệm mượt mà nhất.
           </p>
 
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 pt-2 text-xs text-slate-300">
@@ -113,7 +113,7 @@ export default function UniversalSupportPage() {
       <section className="space-y-4">
         <div className="flex justify-between items-end">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">Hệ sinh thái</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">Ứng dụng</span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5">Các Ứng Dụng Được Hỗ Trợ</h2>
           </div>
           <span className="text-xs text-slate-500 hidden sm:inline">Bấm vào app để chọn yêu cầu hỗ trợ</span>

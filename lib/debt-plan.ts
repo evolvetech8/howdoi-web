@@ -48,7 +48,8 @@ export interface CheckIn {
   cleared: string[];            // id các khoản trả xong trong lần này
   debtFreeBefore: string | null;
   debtFreeAfter: string | null;
-  prevDebts: PlanDebt[];        // để hoàn tác
+  prevDebts: PlanDebt[];        // Để hoàn tác; chỉ lần ghi sổ gần nhất giữ bản này
+  editedAfter?: boolean;        // Người dùng đã sửa sổ sau lần ghi sổ này
 }
 
 export interface DebtPlan {
@@ -57,7 +58,8 @@ export interface DebtPlan {
   updatedAt: string;
   budget: number;               // Tổng tiền dành trả nợ mỗi tháng
   strategy: PlanStrategy;
-  reminderDay: number | null;   // Ngày nhận lương (1–28)
+  reminderDay: number | null;   // Ngày nhận lương (1–28), hoặc -1 là ngày cuối tháng
+  startMonth?: string;          // Tháng trả đầu tiên theo sổ (YYYY-MM); tháng sau nếu lúc lập sổ đã trả tháng này
   debts: PlanDebt[];
   checkIns: CheckIn[];
 }
@@ -100,7 +102,8 @@ export interface PlanStatus {
   startTotal: number;
   progress: number;               // 0..1, phần nợ đã trả so với lúc đưa vào sổ
   gap: number;                    // > 0 khi tiền dành ra chưa đủ trả tối thiểu
-  nextMonth: string;              // Tháng cần trả tiếp theo (YYYY-MM)
+  nextMonth: string;              // Tháng cần ghi sổ tiếp theo (YYYY-MM)
+  canCheckIn: boolean;            // false khi tháng cần ghi sổ còn ở phía trước
   checkedInThisMonth: boolean;
   monthsSinceLastCheckIn: number | null;
   sim: DebtPayoffResult | null;   // null khi thiếu tiền hoặc đã hết nợ
@@ -127,7 +130,14 @@ export function computeStatus(plan: DebtPlan, today: Date): PlanStatus {
   const current = monthKey(today);
   const last = plan.checkIns[plan.checkIns.length - 1];
   const checkedInThisMonth = !!last && last.month >= current;
-  const nextMonth = last && last.month >= current ? addMonths(last.month, 1) : current;
+  const startMonth = plan.startMonth ?? plan.createdAt.slice(0, 7);
+  const nextMonth = last
+    ? last.month >= current
+      ? addMonths(last.month, 1)
+      : current
+    : startMonth > current
+      ? startMonth
+      : current;
 
   const active = plan.debts.filter((d) => d.balance > 0);
   const totalBalance = active.reduce((s, d) => s + d.balance, 0);
@@ -161,8 +171,14 @@ export function computeStatus(plan: DebtPlan, today: Date): PlanStatus {
     progress,
     gap,
     nextMonth,
+    canCheckIn: nextMonth <= current,
     checkedInThisMonth,
-    monthsSinceLastCheckIn: last ? monthsBetween(last.month, current) : null,
+    // Chưa ghi sổ lần nào: tính cả tháng bắt đầu của sổ, để nhắc nhập dư nợ theo sao kê nếu đã bỏ lỡ.
+    monthsSinceLastCheckIn: last
+      ? monthsBetween(last.month, current)
+      : isMonth(startMonth) && startMonth <= current
+        ? monthsBetween(startMonth, current) + 1
+        : null,
     sim,
     debtFreeMonth,
     monthsLeft,
@@ -210,15 +226,29 @@ export function applyCheckIn(plan: DebtPlan, input: CheckInInput, now: Date): { 
     debtFreeAfter: null,
     prevDebts: plan.debts,
   };
-  const next: DebtPlan = { ...plan, debts, checkIns: [...plan.checkIns, checkIn], updatedAt: now.toISOString() };
+  // Chỉ giữ bản chụp để hoàn tác ở lần ghi sổ mới nhất, để tệp sao lưu và link khôi phục gọn.
+  const older = plan.checkIns.map((c) => (c.prevDebts.length ? { ...c, prevDebts: [] } : c));
+  const next: DebtPlan = { ...plan, debts, checkIns: [...older, checkIn], updatedAt: now.toISOString() };
   checkIn.debtFreeAfter = computeStatus(next, now).debtFreeMonth;
   return { plan: next, checkIn };
 }
 
+export function canUndoLastCheckIn(plan: DebtPlan, today: Date): boolean {
+  const last = plan.checkIns[plan.checkIns.length - 1];
+  return !!last && last.prevDebts.length > 0 && last.month >= monthKey(today);
+}
+
+// Hoàn tác chỉ đưa dư nợ về như trước lần ghi sổ. Khoản nợ thêm sau đó và các thay đổi khác
+// (tên, lãi suất, mức tối thiểu) được giữ nguyên.
 export function undoLastCheckIn(plan: DebtPlan, now: Date): DebtPlan {
   const last = plan.checkIns[plan.checkIns.length - 1];
-  if (!last) return plan;
-  return { ...plan, debts: last.prevDebts, checkIns: plan.checkIns.slice(0, -1), updatedAt: now.toISOString() };
+  if (!last || last.prevDebts.length === 0) return plan;
+  const prev = new Map(last.prevDebts.map((d) => [d.id, d]));
+  const debts = plan.debts.map((d) => {
+    const p = prev.get(d.id);
+    return p ? { ...d, balance: p.balance, startBalance: p.startBalance, paidOffAt: p.paidOffAt } : d;
+  });
+  return { ...plan, debts, checkIns: plan.checkIns.slice(0, -1), updatedAt: now.toISOString() };
 }
 
 // ---------- Kiểm tra dữ liệu (khi đọc từ máy, tệp sao lưu hoặc link khôi phục) ----------
@@ -232,7 +262,7 @@ function sanitizeDebt(raw: unknown, fallbackMonth: string): PlanDebt | null {
   if (!raw || typeof raw !== "object") return null;
   const d = raw as Record<string, unknown>;
   const id = str(d.id, 40);
-  if (!id) return null;
+  if (!id || id in Object.prototype) return null;
   const type = DEBT_TYPES.some((t) => t.id === d.type) ? (d.type as DebtType) : "khac";
   const balance = num(d.balance);
   return {
@@ -255,21 +285,46 @@ export function sanitizePlan(raw: unknown): DebtPlan | null {
   if (p.version !== 1 || !Array.isArray(p.debts)) return null;
   const createdAt = typeof p.createdAt === "string" ? p.createdAt : new Date(0).toISOString();
   const fallbackMonth = createdAt.slice(0, 7);
+  const seen = new Set<string>();
   const debts = p.debts
     .map((d) => sanitizeDebt(d, isMonth(fallbackMonth) ? fallbackMonth : "2026-01"))
-    .filter((d): d is PlanDebt => d !== null)
+    .filter((d): d is PlanDebt => d !== null && !seen.has(d.id) && !!seen.add(d.id))
     .slice(0, MAX_PLAN_DEBTS);
-  const checkIns = Array.isArray(p.checkIns)
-    ? (p.checkIns as unknown[]).filter((c): c is CheckIn => {
-        if (!c || typeof c !== "object") return false;
-        const ci = c as Record<string, unknown>;
-        return isMonth(ci.month) && Array.isArray(ci.prevDebts) && typeof ci.paid === "object" && ci.paid !== null;
-      }).map((c) => ({
-        ...c,
-        prevDebts: c.prevDebts.map((d) => sanitizeDebt(d, c.month)).filter((d): d is PlanDebt => d !== null),
-      }))
+  if (debts.length === 0) return null;
+  const checkIns: CheckIn[] = Array.isArray(p.checkIns)
+    ? (p.checkIns as unknown[])
+        .filter((c): c is Record<string, unknown> => !!c && typeof c === "object" && isMonth((c as Record<string, unknown>).month))
+        .slice(-600)
+        .map((ci) => {
+          const month = ci.month as string;
+          const paidRaw = ci.paid && typeof ci.paid === "object" ? (ci.paid as Record<string, unknown>) : {};
+          return {
+            month,
+            at: str(ci.at, 40),
+            paid: Object.fromEntries(
+              Object.entries(paidRaw)
+                .filter(([k, v]) => seen.has(k) && typeof v === "number" && Number.isFinite(v))
+                .map(([k, v]) => [k, num(v)]),
+            ),
+            totalPaid: num(ci.totalPaid),
+            plannedTotal: num(ci.plannedTotal),
+            newDebt: ci.newDebt === true,
+            cleared: Array.isArray(ci.cleared) ? ci.cleared.filter((x): x is string => typeof x === "string").slice(0, MAX_PLAN_DEBTS) : [],
+            debtFreeBefore: isMonth(ci.debtFreeBefore) ? ci.debtFreeBefore : null,
+            debtFreeAfter: isMonth(ci.debtFreeAfter) ? ci.debtFreeAfter : null,
+            prevDebts: Array.isArray(ci.prevDebts)
+              ? ci.prevDebts.map((d) => sanitizeDebt(d, month)).filter((d): d is PlanDebt => d !== null).slice(0, MAX_PLAN_DEBTS)
+              : [],
+            editedAfter: ci.editedAfter === true,
+          };
+        })
     : [];
-  const reminderDay = typeof p.reminderDay === "number" && p.reminderDay >= 1 && p.reminderDay <= 28 ? Math.round(p.reminderDay) : null;
+  const reminderDay =
+    p.reminderDay === -1
+      ? -1
+      : typeof p.reminderDay === "number" && p.reminderDay >= 1 && p.reminderDay <= 28
+        ? Math.round(p.reminderDay)
+        : null;
   return {
     version: 1,
     createdAt,
@@ -277,6 +332,7 @@ export function sanitizePlan(raw: unknown): DebtPlan | null {
     budget: num(p.budget),
     strategy: p.strategy === "avalanche" ? "avalanche" : "snowball",
     reminderDay,
+    startMonth: isMonth(p.startMonth) ? p.startMonth : undefined,
     debts,
     checkIns,
   };
@@ -337,11 +393,19 @@ export function decodeBackup(encoded: string): DebtPlan | null {
 const icsDate = (d: Date) =>
   `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}`;
 
-// Ngày đầu tiên có ngày `day` cách hôm nay ít nhất `minDays` ngày (để lần ghi sổ đầu có một kỳ trả thật).
-export function firstReminderDate(day: number, today: Date, minDays = 21): Date {
-  const earliest = new Date(today.getFullYear(), today.getMonth(), today.getDate() + minDays);
-  let candidate = new Date(today.getFullYear(), today.getMonth(), day);
-  while (candidate < earliest) candidate = new Date(candidate.getFullYear(), candidate.getMonth() + 1, day);
+// Lần nhắc đầu tiên: ngày `day` (hoặc ngày cuối tháng nếu day = -1) đầu tiên kể từ hôm nay,
+// và không sớm hơn tháng cần ghi sổ tiếp theo (`fromMonth`).
+export function firstReminderDate(day: number, today: Date, fromMonth?: string): Date {
+  let earliest = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  if (fromMonth && isMonth(fromMonth)) {
+    const [y, m] = fromMonth.split("-").map(Number);
+    const firstOfMonth = new Date(y, m - 1, 1);
+    if (firstOfMonth > earliest) earliest = firstOfMonth;
+  }
+  const dayIn = (y: number, m: number) => (day === -1 ? new Date(y, m + 1, 0) : new Date(y, m, day));
+  let month = earliest.getMonth();
+  let candidate = dayIn(earliest.getFullYear(), month);
+  while (candidate < earliest) candidate = dayIn(earliest.getFullYear(), ++month);
   return candidate;
 }
 
@@ -369,8 +433,8 @@ function foldLine(line: string): string {
 const icsText = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
 
 // Tiêu đề trung tính, không có chữ "nợ" để không lộ trên màn hình khóa.
-export function buildReminderIcs(day: number, today: Date, url: string, uid: string): string {
-  const start = firstReminderDate(day, today);
+export function buildReminderIcs(day: number, today: Date, url: string, uid: string, fromMonth?: string): string {
+  const start = firstReminderDate(day, today, fromMonth);
   const end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1);
   const stamp = new Date(today.getTime()).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
   const title = "HowDoI: ghi sổ tháng này";

@@ -52,7 +52,9 @@ export default function DebtPlanPage() {
         <P>
           Chỉ ở trong trình duyệt trên máy bạn đang dùng. HowDoI không có máy chủ lưu số nợ, không có tài khoản, không hỏi số
           điện thoại. Vì vậy nếu đổi máy hoặc xóa dữ liệu trình duyệt, sổ sẽ mất: hãy dùng “Tải tệp sao lưu” hoặc “Sao chép link
-          khôi phục” sau khi lập sổ. Trên iPhone, nên thêm trang vào Màn hình chính.
+          khôi phục” sau mỗi lần ghi sổ. Trên iPhone, Safari có thể xóa dữ liệu của trang nếu bạn không mở trang trong 7 ngày,
+          nên bản sao lưu càng quan trọng. Nếu thêm trang vào Màn hình chính, biểu tượng đó có bộ nhớ riêng: hãy mở tệp sao lưu
+          trong đó để chuyển sổ sang.
         </P>
         <P>
           HowDoI không cho vay và không quảng cáo khoản vay, thẻ tín dụng hay ví trả sau.{' '}
