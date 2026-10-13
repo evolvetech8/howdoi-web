@@ -37,8 +37,9 @@ const faqs: Faq[] = [
     a: (
       <>
         Chỉ hợp lý khi lãi suất khoản mới thấp hơn thật sự sau khi đã tính mọi loại phí, và bạn không tiếp tục tiêu bằng
-        thẻ cũ. Nếu không, bạn chỉ dời nợ từ chỗ này sang chỗ khác. Hãy nhập khoản vay mới vào công cụ để so sánh trước khi
-        quyết định.
+        thẻ cũ. Nếu không, bạn chỉ dời nợ từ chỗ này sang chỗ khác. Để so sánh, ghi lại kết quả với các khoản hiện có, rồi
+        xóa chúng và chỉ nhập khoản vay mới (dư nợ bằng tổng nợ cũ cộng phí, trả tối thiểu bằng tiền trả góp hằng tháng
+        của khoản mới). Lãi thấp hơn nhưng kỳ hạn dài hơn vẫn có thể khiến tổng tiền lãi cao hơn.
       </>
     ),
   },
@@ -148,7 +149,10 @@ export default function DebtPayoffPage() {
           </Link>
           .
         </li>
-        <li>Kiểm tra lãi suất thật và phí trả trước hạn trong hợp đồng của từng khoản vay.</li>
+        <li>
+          Kiểm tra trong hợp đồng: lãi suất năm tính trên dư nợ còn lại (không phải lãi phẳng hay lãi theo tháng) và phí trả
+          nợ trước hạn của từng khoản vay.
+        </li>
         <li>
           Chưa biết mỗi tháng dư ra bao nhiêu để trả thêm? Bắt đầu với{' '}
           <Link href={toolPath('ngan-sach-50-30-20')} className="underline hover:text-emerald-700">

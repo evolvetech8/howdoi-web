@@ -21,7 +21,14 @@ interface Props {
 
 export default function ToolPageShell({ tool, intro, calculator, faqs, sources, children }: Props) {
   const topic = getTopic(tool.topic);
-  const relatedGuides = GUIDES.filter((g) => g.relatedTool === tool.slug || g.topic === tool.topic).slice(0, 3);
+  // Bài gắn trực tiếp với công cụ lên trước, sau đó bài mới nhất cùng cụm.
+  const relatedGuides = GUIDES.filter((g) => g.relatedTool === tool.slug || g.topic === tool.topic)
+    .sort(
+      (a, b) =>
+        Number(b.relatedTool === tool.slug) - Number(a.relatedTool === tool.slug) ||
+        b.publishedAt.localeCompare(a.publishedAt),
+    )
+    .slice(0, 3);
   const otherTools = TOOLS.filter((t) => t.slug !== tool.slug);
 
   return (

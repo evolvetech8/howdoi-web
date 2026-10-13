@@ -42,4 +42,4 @@ npm run build   # kiểm tra trước khi triển khai
 
 ## Google Search Console
 
-Xác minh tên miền `howdoi.id.vn` bằng bản ghi DNS (khuyên dùng), hoặc đặt biến môi trường `GOOGLE_SITE_VERIFICATION` bằng mã xác minh để trang tự thêm thẻ meta. Sau đó gửi sitemap: `https://howdoi.id.vn/sitemap.xml`.
+Xác minh tên miền `howdoi.id.vn` bằng bản ghi DNS (khuyên dùng), hoặc đặt biến môi trường `GOOGLE_SITE_VERIFICATION` bằng mã xác minh để trang tự thêm thẻ meta. Sau đó gửi sitemap: `https://www.howdoi.id.vn/sitemap.xml` (trang chạy trên Vercel, tên miền chính là `www`; `howdoi.id.vn` tự chuyển sang `www`).

@@ -10,6 +10,7 @@ import {
   type Region,
 } from '@/lib/finance-math';
 import { Wallet, ShieldCheck, Users, ArrowLeftRight } from 'lucide-react';
+import MoneyInput from '@/components/MoneyInput';
 
 type Mode = 'gross-to-net' | 'net-to-gross';
 
@@ -85,15 +86,11 @@ export default function GrossNetCalc() {
               {inputLabel}
             </label>
             <div className="relative">
-              <input
+              <MoneyInput
                 id="salary-input"
-                type="text"
-                inputMode="numeric"
-                value={salary.toLocaleString('vi-VN')}
-                onChange={(e) => {
-                  const digits = e.target.value.replace(/\D/g, '');
-                  setSalary(Math.min(Number(digits || 0), 10_000_000_000));
-                }}
+                value={salary}
+                onChange={setSalary}
+                max={10_000_000_000}
                 className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-slate-200 text-sm font-bold text-blue-700 focus:outline-none focus:border-blue-500"
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-slate-400">₫</span>
