@@ -38,8 +38,8 @@ export default function UniversalSupportPage() {
       badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
     },
     {
-      id: 'howdoi-finance',
-      name: lang === 'vi' ? 'HowDoI — Tài Chính Cá Nhân' : 'HowDoI — Personal Finance Suite',
+      id: 'evolvetech-finance',
+      name: lang === 'vi' ? 'EvolveTech — Tài Chính Cá Nhân' : 'EvolveTech — Personal Finance Suite',
       tagline: lang === 'vi' ? 'Quản lý thu chi, tích lũy lãi kép & thoát khỏi âu lo tiền bạc' : 'Compound interest calculator, salary converter & budget planner',
       version: 'iOS / Web Ecosystem',
       icon: Wallet,
@@ -416,7 +416,7 @@ export default function UniversalSupportPage() {
           </Link>
           <span>•</span>
           <Link href="/" className="text-slate-600 hover:text-emerald-700 underline">
-            {lang === 'vi' ? 'Trang chủ HowDoI.vn' : 'HowDoI.vn Home'}
+            {lang === 'vi' ? 'Trang chủ EvolveTech.biz.vn' : 'EvolveTech.biz.vn Home'}
           </Link>
         </div>
       </div>

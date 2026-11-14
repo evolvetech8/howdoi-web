@@ -1,9 +1,9 @@
-# HowDoI.vn — Tiếng Nói Độc Lập Về Tài Chính Cá Nhân Cho Người Việt
+# EvolveTech / DepositGuard — Tiếng Nói Độc Lập Về Tài Chính Cá Nhân Cho Người Việt
 
 > *"Giúp người Việt không còn sợ hãi tiền bạc, làm chủ tài chính và sống an tâm hơn."* — Frank
 
 Nền tảng tài chính cá nhân thực chiến kết hợp giữa:
-1. **Web Platform (`howdoi.id.vn`)**: Bộ công cụ tính tài chính tự động (Lãi kép, Lương Gross-Net 2026, Ngân sách 50/30/20, Vay mua nhà) và kho cẩm nang thực chiến.
+1. **Web Platform (`https://www.evolvetech.biz.vn/`)**: Bộ công cụ mô phỏng rủi ro tài chính mua nhà (**DepositGuard**), tính tài chính tự động (Lãi kép, Lương Gross-Net 2026, Ngân sách 50/30/20, Vay mua nhà) và kho cẩm nang thực chiến.
 2. **Hệ thống Backend & API dùng chung**: Thiết kế sẵn để kết nối trực tiếp với ứng dụng **iOS App** tiếp theo mà Frank sẽ phát hành.
 
 ---
@@ -42,22 +42,21 @@ Khi phát triển ứng dụng di động iOS (Flutter hoặc React Native / Swi
 
 ---
 
-## 🌐 Hướng Dẫn Cấu Hình Tên Miền `howdoi.id.vn` & Bật SSL Miễn Phí
+## 🌐 Tên Miền Chính Thức & Quản Trị Triển Khai (Vercel)
 
-Hiện tại tên miền `howdoi.id.vn` đang trỏ vào Netlify nhưng bị lỗi chứng chỉ SSL (`*.netlify.app`). Để trang web hoạt động mượt mà với ổ khóa xanh an toàn:
+- **Website chính thức**: [https://www.evolvetech.biz.vn/](https://www.evolvetech.biz.vn/) (`evolvetech.biz.vn`)
+- **Vercel Project Dashboard**: [https://vercel.com/evolvetech8s-projects](https://vercel.com/evolvetech8s-projects)
 
-### Cách 1: Triển khai lên Vercel (Khuyên dùng, 2 phút)
+### Hướng dẫn triển khai & cấu hình tên miền trên Vercel
 1. Đẩy mã nguồn lên GitHub:
    ```bash
-   git init
    git add .
-   git commit -m "feat: initial HowDoI personal finance platform"
-   git branch -M main
-   # Đẩy lên repo GitHub của bạn
+   git commit -m "chore: update official domain to evolvetech.biz.vn"
+   git push origin main
    ```
-2. Đăng nhập [Vercel.com](https://vercel.com) -> Chọn **Import Git Repository** -> Bấm **Deploy**.
-3. Vào mục **Settings** -> **Domains** -> Nhập `howdoi.id.vn`.
-4. Mở trang quản trị nhà đăng ký tên miền của bạn (ví dụ: PA Việt Nam, Mắt Bão, Tenten, v.v.):
-   - Thêm bản ghi **A**: Host `@` trỏ tới IP `76.76.21.21`
-   - Thêm bản ghi **CNAME**: Host `www` trỏ tới `cname.vercel-dns.com`
-5. Vercel sẽ tự động cấp chứng chỉ SSL HTTPS miễn phí trong vòng 2 phút.
+2. Truy cập bảng điều khiển dự án tại [https://vercel.com/evolvetech8s-projects](https://vercel.com/evolvetech8s-projects).
+3. Vào mục **Settings** -> **Domains** -> Đảm bảo `evolvetech.biz.vn` và `www.evolvetech.biz.vn` đã được kết nối.
+4. Cấu hình DNS tại nhà đăng ký tên miền:
+   - Bản ghi **A**: Host `@` trỏ tới IP `76.76.21.21`
+   - Bản ghi **CNAME**: Host `www` trỏ tới `cname.vercel-dns.com`
+5. Vercel tự động cấp chứng chỉ SSL HTTPS miễn phí.

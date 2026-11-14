@@ -51,7 +51,7 @@ export default function NewsletterWaitlist() {
         </div>
 
         <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-          Ứng Dụng HowDoI iOS: <br className="hidden sm:inline" />
+          Ứng Dụng EvolveTech iOS: <br className="hidden sm:inline" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300">
             Trợ Lý Tài Chính Cá Nhân Thuần Việt
           </span>

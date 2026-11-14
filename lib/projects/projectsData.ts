@@ -135,13 +135,13 @@ export const STATUS_CONFIG: Record<
 
 export const ALL_PROJECTS: Project[] = [
   {
-    id: 'howdoi-finance',
+    id: 'evolvetech-finance',
     year: 2026,
     date: '2026-02',
     status: 'success',
     statusLabel: { vi: 'Đang hoạt động', en: 'Active' },
-    name: 'HowDoI Finance Suite',
-    url: 'https://howdoi.id.vn/#tools',
+    name: 'EvolveTech Finance Suite',
+    url: 'https://www.evolvetech.biz.vn/#tools',
     tagline: {
       vi: 'Nền tảng quản lý tài chính cá nhân toàn diện cho người làm việc tự do',
       en: 'All-in-one personal finance suite tailored for solo workers & freelancers',
@@ -164,7 +164,7 @@ export const ALL_PROJECTS: Project[] = [
     status: 'nonprofit',
     statusLabel: { vi: 'Công cụ miễn phí', en: 'Free Tool' },
     name: 'Công Cụ Thuế TNCN & BHXH 2026',
-    url: 'https://howdoi.id.vn/#tools',
+    url: 'https://www.evolvetech.biz.vn/#tools',
     tagline: {
       vi: 'Bảng tính tự động thuế thu nhập cá nhân & các mức trích đóng BHXH theo luật mới',
       en: 'Automated personal income tax & social insurance calculator under 2026 laws',
@@ -187,7 +187,7 @@ export const ALL_PROJECTS: Project[] = [
     status: 'nonprofit',
     statusLabel: { vi: 'Công cụ miễn phí', en: 'Free Tool' },
     name: 'Bảng Tính Lãi Kép & Lộ Trình FIRE',
-    url: 'https://howdoi.id.vn/#tools',
+    url: 'https://www.evolvetech.biz.vn/#tools',
     tagline: {
       vi: 'Mô phỏng sức mạnh lãi kép và dự báo thời điểm đạt Tự Do Tài Chính',
       en: 'Interactive compound interest simulator & FIRE retirement timeline forecaster',
@@ -210,7 +210,7 @@ export const ALL_PROJECTS: Project[] = [
     status: 'nonprofit',
     statusLabel: { vi: 'Công cụ miễn phí', en: 'Free Tool' },
     name: 'Chuyển Đổi Lương Gross ↔ Net 2026',
-    url: 'https://howdoi.id.vn/#tools',
+    url: 'https://www.evolvetech.biz.vn/#tools',
     tagline: {
       vi: 'Quy đổi 2 chiều chính xác giữa lương Gross và Net kèm giải trình chi tiết từng khoản',
       en: 'Bidirectional Gross ↔ Net salary conversion with granular statutory breakdowns',
@@ -220,8 +220,8 @@ export const ALL_PROJECTS: Project[] = [
       en: 'Supports both employee take-home pay and employer total cost of employment under current statutory regulations.',
     },
     notes: {
-      vi: 'Tích hợp thẳng vào HowDoI Finance Suite, hoàn toàn chạy trên trình duyệt không gửi dữ liệu lương lên bất kỳ máy chủ nào.',
-      en: 'Integrated into HowDoI suite, zero server logs, completely client-side for maximum salary confidentiality.',
+      vi: 'Tích hợp thẳng vào EvolveTech Finance Suite, hoàn toàn chạy trên trình duyệt không gửi dữ liệu lương lên bất kỳ máy chủ nào.',
+      en: 'Integrated into EvolveTech suite, zero server logs, completely client-side for maximum salary confidentiality.',
     },
     techStack: ['React 19', 'Form State Engine'],
     metrics: { vi: 'Bảo mật 100%', en: '100% Private' },
@@ -233,7 +233,7 @@ export const ALL_PROJECTS: Project[] = [
     status: 'nonprofit',
     statusLabel: { vi: 'Công cụ miễn phí', en: 'Free Tool' },
     name: 'Kế Hoạch Trả Nợ Vay (Snowball / Avalanche)',
-    url: 'https://howdoi.id.vn/#tools',
+    url: 'https://www.evolvetech.biz.vn/#tools',
     tagline: {
       vi: 'So sánh chiến lược trả nợ Quả cầu tuyết và Thác đổ để tối ưu tiền lãi ngân hàng',
       en: 'Compare Debt Snowball vs Avalanche strategies to minimize total bank interest',
@@ -256,7 +256,7 @@ export const ALL_PROJECTS: Project[] = [
     status: 'success',
     statusLabel: { vi: 'App Store (iOS)', en: 'App Store (iOS)' },
     name: 'Cho Con - Chuẩn Bị Đón Bé',
-    url: 'https://howdoi.id.vn/support',
+    url: 'https://www.evolvetech.biz.vn/support',
     appStoreUrl: 'https://apps.apple.com/app/id6743729909',
     tagline: {
       vi: 'Ứng dụng iOS đồng hành cùng ba mẹ chuẩn bị hành trang đón con chào đời',
@@ -280,7 +280,7 @@ export const ALL_PROJECTS: Project[] = [
     status: 'okay',
     statusLabel: { vi: 'Đã hợp nhất', en: 'Merged / Pivoted' },
     name: 'EvolveTech Portfolio & Micro-Lab v1',
-    url: 'https://howdoi.id.vn',
+    url: 'https://www.evolvetech.biz.vn',
     tagline: {
       vi: 'Phiên bản đầu tiên của studio phát triển phần mềm độc lập',
       en: 'First iteration of my independent software studio portfolio',
@@ -290,8 +290,8 @@ export const ALL_PROJECTS: Project[] = [
       en: 'Experimental space for micro-products, custom web development consulting, and small client automation systems.',
     },
     notes: {
-      vi: 'Giúp tôi tích lũy kinh nghiệm về deployment, SEO và hạ tầng DNS. Sau đó tôi nhận ra cần tập trung vào thương hiệu cá nhân Frank & nền tảng HowDoI nên đã hợp nhất vào trang hiện tại.',
-      en: 'Great learning experience in DNS, CDN edge caching, and personal branding. Subsequently merged and rebranded into Frank @ HowDoI.',
+      vi: 'Giúp tôi tích lũy kinh nghiệm về deployment, SEO và hạ tầng DNS. Sau đó tôi nhận ra cần tập trung vào thương hiệu cá nhân Frank & nền tảng EvolveTech nên đã hợp nhất vào trang hiện tại.',
+      en: 'Great learning experience in DNS, CDN edge caching, and personal branding. Subsequently merged and rebranded into Frank @ EvolveTech.',
     },
     techStack: ['Next.js', 'Vercel', 'Tailwind CSS'],
     metrics: { vi: 'Chuyển đổi thành công', en: 'Successfully Pivoted' },
@@ -379,8 +379,8 @@ export const ALL_PROJECTS: Project[] = [
       en: 'Blazing fast static notes site compiled with Hugo and hosted free on GitHub Pages.',
     },
     notes: {
-      vi: 'Nơi tôi bắt đầu thói quen viết tài liệu và ghi chú công khai (Learn in public). Nền tảng này sau đó đã thúc đẩy tôi làm trang HowDoI hiện đại bằng Next.js.',
-      en: 'Where I developed my "Learn in public" habit. Served as the ideological precursor to the current HowDoI site.',
+      vi: 'Nơi tôi bắt đầu thói quen viết tài liệu và ghi chú công khai (Learn in public). Nền tảng này sau đó đã thúc đẩy tôi làm trang EvolveTech hiện đại bằng Next.js.',
+      en: 'Where I developed my "Learn in public" habit. Served as the ideological precursor to the current EvolveTech site.',
     },
     techStack: ['Hugo', 'Markdown', 'Go Templates', 'GitHub Pages'],
     metrics: { vi: '100% Static', en: '100% Static' },

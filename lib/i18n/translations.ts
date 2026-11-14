@@ -162,8 +162,8 @@ export const translations: Record<Language, Translations> = {
       title: 'Các Ứng Dụng Đã & Đang Xây Dựng',
       subtitle: 'Mỗi sản phẩm đều xuất phát từ một nhu cầu thực tế và được trau chuốt tỉ mỉ.',
       product1: {
-        type: 'Web App • howdoi.id.vn',
-        title: 'HowDoI Finance Suite',
+        type: 'Web App • evolvetech.biz.vn',
+        title: 'EvolveTech Finance Suite',
         description:
           'Bộ công cụ tính toán tài chính cá nhân dành cho người Việt: mô phỏng lãi kép với biểu đồ tăng trưởng, chuyển đổi lương Gross sang Net chuẩn luật 2026, lập ngân sách 50/30/20 và tính toán vay ngân hàng.',
         status: '🟢 Đang hoạt động • Web miễn phí',
@@ -188,7 +188,7 @@ export const translations: Record<Language, Translations> = {
     tools: {
       badge: 'Công Cụ Tương Tác',
       title: 'Bộ Công Cụ Tính Toán Miễn Phí',
-      subtitle: 'Một phần trong hệ sinh thái sản phẩm HowDoI. Chọn công cụ để tính toán ngay:',
+      subtitle: 'Một phần trong hệ sinh thái sản phẩm EvolveTech. Chọn công cụ để tính toán ngay:',
       tab1: 'Lãi Kép & Tích Lũy',
       tab2: 'Lương Gross - Net',
       tab3: 'Ngân Sách 50/30/20',
@@ -281,8 +281,8 @@ export const translations: Record<Language, Translations> = {
       title: 'Built & In-Progress Software',
       subtitle: 'Every product is born from a real-life need and carefully crafted.',
       product1: {
-        type: 'Web App • howdoi.id.vn',
-        title: 'HowDoI Finance Suite',
+        type: 'Web App • evolvetech.biz.vn',
+        title: 'EvolveTech Finance Suite',
         description:
           'Personal finance calculations made simple: interactive compound interest projections, Vietnamese 2026 Gross-to-Net salary converter, 50/30/20 budget planner, and bank loan amortization.',
         status: '🟢 Live • Free Web Platform',
@@ -307,7 +307,7 @@ export const translations: Record<Language, Translations> = {
     tools: {
       badge: 'Interactive Tools',
       title: 'Free Interactive Calculators',
-      subtitle: 'Part of the HowDoI software ecosystem. Choose a tool to calculate instantly:',
+      subtitle: 'Part of the EvolveTech software ecosystem. Choose a tool to calculate instantly:',
       tab1: 'Compound Interest',
       tab2: 'Gross to Net Salary',
       tab3: '50/30/20 Budget',

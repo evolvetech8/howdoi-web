@@ -318,14 +318,14 @@ export default function ChoConSupportPage() {
 
       {/* Footer Info for App Reviewers & Users */}
       <div className="pt-4 border-t border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <span>Nhà phát triển: <strong>Frank (EvolveTech / HowDoI)</strong></span>
+        <span>Nhà phát triển: <strong>Frank (EvolveTech)</strong></span>
         <div className="flex gap-4">
           <Link href="/privacy/cho-con" className="text-slate-600 hover:text-rose-600 underline">
             Chính Sách Quyền Riêng Tư (Privacy Policy)
           </Link>
           <span>•</span>
           <Link href="/" className="text-slate-600 hover:text-rose-600 underline">
-            Trang chủ HowDoI.vn
+            Trang chủ EvolveTech.biz.vn
           </Link>
         </div>
       </div>

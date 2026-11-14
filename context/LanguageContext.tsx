@@ -22,7 +22,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Check saved language preference or browser setting
-    const saved = localStorage.getItem('howdoi_lang') as Language;
+    const saved = localStorage.getItem('evolvetech_lang') as Language;
     if (saved === 'vi' || saved === 'en') {
       setLangState(saved);
     } else {
@@ -38,7 +38,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const setLang = (newLang: Language) => {
     setLangState(newLang);
-    localStorage.setItem('howdoi_lang', newLang);
+    localStorage.setItem('evolvetech_lang', newLang);
   };
 
   const toggleLang = () => {

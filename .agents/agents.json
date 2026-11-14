@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json.schemastore.org/antigravity-agents.json",
+  "version": "1.0.0",
+  "agents": [
+    {
+      "name": "client-support-agent",
+      "path": "agents/client-support-agent.md",
+      "description": "Specialist operational subagent for Customer Success, Client Inquiries, Public Documentation, and Trust Architecture. Handles DepositGuard methodology transparency (/cach-tinh), FAQs (/cau-hoi-thuong-gap), contact requests (/lien-he), legal terms (/dieu-khoan, /bao-mat), and preserves legacy App Store support routes (/support, /privacy, /api/support).",
+      "department": "Client Support & Documentation (Your Customer Success Team)",
+      "mainAgent": true,
+      "subagent": true,
+      "commandExecutionPolicy": "auto",
+      "tools": [
+        "view_file",
+        "write_to_file",
+        "replace_file_content",
+        "grep_search",
+        "find_by_name",
+        "list_dir",
+        "run_command",
+        "send_message"
+      ]
+    },
+    {
+      "name": "development-infra-agent",
+      "path": "agents/development-infra-agent.md",
+      "description": "Specialist operational subagent for Software Engineering, Deterministic Calculation Engine, Next.js Architecture, and Automated Test Infrastructure. Owns lib/depositguard/engine/, Next.js routes, Vitest/E2E test suites, build pipelines, and zero-drift arithmetic.",
+      "department": "Development & Infrastructure (Your Engineering Team)",
+      "mainAgent": true,
+      "subagent": true,
+      "commandExecutionPolicy": "auto",
+      "tools": [
+        "view_file",
+        "write_to_file",
+        "replace_file_content",
+        "grep_search",
+        "find_by_name",
+        "list_dir",
+        "run_command",
+        "send_message"
+      ]
+    },
+    {
+      "name": "lead-generation-sales-agent",
+      "path": "agents/lead-generation-sales-agent.md",
+      "description": "Specialist operational subagent for Marketing, Educational Content Strategy, Media Asset Management, and Social Infographics. Manages PLAN/Media asset reorganization, Facebook visual infographics, homebuyer education campaigns, and anonymous acquisition funnels.",
+      "department": "Lead Generation & Sales (Your Marketing Team)",
+      "mainAgent": true,
+      "subagent": true,
+      "commandExecutionPolicy": "auto",
+      "tools": [
+        "view_file",
+        "write_to_file",
+        "replace_file_content",
+        "grep_search",
+        "find_by_name",
+        "list_dir",
+        "run_command",
+        "generate_image",
+        "send_message"
+      ]
+    },
+    {
+      "name": "orchestration-workflow-agent",
+      "path": "agents/orchestration-workflow-agent.md",
+      "description": "Specialist operational subagent for Project Management, Workflow Orchestration, Cross-Department Coordination, and Quality Automation. Connects One-Man-Business departments with HOWDOI production milestones, monitors liveness, and manages task dispatch.",
+      "department": "Orchestration & Workflow Automation (Your Operations Manager)",
+      "mainAgent": true,
+      "subagent": true,
+      "commandExecutionPolicy": "auto",
+      "tools": [
+        "view_file",
+        "write_to_file",
+        "replace_file_content",
+        "grep_search",
+        "find_by_name",
+        "list_dir",
+        "run_command",
+        "manage_task",
+        "schedule",
+        "send_message"
+      ]
+    }
+  ]
+}

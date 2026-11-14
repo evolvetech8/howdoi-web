@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Đăng ký thành công! Cảm ơn bạn đã tham gia cộng đồng HowDoI.',
+      message: 'Đăng ký thành công! Cảm ơn bạn đã tham gia cộng đồng EvolveTech.',
     });
   } catch (error) {
     console.error('Subscription error:', error);

@@ -18,10 +18,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const guide = GUIDES.find((g) => g.slug === slug);
-  if (!guide) return { title: 'Bài viết không tìm thấy — HowDoI' };
+  if (!guide) return { title: 'Bài viết không tìm thấy — EvolveTech' };
 
   return {
-    title: `${guide.title} — HowDoI.vn`,
+    title: `${guide.title} — EvolveTech.biz.vn`,
     description: guide.excerpt,
     openGraph: {
       title: guide.title,
@@ -147,7 +147,7 @@ export default async function GuideDetailPage({ params }: Props) {
               Tự tính toán các con số trên máy của bạn
             </h4>
             <p className="text-xs text-slate-400 mt-1">
-              Dùng công cụ tính toán tự động của HowDoI để lập kế hoạch tài chính cá nhân.
+              Dùng công cụ tính toán tự động của EvolveTech để lập kế hoạch tài chính cá nhân.
             </p>
           </div>
           <Link
@@ -169,7 +169,7 @@ export default async function GuideDetailPage({ params }: Props) {
         <div>
           <span className="font-bold text-slate-900 block text-sm">Viết bởi Frank</span>
           <p className="text-xs text-slate-600 mt-0.5">
-            Kỹ sư công nghệ & người sáng lập HowDoI.vn. Với mong muốn người Việt không còn nỗi sợ về tiền bạc và sống tự do, bình an hơn mỗi ngày.
+            Kỹ sư công nghệ & người sáng lập EvolveTech.biz.vn. Với mong muốn người Việt không còn nỗi sợ về tiền bạc và sống tự do, bình an hơn mỗi ngày.
           </p>
         </div>
       </div>

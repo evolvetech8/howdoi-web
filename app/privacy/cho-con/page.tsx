@@ -120,7 +120,7 @@ export default function ChoConPrivacyPage() {
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-1">
             <p><strong>Người đại diện:</strong> Frank (EvolveTech)</p>
             <p><strong>Email:</strong> archonic88@gmail.com</p>
-            <p><strong>Trang web:</strong> https://howdoi.id.vn</p>
+            <p><strong>Trang web:</strong> https://www.evolvetech.biz.vn</p>
           </div>
         </section>
       </div>

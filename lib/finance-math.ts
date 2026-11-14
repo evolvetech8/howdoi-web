@@ -1,5 +1,5 @@
 /**
- * HowDoI (howdoi.id.vn) - Financial Calculation Core Algorithms
+ * EvolveTech (evolvetech.biz.vn) - Financial Calculation Core Algorithms
  * Shared logic between Web Platform and upcoming iOS App
  */
 

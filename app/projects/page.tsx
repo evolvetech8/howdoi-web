@@ -89,7 +89,7 @@ export default function ProjectsPage() {
             <span>{t.projects.backToHome}</span>
           </Link>
           <div className="flex items-center gap-2 text-slate-400">
-            <span>howdoi.id.vn</span>
+            <span>evolvetech.biz.vn</span>
             <span>/</span>
             <span className="font-semibold text-slate-700">projects</span>
           </div>
@@ -507,7 +507,7 @@ export default function ProjectsPage() {
                             {proj.url && !proj.appStoreUrl && (
                               <a
                                 href={proj.url}
-                                target={proj.url.startsWith('http') && !proj.url.includes('howdoi.id.vn') ? '_blank' : '_self'}
+                                target={proj.url.startsWith('http') && !proj.url.includes('evolvetech.biz.vn') ? '_blank' : '_self'}
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-emerald-600 font-semibold transition-colors shadow-2xs"
                               >

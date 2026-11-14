@@ -98,11 +98,11 @@ export default function UniversalPrivacyPage() {
             <section className="space-y-3">
               <h2 className="text-xl font-bold text-slate-900">1. Giới thiệu và Phạm vi áp dụng</h2>
               <p>
-                Chính sách quyền riêng tư này áp dụng cho toàn bộ các ứng dụng di động được phân phối trên Apple App Store bởi nhà phát triển <strong>Frank (EvolveTech / HowDoI Ecosystem)</strong>, bao gồm nhưng không giới hạn ở:
+                Chính sách quyền riêng tư này áp dụng cho toàn bộ các ứng dụng di động được phân phối trên Apple App Store bởi nhà phát triển <strong>Frank (EvolveTech Ecosystem)</strong>, bao gồm nhưng không giới hạn ở:
               </p>
               <ul className="list-disc pl-5 space-y-1 text-slate-600 text-sm">
                 <li><strong>Cho Con - Chuẩn Bị Đón Bé</strong> (Ứng dụng chuẩn bị đồ sơ sinh & ngân sách đón bé)</li>
-                <li><strong>HowDoI Personal Finance</strong> (Ứng dụng quản lý tài chính cá nhân & tích lũy tài sản)</li>
+                <li><strong>EvolveTech Personal Finance</strong> (Ứng dụng quản lý tài chính cá nhân & tích lũy tài sản)</li>
                 <li>Các ứng dụng tiện ích khác được phát hành trong tương lai dưới cùng tài khoản nhà phát triển.</li>
               </ul>
             </section>
@@ -135,7 +135,7 @@ export default function UniversalPrivacyPage() {
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-1">
                 <p><strong>Nhà phát triển:</strong> Frank (EvolveTech)</p>
                 <p><strong>Email:</strong> archonic88@gmail.com</p>
-                <p><strong>Trang web:</strong> https://howdoi.id.vn</p>
+                <p><strong>Trang web:</strong> https://www.evolvetech.biz.vn</p>
               </div>
             </section>
           </>
@@ -144,11 +144,11 @@ export default function UniversalPrivacyPage() {
             <section className="space-y-3">
               <h2 className="text-xl font-bold text-slate-900">1. Overview & Scope</h2>
               <p>
-                This Privacy Policy applies to all applications distributed on the Apple App Store and web platforms developed by <strong>Frank (EvolveTech / HowDoI Studio)</strong>, including:
+                This Privacy Policy applies to all applications distributed on the Apple App Store and web platforms developed by <strong>Frank (EvolveTech Studio)</strong>, including:
               </p>
               <ul className="list-disc pl-5 space-y-1 text-slate-600 text-sm">
                 <li><strong>Cho Con - Baby Prep & Checklist</strong> (Newborn checklist & budget planner)</li>
-                <li><strong>HowDoI Personal Finance Suite</strong> (Personal wealth planning & calculation tools)</li>
+                <li><strong>EvolveTech Personal Finance Suite</strong> (Personal wealth planning & calculation tools)</li>
                 <li>All upcoming utility and productivity applications published under the developer account.</li>
               </ul>
             </section>
@@ -181,7 +181,7 @@ export default function UniversalPrivacyPage() {
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-1">
                 <p><strong>Developer:</strong> Frank (EvolveTech)</p>
                 <p><strong>Email:</strong> archonic88@gmail.com</p>
-                <p><strong>Website:</strong> https://howdoi.id.vn</p>
+                <p><strong>Website:</strong> https://www.evolvetech.biz.vn</p>
               </div>
             </section>
           </>
