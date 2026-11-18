@@ -36,7 +36,7 @@ export default function ChoConPrivacyPage() {
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
           <span>Ứng dụng: <strong>Cho Con - Chuẩn Bị Đón Bé</strong> (iOS)</span>
           <span>•</span>
-          <span>Nhà phát triển: <strong>Frank / EvolveTech</strong></span>
+          <span>Nhà phát triển: <strong>Archonic / EvolveTech</strong></span>
           <span>•</span>
           <span>Cập nhật lần cuối: <strong>08/09/2026</strong></span>
         </div>
@@ -68,7 +68,7 @@ export default function ChoConPrivacyPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-slate-900">1. Giới thiệu</h2>
           <p>
-            Chào mừng bạn đến với ứng dụng <strong>&quot;Cho Con - Chuẩn Bị Đón Bé&quot;</strong> do Frank phát triển. Chúng tôi hiểu rằng hành trình làm cha mẹ là một trải nghiệm thiêng liêng và riêng tư. Chúng tôi cam kết tuyệt đối bảo vệ quyền riêng tư của bạn và con bạn.
+            Chào mừng bạn đến với ứng dụng <strong>&quot;Cho Con - Chuẩn Bị Đón Bé&quot;</strong> do Archonic phát triển. Chúng tôi hiểu rằng hành trình làm cha mẹ là một trải nghiệm thiêng liêng và riêng tư. Chúng tôi cam kết tuyệt đối bảo vệ quyền riêng tư của bạn và con bạn.
           </p>
         </section>
 
@@ -118,7 +118,7 @@ export default function ChoConPrivacyPage() {
             Nếu bạn có bất kỳ câu hỏi hoặc khiếu nại nào về Chính sách quyền riêng tư này, vui lòng liên hệ với nhà phát triển:
           </p>
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-1">
-            <p><strong>Người đại diện:</strong> Frank (EvolveTech)</p>
+            <p><strong>Người đại diện:</strong> Archonic (EvolveTech)</p>
             <p><strong>Email:</strong> archonic88@gmail.com</p>
             <p><strong>Trang web:</strong> https://www.evolvetech.biz.vn</p>
           </div>

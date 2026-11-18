@@ -419,7 +419,7 @@ export default function DepositGuardHomePage() {
               Độc lập & Minh bạch phương pháp
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Vận hành độc lập bởi Frank (EvolveTech), không nhận hoa hồng ẩn để điều hướng kết quả sang bất kỳ ngân hàng hay sàn môi giới nào. Công thức mở hoàn toàn để đối chiếu.
+              Vận hành độc lập bởi Archonic (EvolveTech), không nhận hoa hồng ẩn để điều hướng kết quả sang bất kỳ ngân hàng hay sàn môi giới nào. Công thức mở hoàn toàn để đối chiếu.
             </p>
             <Link href="/lien-he" className="inline-block text-xs font-bold text-emerald-700 hover:underline">
               Góp ý hoặc báo cáo sai lệch phép tính →

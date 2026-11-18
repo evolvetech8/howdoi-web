@@ -1,10 +1,10 @@
 # EvolveTech / DepositGuard — Tiếng Nói Độc Lập Về Tài Chính Cá Nhân Cho Người Việt
 
-> *"Giúp người Việt không còn sợ hãi tiền bạc, làm chủ tài chính và sống an tâm hơn."* — Frank
+> *"Giúp người Việt không còn sợ hãi tiền bạc, làm chủ tài chính và sống an tâm hơn."* — Archonic
 
 Nền tảng tài chính cá nhân thực chiến kết hợp giữa:
 1. **Web Platform (`https://www.evolvetech.biz.vn/`)**: Bộ công cụ mô phỏng rủi ro tài chính mua nhà (**DepositGuard**), tính tài chính tự động (Lãi kép, Lương Gross-Net 2026, Ngân sách 50/30/20, Vay mua nhà) và kho cẩm nang thực chiến.
-2. **Hệ thống Backend & API dùng chung**: Thiết kế sẵn để kết nối trực tiếp với ứng dụng **iOS App** tiếp theo mà Frank sẽ phát hành.
+2. **Hệ thống Backend & API dùng chung**: Thiết kế sẵn để kết nối trực tiếp với ứng dụng **iOS App** tiếp theo mà Archonic sẽ phát hành.
 
 ---
 
@@ -32,7 +32,7 @@ Nền tảng tài chính cá nhân thực chiến kết hợp giữa:
 
 ---
 
-## 📱 Sẵn Sàng Cho Ứng Dụng iOS Của Frank
+## 📱 Sẵn Sàng Cho Ứng Dụng iOS Của Archonic
 
 Kiến trúc thư mục và thuật toán tính toán tại `lib/finance-math.ts` được tách biệt hoàn toàn dưới dạng pure TypeScript/JavaScript.
 

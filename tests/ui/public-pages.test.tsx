@@ -203,6 +203,8 @@ describe('Milestone 3 & 4: Public Pages, Trust Architecture, SEO & Privacy (Evol
     expect(container.textContent).toContain('EvolveTech');
     expect(container.textContent).toContain('DepositGuard');
     expect(container.textContent).toContain('evolvetech.biz.vn');
+    expect(container.textContent).toContain('Vận hành bởi Archonic.');
+    expect(container.textContent).not.toContain('Frank');
     expect(container.textContent).toContain('App Store Support');
     expect(container.textContent).not.toContain('howdoi.id.vn');
   });

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "dư nợ giảm dần",
     "niên kim trả góp đều",
   ],
-  authors: [{ name: "Frank (EvolveTech)" }],
+  authors: [{ name: "Archonic (EvolveTech)" }],
   openGraph: {
     title: "EvolveTech DepositGuard — Đừng đặt cọc trước khi biết mình có đủ sức trả nợ",
     description:

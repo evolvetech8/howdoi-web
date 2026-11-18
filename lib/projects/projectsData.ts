@@ -290,8 +290,8 @@ export const ALL_PROJECTS: Project[] = [
       en: 'Experimental space for micro-products, custom web development consulting, and small client automation systems.',
     },
     notes: {
-      vi: 'Giúp tôi tích lũy kinh nghiệm về deployment, SEO và hạ tầng DNS. Sau đó tôi nhận ra cần tập trung vào thương hiệu cá nhân Frank & nền tảng EvolveTech nên đã hợp nhất vào trang hiện tại.',
-      en: 'Great learning experience in DNS, CDN edge caching, and personal branding. Subsequently merged and rebranded into Frank @ EvolveTech.',
+      vi: 'Giúp tôi tích lũy kinh nghiệm về deployment, SEO và hạ tầng DNS. Sau đó tôi nhận ra cần tập trung vào thương hiệu cá nhân Archonic & nền tảng EvolveTech nên đã hợp nhất vào trang hiện tại.',
+      en: 'Great learning experience in DNS, CDN edge caching, and personal branding. Subsequently merged and rebranded into Archonic @ EvolveTech.',
     },
     techStack: ['Next.js', 'Vercel', 'Tailwind CSS'],
     metrics: { vi: 'Chuyển đổi thành công', en: 'Successfully Pivoted' },

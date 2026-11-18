@@ -47,7 +47,7 @@ export default function NewsletterWaitlist() {
       <div className="relative z-10 max-w-3xl mx-auto text-center space-y-6">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
           <Smartphone className="w-4 h-4" />
-          <span>Dự án ứng dụng di động tiếp theo của Frank</span>
+          <span>Dự án ứng dụng di động tiếp theo của Archonic</span>
         </div>
 
         <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
@@ -66,7 +66,7 @@ export default function NewsletterWaitlist() {
             <CheckCircle className="w-10 h-10 text-emerald-400 mx-auto mb-2" />
             <h4 className="text-lg font-bold text-white">Đăng ký thành công!</h4>
             <p className="text-xs text-emerald-200 mt-1">
-              Cảm ơn bạn! Frank sẽ gửi lời mời trải nghiệm bản TestFlight iOS và bản tin tài chính sớm nhất qua email của bạn.
+              Cảm ơn bạn! Archonic sẽ gửi lời mời trải nghiệm bản TestFlight iOS và bản tin tài chính sớm nhất qua email của bạn.
             </p>
           </div>
         ) : (

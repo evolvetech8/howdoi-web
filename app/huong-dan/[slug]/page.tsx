@@ -167,7 +167,7 @@ export default async function GuideDetailPage({ params }: Props) {
           F
         </div>
         <div>
-          <span className="font-bold text-slate-900 block text-sm">Viết bởi Frank</span>
+          <span className="font-bold text-slate-900 block text-sm">Viết bởi Archonic</span>
           <p className="text-xs text-slate-600 mt-0.5">
             Kỹ sư công nghệ & người sáng lập EvolveTech.biz.vn. Với mong muốn người Việt không còn nỗi sợ về tiền bạc và sống tự do, bình an hơn mỗi ngày.
           </p>

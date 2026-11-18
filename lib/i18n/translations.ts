@@ -121,7 +121,7 @@ export const translations: Record<Language, Translations> = {
       allProjects: 'Tất cả dự án',
       writing: 'Bài viết',
       support: 'Hỗ trợ App',
-      contact: 'Gửi thư cho Frank',
+      contact: 'Gửi thư cho Archonic',
       role: 'Indie Maker',
     },
     projects: {
@@ -145,12 +145,12 @@ export const translations: Record<Language, Translations> = {
       noResults: 'Không tìm thấy dự án phù hợp với bộ lọc.',
     },
     hero: {
-      badge: 'Frank • Lập trình viên độc lập',
+      badge: 'Archonic • Lập trình viên độc lập',
       titleStart: 'Tự thiết kế, lập trình & phát hành',
       titleGradient: 'phần mềm hữu ích',
       titleEnd: 'cho cuộc sống hàng ngày.',
       subtitle:
-        'Chào bạn, tôi là Frank. Tôi tự tay lập trình và vận hành các ứng dụng di động & công cụ web độc lập. Không nhà đầu tư, không bộ máy cồng kềnh — chỉ tập trung giải quyết đúng vấn đề và mang lại giá trị thực tế cho người dùng.',
+        'Chào bạn, tôi là Archonic. Tôi tự tay lập trình và vận hành các ứng dụng di động & công cụ web độc lập. Không nhà đầu tư, không bộ máy cồng kềnh — chỉ tập trung giải quyết đúng vấn đề và mang lại giá trị thực tế cho người dùng.',
       exploreBtn: 'Xem các sản phẩm đã phát hành',
       toolsBtn: 'Dùng thử bộ công cụ miễn phí',
       stat1Label: 'Tự thân phát triển',
@@ -182,7 +182,7 @@ export const translations: Record<Language, Translations> = {
       lab: {
         title: 'Đang ấp ủ sản phẩm tiếp theo...',
         desc: 'Thử nghiệm các tiện ích AI và micro-tools hỗ trợ năng suất cá nhân.',
-        cta: 'Đề xuất ý tưởng cho Frank →',
+        cta: 'Đề xuất ý tưởng cho Archonic →',
       },
     },
     tools: {
@@ -199,13 +199,13 @@ export const translations: Record<Language, Translations> = {
       title: 'Tại sao tôi chọn con đường Solo Indie Developer?',
       text:
         'Tôi tin vào sức mạnh của sự tinh gọn. Khi một kỹ sư làm chủ toàn bộ quy trình từ ý tưởng, thiết kế UI/UX, viết code front-end/back-end đến hỗ trợ người dùng, sản phẩm sẽ được tạo ra với sự thấu hiểu sâu sắc nhất mà không bị phân mảnh qua các tầng họp hành báo cáo.',
-      stackTitle: 'Vũ Khí Công Nghệ (Tech Stack Của Frank)',
+      stackTitle: 'Vũ Khí Công Nghệ (Tech Stack Của Archonic)',
     },
     support: {
       badge: 'Cổng Hỗ Trợ Chính Thức Apple App Store',
       title: 'Trung Tâm Hỗ Trợ Ứng Dụng Di Động',
       subtitle:
-        'Trang hỗ trợ chính thức cho tất cả các ứng dụng trên hệ sinh thái iOS của Frank & EvolveTech. Chúng tôi luôn ở đây để giúp bạn có trải nghiệm tốt nhất.',
+        'Trang hỗ trợ chính thức cho tất cả các ứng dụng trên hệ sinh thái iOS của Archonic & EvolveTech. Chúng tôi luôn ở đây để giúp bạn có trải nghiệm tốt nhất.',
       emailLabel: 'Email',
       responseLabel: 'Thời gian phản hồi: Trong 24 giờ',
       sectionTitle: 'Các Ứng Dụng Được Hỗ Trợ',
@@ -240,7 +240,7 @@ export const translations: Record<Language, Translations> = {
       allProjects: 'All Projects',
       writing: 'Writing',
       support: 'App Support',
-      contact: 'Email Frank',
+      contact: 'Email Archonic',
       role: 'Indie Maker',
     },
     projects: {
@@ -264,12 +264,12 @@ export const translations: Record<Language, Translations> = {
       noResults: 'No projects match your current filter.',
     },
     hero: {
-      badge: 'Frank • Solo Indie Developer',
+      badge: 'Archonic • Solo Indie Developer',
       titleStart: 'I design, code & ship',
       titleGradient: 'useful software',
       titleEnd: 'for everyday life.',
       subtitle:
-        "Hi, I'm Frank. I build and operate independent mobile apps and web tools. No venture capital, no corporate bloat — just laser-focused on solving real problems and delivering genuine value to users.",
+        "Hi, I'm Archonic. I build and operate independent mobile apps and web tools. No venture capital, no corporate bloat — just laser-focused on solving real problems and delivering genuine value to users.",
       exploreBtn: 'Explore Shipped Products',
       toolsBtn: 'Try Free Financial Tools',
       stat1Label: 'Solo Bootstrapped',
@@ -301,7 +301,7 @@ export const translations: Record<Language, Translations> = {
       lab: {
         title: "What's next? Cooking up the next tool...",
         desc: 'Experimenting with AI utilities and solo developer productivity tools.',
-        cta: 'Suggest an idea to Frank →',
+        cta: 'Suggest an idea to Archonic →',
       },
     },
     tools: {
@@ -318,13 +318,13 @@ export const translations: Record<Language, Translations> = {
       title: 'Why I Chose The Solo Indie Path',
       text:
         'I believe in the power of extreme minimalism. When one software engineer owns the entire product lifecycle — from ideation, UX design, full-stack code to customer support — products are built with deep empathy and ship without bureaucracy.',
-      stackTitle: "Frank's Weapon of Choice (Tech Stack)",
+      stackTitle: "Archonic's Weapon of Choice (Tech Stack)",
     },
     support: {
       badge: 'Apple App Store Official Support Portal',
       title: 'Mobile App Support Center',
       subtitle:
-        'Official support portal for all iOS applications developed by Frank & EvolveTech. We are always here to ensure you have a seamless experience.',
+        'Official support portal for all iOS applications developed by Archonic & EvolveTech. We are always here to ensure you have a seamless experience.',
       emailLabel: 'Direct Email',
       responseLabel: 'Response Time: Within 24 Hours',
       sectionTitle: 'Supported Applications',

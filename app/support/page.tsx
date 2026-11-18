@@ -131,7 +131,7 @@ export default function UniversalSupportPage() {
       setFeedbackMsg(
         lang === 'vi'
           ? `Yêu cầu hỗ trợ cho ứng dụng "${selectedApp}" đã được tiếp nhận. Đội ngũ phát triển sẽ phản hồi qua email ${email} trong vòng 24 giờ.`
-          : `Support request for "${selectedApp}" received! Frank will reply to ${email} within 24 hours.`
+          : `Support request for "${selectedApp}" received! Archonic will reply to ${email} within 24 hours.`
       );
       setName('');
       setEmail('');
@@ -158,7 +158,7 @@ export default function UniversalSupportPage() {
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
             {t.support.title} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300">
-              Apps By Frank & EvolveTech
+              Apps By Archonic & EvolveTech
             </span>
           </h1>
 
@@ -277,7 +277,7 @@ export default function UniversalSupportPage() {
                 </label>
                 <input
                   type="text"
-                  placeholder={lang === 'vi' ? 'Ví dụ: Frank, Minh Anh...' : 'e.g. Frank, Alex...'}
+                  placeholder={lang === 'vi' ? 'Ví dụ: Archonic, Minh Anh...' : 'e.g. Archonic, Alex...'}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
@@ -409,7 +409,7 @@ export default function UniversalSupportPage() {
 
       {/* Bottom Compliance & Policy Bar */}
       <div className="pt-6 border-t border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <span>Developer: <strong>Frank • EvolveTech Apps Ecosystem</strong></span>
+        <span>Developer: <strong>Archonic • EvolveTech Apps Ecosystem</strong></span>
         <div className="flex gap-4">
           <Link href="/privacy" className="text-slate-600 hover:text-emerald-700 font-semibold underline">
             {t.support.privacyLink}

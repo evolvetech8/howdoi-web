@@ -6,7 +6,7 @@ import DisclaimerBanner from '@/components/depositguard/common/DisclaimerBanner'
 export const metadata: Metadata = {
   title: 'Về EvolveTech & Cam Kết Độc Lập Tài Chính | EvolveTech DepositGuard',
   description:
-    'Thông tin người vận hành EvolveTech (Frank), nguyên tắc độc lập tài chính, không nhận hoa hồng ẩn từ ngân hàng hay sàn môi giới bất động sản.',
+    'Thông tin đơn vị vận hành EvolveTech (Archonic), nguyên tắc độc lập tài chính, không nhận hoa hồng ẩn từ ngân hàng hay sàn môi giới bất động sản.',
   alternates: {
     canonical: 'https://www.evolvetech.biz.vn/ve-evolvetech',
   },
@@ -34,10 +34,10 @@ export default function VeEvolveTechPage() {
             <ShieldCheck className="w-5 h-5" />
           </div>
           <h2 className="text-lg font-bold text-slate-900">
-            1. Người vận hành là ai?
+            1. Đơn vị vận hành là ai?
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Nền tảng được phát triển và vận hành độc lập bởi <strong>Frank</strong> (nhà phát triển phần mềm độc lập đứng sau studio sản phẩm <strong>EvolveTech</strong> tại <strong>evolvetech.biz.vn</strong>). Các ứng dụng di động iOS và dự án phần mềm khác được lưu trữ tại danh mục kỹ thuật <Link href="/projects" className="text-emerald-700 font-semibold hover:underline">/projects</Link>, kết hợp cùng mô-đun chuyên sâu <strong>DepositGuard</strong> phục vụ bài toán an toàn tài chính khi mua nhà.
+            Nền tảng được phát triển và vận hành độc lập bởi <strong>Archonic</strong> (công ty công nghệ đứng sau hệ sinh thái sản phẩm <strong>EvolveTech</strong> tại <strong>evolvetech.biz.vn</strong>). Các ứng dụng di động iOS và dự án phần mềm khác được lưu trữ tại danh mục kỹ thuật <Link href="/projects" className="text-emerald-700 font-semibold hover:underline">/projects</Link>, kết hợp cùng mô-đun chuyên sâu <strong>DepositGuard</strong> phục vụ bài toán an toàn tài chính khi mua nhà.
           </p>
         </section>
 

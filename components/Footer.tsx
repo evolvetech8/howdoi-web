@@ -116,7 +116,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-6 pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-400">
-          <p>© {new Date().getFullYear()} EvolveTech (evolvetech.biz.vn) • Vận hành bởi Frank.</p>
+          <p>© {new Date().getFullYear()} EvolveTech (evolvetech.biz.vn) • Vận hành bởi Archonic.</p>
           <div className="flex items-center gap-3">
             <span>Mô hình tính toán v1.1 (Deterministic VND)</span>
             <span className="text-slate-300">•</span>

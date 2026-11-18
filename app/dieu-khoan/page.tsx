@@ -69,7 +69,7 @@ export default function DieuKhoanPage() {
             3. Giới hạn trách nhiệm (Limitation of Liability)
           </h2>
           <p>
-            Trong phạm vi tối đa được pháp luật Việt Nam cho phép, người vận hành EvolveTech (Frank) không chịu trách nhiệm đối với bất kỳ thiệt hại trực tiếp hoặc gián tiếp nào phát sinh từ quyết định đặt cọc, mua bán bất động sản, ký kết hợp đồng tín dụng hoặc mất tiền cọc của người dùng. Trước khi ký hợp đồng đặt cọc hoặc hợp đồng vay vốn, người dùng cần làm việc trực tiếp bằng văn bản với ngân hàng cho vay và tham vấn luật sư/công chứng viên độc lập.
+            Trong phạm vi tối đa được pháp luật Việt Nam cho phép, người vận hành EvolveTech (Archonic) không chịu trách nhiệm đối với bất kỳ thiệt hại trực tiếp hoặc gián tiếp nào phát sinh từ quyết định đặt cọc, mua bán bất động sản, ký kết hợp đồng tín dụng hoặc mất tiền cọc của người dùng. Trước khi ký hợp đồng đặt cọc hoặc hợp đồng vay vốn, người dùng cần làm việc trực tiếp bằng văn bản với ngân hàng cho vay và tham vấn luật sư/công chứng viên độc lập.
           </p>
         </div>
 

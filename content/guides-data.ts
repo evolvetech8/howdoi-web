@@ -27,7 +27,7 @@ export const GUIDES: Guide[] = [
     category: "Tiết kiệm",
     readTime: "6 phút đọc",
     date: "08/09/2026",
-    author: "Frank (HowDoI)",
+    author: "Archonic (EvolveTech)",
     relatedTool: "/cong-cu/50-30-20",
     content: {
       introduction: "Nhiều người Việt chúng ta thường bắt đầu hành trình tài chính bằng việc hỏi 'Đầu tư gì để nhanh giàu?'. Nhưng sự thật cay đắng là: khi chưa có tấm khiên bảo vệ, một sự cố xe hỏng, ốm đau hay mất việc có thể cuốn phăng toàn bộ số tiền bạn tích góp được, thậm chí đẩy bạn vào vòng xoáy thẻ tín dụng và vay nặng lãi.",
@@ -71,7 +71,7 @@ export const GUIDES: Guide[] = [
     category: "Quản lý nợ",
     readTime: "7 phút đọc",
     date: "05/09/2026",
-    author: "Frank (HowDoI)",
+    author: "Archonic (EvolveTech)",
     relatedTool: "/cong-cu/gross-net",
     content: {
       introduction: "Lương 10 đến 15 triệu ở TP.HCM hay Hà Nội có vẻ như 'vừa đủ sống', nhưng nếu không kiểm soát, bạn sẽ rơi vào cái bẫy sống mòn từ kỳ lương này sang kỳ lương khác (Paycheck to paycheck).",
@@ -114,7 +114,7 @@ export const GUIDES: Guide[] = [
     category: "Đầu tư",
     readTime: "5 phút đọc",
     date: "01/09/2026",
-    author: "Frank (HowDoI)",
+    author: "Archonic (EvolveTech)",
     relatedTool: "/cong-cu/lai-kep",
     content: {
       introduction: "Albert Einstein từng gọi lãi kép là kỳ quan thứ 8 của thế giới: 'Người hiểu nó sẽ kiếm được tiền từ nó; người không hiểu nó sẽ phải trả tiền cho nó'. Trong tài chính cá nhân, tài sản lớn nhất của bạn không phải là tiền, mà là THỜI GIAN.",
@@ -152,7 +152,7 @@ export const GUIDES: Guide[] = [
     category: "Tâm lý tiền bạc",
     readTime: "8 phút đọc",
     date: "28/08/2026",
-    author: "Frank (HowDoI)",
+    author: "Archonic (EvolveTech)",
     content: {
       introduction: "Kiếm tiền đã khó, giữ tiền còn khó hơn gấp mười lần. Ở Việt Nam, lòng tham và nỗi sợ bị bỏ lại phía sau (FOMO) là hai tử huyệt khiến hàng ngàn người mất sạch số tiền tích cóp cả đời.",
       keyTakeaways: [
@@ -193,7 +193,7 @@ export const GUIDES: Guide[] = [
     category: "Bảo hiểm",
     readTime: "7 phút đọc",
     date: "20/08/2026",
-    author: "Frank (HowDoI)",
+    author: "Archonic (EvolveTech)",
     content: {
       introduction: "Bảo hiểm nhân thọ sinh ra không phải để sinh lời hay làm giàu. Mục đích duy nhất của nó là BẢO VỆ THU NHẬP của người trụ cột khi có rủi ro lớn về tính mạng hay sức khỏe xảy ra.",
       keyTakeaways: [

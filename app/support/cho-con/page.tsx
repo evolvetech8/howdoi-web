@@ -78,7 +78,7 @@ export default function ChoConSupportPage() {
       if (!res.ok) throw new Error(data.message || 'Lỗi gửi yêu cầu.');
 
       setStatus('success');
-      setFeedbackMsg('Yêu cầu hỗ trợ của bạn đã được gửi thành công! Frank và đội ngũ phát triển sẽ phản hồi qua email trong vòng 24 giờ.');
+      setFeedbackMsg('Yêu cầu hỗ trợ của bạn đã được gửi thành công! Archonic và đội ngũ phát triển sẽ phản hồi qua email trong vòng 24 giờ.');
       setName('');
       setEmail('');
       setMessage('');
@@ -211,7 +211,7 @@ export default function ChoConSupportPage() {
           <span className="text-xs font-bold uppercase tracking-wider text-rose-600">Biểu Mẫu Trực Tuyến</span>
           <h2 className="text-2xl font-bold text-slate-900">Gửi Tin Nhắn Cho Nhà Phát Triển</h2>
           <p className="text-slate-500 text-xs sm:text-sm">
-            Bạn cần trợ giúp gấp hoặc muốn góp ý tính năng cho ứng dụng <strong>Cho Con</strong>? Hãy để lại lời nhắn, Frank sẽ hồi đáp sớm nhất.
+            Bạn cần trợ giúp gấp hoặc muốn góp ý tính năng cho ứng dụng <strong>Cho Con</strong>? Hãy để lại lời nhắn, Archonic sẽ hồi đáp sớm nhất.
           </p>
         </div>
 
@@ -318,7 +318,7 @@ export default function ChoConSupportPage() {
 
       {/* Footer Info for App Reviewers & Users */}
       <div className="pt-4 border-t border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <span>Nhà phát triển: <strong>Frank (EvolveTech)</strong></span>
+        <span>Nhà phát triển: <strong>Archonic (EvolveTech)</strong></span>
         <div className="flex gap-4">
           <Link href="/privacy/cho-con" className="text-slate-600 hover:text-rose-600 underline">
             Chính Sách Quyền Riêng Tư (Privacy Policy)

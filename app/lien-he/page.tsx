@@ -39,7 +39,7 @@ export default function LienHePage() {
               Email liên hệ trực tiếp
             </h2>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Người vận hành: <strong>Frank (EvolveTech)</strong>
+              Đơn vị vận hành: <strong>Archonic (EvolveTech)</strong>
             </p>
             <a
               href="mailto:archonic88@gmail.com"

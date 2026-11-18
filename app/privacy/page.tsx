@@ -45,7 +45,7 @@ export default function UniversalPrivacyPage() {
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
           <span>
             {lang === 'vi' ? 'Áp dụng cho:' : 'Applies to:'}{' '}
-            <strong>All iOS & Web Apps by Frank / EvolveTech</strong>
+            <strong>All iOS & Web Apps by Archonic / EvolveTech</strong>
           </span>
           <span>•</span>
           <span>
@@ -98,7 +98,7 @@ export default function UniversalPrivacyPage() {
             <section className="space-y-3">
               <h2 className="text-xl font-bold text-slate-900">1. Giới thiệu và Phạm vi áp dụng</h2>
               <p>
-                Chính sách quyền riêng tư này áp dụng cho toàn bộ các ứng dụng di động được phân phối trên Apple App Store bởi nhà phát triển <strong>Frank (EvolveTech Ecosystem)</strong>, bao gồm nhưng không giới hạn ở:
+                Chính sách quyền riêng tư này áp dụng cho toàn bộ các ứng dụng di động được phân phối trên Apple App Store bởi nhà phát triển <strong>Archonic (EvolveTech Ecosystem)</strong>, bao gồm nhưng không giới hạn ở:
               </p>
               <ul className="list-disc pl-5 space-y-1 text-slate-600 text-sm">
                 <li><strong>Cho Con - Chuẩn Bị Đón Bé</strong> (Ứng dụng chuẩn bị đồ sơ sinh & ngân sách đón bé)</li>
@@ -133,7 +133,7 @@ export default function UniversalPrivacyPage() {
               <h2 className="text-xl font-bold text-slate-900">4. Liên hệ với nhà phát triển</h2>
               <p>Mọi thắc mắc hoặc yêu cầu liên quan đến chính sách bảo mật này, xin vui lòng gửi thư cho chúng tôi:</p>
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-1">
-                <p><strong>Nhà phát triển:</strong> Frank (EvolveTech)</p>
+                <p><strong>Nhà phát triển:</strong> Archonic (EvolveTech)</p>
                 <p><strong>Email:</strong> archonic88@gmail.com</p>
                 <p><strong>Trang web:</strong> https://www.evolvetech.biz.vn</p>
               </div>
@@ -144,7 +144,7 @@ export default function UniversalPrivacyPage() {
             <section className="space-y-3">
               <h2 className="text-xl font-bold text-slate-900">1. Overview & Scope</h2>
               <p>
-                This Privacy Policy applies to all applications distributed on the Apple App Store and web platforms developed by <strong>Frank (EvolveTech Studio)</strong>, including:
+                This Privacy Policy applies to all applications distributed on the Apple App Store and web platforms developed by <strong>Archonic (EvolveTech Studio)</strong>, including:
               </p>
               <ul className="list-disc pl-5 space-y-1 text-slate-600 text-sm">
                 <li><strong>Cho Con - Baby Prep & Checklist</strong> (Newborn checklist & budget planner)</li>
@@ -179,7 +179,7 @@ export default function UniversalPrivacyPage() {
               <h2 className="text-xl font-bold text-slate-900">4. Developer Contact</h2>
               <p>For questions or privacy requests, please contact us directly:</p>
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-1">
-                <p><strong>Developer:</strong> Frank (EvolveTech)</p>
+                <p><strong>Developer:</strong> Archonic (EvolveTech)</p>
                 <p><strong>Email:</strong> archonic88@gmail.com</p>
                 <p><strong>Website:</strong> https://www.evolvetech.biz.vn</p>
               </div>
