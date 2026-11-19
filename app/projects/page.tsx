@@ -83,7 +83,7 @@ export default function ProjectsPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between text-xs">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 font-semibold text-slate-600 hover:text-emerald-700 transition-colors"
+            className="inline-flex items-center gap-1.5 font-semibold text-slate-600 hover:text-blue-800 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>{t.projects.backToHome}</span>
@@ -99,7 +99,7 @@ export default function ProjectsPage() {
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 space-y-12">
         {/* Hero Section */}
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200/60">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-900 text-xs font-bold border border-blue-200/60">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{t.projects.badge}</span>
           </div>
@@ -113,7 +113,7 @@ export default function ProjectsPage() {
             <span>•</span>
             <span>{t.projects.views}</span>
             <span>•</span>
-            <span className="inline-flex items-center gap-1 text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">
+            <span className="inline-flex items-center gap-1 text-blue-800 font-semibold bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200/60">
               <Flame className="w-3 h-3" />
               100% Bootstrapped
             </span>
@@ -216,30 +216,30 @@ export default function ProjectsPage() {
         {/* Scoreboard Pastel Cards (Like levels.io/projects cards) */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Card 1: Success */}
-          <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-5 flex flex-col justify-between">
+          <div className="bg-blue-50/70 border border-blue-200/80 rounded-2xl p-5 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-[11px] uppercase tracking-wider font-bold text-emerald-800 flex items-center gap-1">
+                <span className="text-[11px] uppercase tracking-wider font-bold text-blue-900 flex items-center gap-1">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   {STATUS_CONFIG.success.title[lang]}
                 </span>
-                <span className="text-xs font-semibold text-emerald-700">
+                <span className="text-xs font-semibold text-blue-800">
                   {stats.percentages.success}%
                 </span>
               </div>
-              <div className="text-3xl font-extrabold text-emerald-950 mt-2 mb-1">
+              <div className="text-3xl font-extrabold text-slate-900 mt-2 mb-1">
                 {stats.counts.success}
               </div>
-              <p className="text-xs text-emerald-800/80">
+              <p className="text-xs text-blue-900/80">
                 {STATUS_CONFIG.success.desc[lang]}
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-emerald-200/60 flex flex-wrap gap-1.5">
+            <div className="mt-4 pt-3 border-t border-blue-200/60 flex flex-wrap gap-1.5">
               {ALL_PROJECTS.filter((p) => p.status === 'success').map((p) => (
                 <button
                   key={p.id}
                   onClick={() => scrollToProject(p.id)}
-                  className="px-2.5 py-1 bg-white/90 hover:bg-white text-emerald-900 text-xs font-semibold rounded-full border border-emerald-300/60 transition-all hover:scale-105 shadow-2xs"
+                  className="px-2.5 py-1 bg-white/90 hover:bg-white text-blue-950 text-xs font-semibold rounded-full border border-blue-300/60 transition-all hover:scale-105 shadow-2xs"
                 >
                   {p.name}
                 </button>
@@ -385,7 +385,7 @@ export default function ProjectsPage() {
                   setSelectedStatus('all');
                   setSearchQuery('');
                 }}
-                className="mt-3 text-xs font-bold text-emerald-700 hover:underline"
+                className="mt-3 text-xs font-bold text-blue-800 hover:underline"
               >
                 Reset filters
               </button>
@@ -485,7 +485,7 @@ export default function ProjectsPage() {
                                 href={proj.appStoreUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-semibold transition-colors"
+                                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-50 text-blue-900 hover:bg-blue-100 font-semibold transition-colors"
                               >
                                 <Smartphone className="w-3.5 h-3.5" />
                                 <span>{t.projects.appStoreBadge}</span>
@@ -509,7 +509,7 @@ export default function ProjectsPage() {
                                 href={proj.url}
                                 target={proj.url.startsWith('http') && !proj.url.includes('evolvetech.biz.vn') ? '_blank' : '_self'}
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-emerald-600 font-semibold transition-colors shadow-2xs"
+                                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-blue-700 font-semibold transition-colors shadow-2xs"
                               >
                                 <span>{t.projects.openLink}</span>
                                 <ExternalLink className="w-3 h-3 ml-0.5" />
@@ -542,7 +542,7 @@ export default function ProjectsPage() {
           </div>
           <a
             href="mailto:archonic88@gmail.com"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105 shrink-0"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-700 hover:bg-blue-600 text-white font-bold text-sm shadow-lg transition-all hover:scale-105 shrink-0"
           >
             <Mail className="w-4 h-4" />
             <span>{t.nav.contact}</span>

@@ -73,7 +73,7 @@ export default function Step2Household() {
     <div className="space-y-6">
       {/* Step Header */}
       <div className="border-b border-slate-100 pb-4">
-        <div className="flex items-center gap-2 text-emerald-700 font-semibold text-xs tracking-wider uppercase mb-1">
+        <div className="flex items-center gap-2 text-blue-800 font-semibold text-xs tracking-wider uppercase mb-1">
           <Wallet className="w-4 h-4" /> Bước 2: Dòng tiền & Khả năng chịu đựng
         </div>
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
@@ -178,7 +178,7 @@ export default function Step2Household() {
           </span>
           <span
             className={`text-lg sm:text-xl font-extrabold ${
-              discretionarySurplusBeforeLoan > 0 ? 'text-emerald-700' : 'text-rose-600'
+              discretionarySurplusBeforeLoan > 0 ? 'text-blue-800' : 'text-rose-600'
             }`}
           >
             {formatVND(discretionarySurplusBeforeLoan)} / tháng
@@ -191,7 +191,7 @@ export default function Step2Household() {
             <span
               className={`font-bold text-sm ${
                 remainingCashAfterClosing >= (household.plannedEmergencyReserveFloor || 0)
-                  ? 'text-emerald-700'
+                  ? 'text-blue-800'
                   : 'text-amber-700'
               }`}
             >

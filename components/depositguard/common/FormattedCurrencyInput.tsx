@@ -71,7 +71,7 @@ export default function FormattedCurrencyInput({
         <label htmlFor={id} className="text-xs sm:text-sm font-semibold text-slate-800">
           {label}
         </label>
-        <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80 shadow-2xs">
+        <span className="text-xs font-bold text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200/80 shadow-2xs">
           {formatCompactVND(value)}
         </span>
       </div>
@@ -98,7 +98,7 @@ export default function FormattedCurrencyInput({
               ? 'border-rose-400 focus:ring-rose-500/20 focus:border-rose-600 bg-rose-50/20'
               : warning
               ? 'border-amber-400 focus:ring-amber-500/20 focus:border-amber-600 bg-amber-50/20'
-              : 'border-slate-300 hover:border-slate-400 focus:ring-emerald-500/20 focus:border-emerald-600'
+              : 'border-slate-300 hover:border-slate-400 focus:ring-blue-600/20 focus:border-blue-700'
           }`}
         />
         <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm pointer-events-none select-none">
@@ -117,7 +117,7 @@ export default function FormattedCurrencyInput({
           disabled={disabled}
           onChange={handleSliderChange}
           aria-label={label}
-          className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600 focus:outline-none"
+          className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-700 focus:outline-none"
         />
         <div className="flex justify-between text-[10px] text-slate-400 pt-1 font-medium">
           <span>{formatCompactVND(min)}</span>
@@ -140,7 +140,7 @@ export default function FormattedCurrencyInput({
                 }}
                 className={`px-2.5 py-1 text-xs font-semibold rounded-lg border transition-all ${
                   isSelected
-                    ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                    ? 'bg-blue-700 text-white border-blue-700 shadow-2xs'
                     : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:border-slate-300'
                 }`}
               >

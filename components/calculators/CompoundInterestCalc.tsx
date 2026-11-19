@@ -64,9 +64,9 @@ export default function CompoundInterestCalc() {
           <div>
             <div className="flex justify-between items-center mb-1.5">
               <label className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
-                <Coins className="w-4 h-4 text-emerald-600" /> Số tiền ban đầu
+                <Coins className="w-4 h-4 text-blue-700" /> Số tiền ban đầu
               </label>
-              <span className="text-sm font-bold text-emerald-700">{formatVND(initialInvestment)}</span>
+              <span className="text-sm font-bold text-blue-800">{formatVND(initialInvestment)}</span>
             </div>
             <input
               type="range"
@@ -75,7 +75,7 @@ export default function CompoundInterestCalc() {
               step={5_000_000}
               value={initialInvestment}
               onChange={(e) => setInitialInvestment(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-700"
             />
             <div className="flex justify-between text-[11px] text-slate-400 mt-1">
               <span>0 đ</span>
@@ -88,9 +88,9 @@ export default function CompoundInterestCalc() {
           <div>
             <div className="flex justify-between items-center mb-1.5">
               <label className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
-                <Calendar className="w-4 h-4 text-emerald-600" /> Góp thêm mỗi tháng
+                <Calendar className="w-4 h-4 text-blue-700" /> Góp thêm mỗi tháng
               </label>
-              <span className="text-sm font-bold text-emerald-700">{formatVND(monthlyContribution)}</span>
+              <span className="text-sm font-bold text-blue-800">{formatVND(monthlyContribution)}</span>
             </div>
             <input
               type="range"
@@ -99,7 +99,7 @@ export default function CompoundInterestCalc() {
               step={500_000}
               value={monthlyContribution}
               onChange={(e) => setMonthlyContribution(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-700"
             />
             <div className="flex justify-between text-[11px] text-slate-400 mt-1">
               <span>500k</span>
@@ -112,9 +112,9 @@ export default function CompoundInterestCalc() {
           <div>
             <div className="flex justify-between items-center mb-1.5">
               <label className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
-                <Percent className="w-4 h-4 text-emerald-600" /> Lãi suất kỳ vọng (% / năm)
+                <Percent className="w-4 h-4 text-blue-700" /> Lãi suất kỳ vọng (% / năm)
               </label>
-              <span className="text-sm font-bold text-emerald-700">{annualRate}% / năm</span>
+              <span className="text-sm font-bold text-blue-800">{annualRate}% / năm</span>
             </div>
             <input
               type="range"
@@ -123,7 +123,7 @@ export default function CompoundInterestCalc() {
               step={0.5}
               value={annualRate}
               onChange={(e) => setAnnualRate(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-700"
             />
             <div className="flex justify-between text-[11px] text-slate-400 mt-1">
               <span>4% (Gửi bank)</span>
@@ -136,9 +136,9 @@ export default function CompoundInterestCalc() {
           <div>
             <div className="flex justify-between items-center mb-1.5">
               <label className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-emerald-600" /> Thời gian tích lũy
+                <Sparkles className="w-4 h-4 text-blue-700" /> Thời gian tích lũy
               </label>
-              <span className="text-sm font-bold text-emerald-700">{years} năm</span>
+              <span className="text-sm font-bold text-blue-800">{years} năm</span>
             </div>
             <input
               type="range"
@@ -147,7 +147,7 @@ export default function CompoundInterestCalc() {
               step={1}
               value={years}
               onChange={(e) => setYears(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-700"
             />
             <div className="flex justify-between text-[11px] text-slate-400 mt-1">
               <span>1 năm</span>
@@ -168,7 +168,7 @@ export default function CompoundInterestCalc() {
                   setAnnualRate(10);
                   setYears(10);
                 }}
-                className="text-xs py-2 px-3 bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 border border-slate-200 rounded-lg transition-colors text-slate-700 font-medium text-left"
+                className="text-xs py-2 px-3 bg-slate-50 hover:bg-blue-50 hover:text-blue-800 hover:border-blue-200 border border-slate-200 rounded-lg transition-colors text-slate-700 font-medium text-left"
               >
                 🌱 Người mới đi làm
                 <span className="block text-[10px] text-slate-400">1.5tr/tháng - 10 năm</span>
@@ -181,7 +181,7 @@ export default function CompoundInterestCalc() {
                   setAnnualRate(11);
                   setYears(20);
                 }}
-                className="text-xs py-2 px-3 bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 border border-slate-200 rounded-lg transition-colors text-slate-700 font-medium text-left"
+                className="text-xs py-2 px-3 bg-slate-50 hover:bg-blue-50 hover:text-blue-800 hover:border-blue-200 border border-slate-200 rounded-lg transition-colors text-slate-700 font-medium text-left"
               >
                 🚀 Hưu trí an nhàn (FIRE)
                 <span className="block text-[10px] text-slate-400">5tr/tháng - 20 năm</span>
@@ -194,12 +194,12 @@ export default function CompoundInterestCalc() {
         <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
           {/* Summary Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="p-4 bg-emerald-50/80 rounded-xl border border-emerald-100">
-              <span className="text-xs text-emerald-800 font-medium block">Tổng tài sản dự kiến</span>
-              <span className="text-xl sm:text-2xl font-bold text-emerald-700 mt-1 block">
+            <div className="p-4 bg-blue-50/80 rounded-xl border border-emerald-100">
+              <span className="text-xs text-blue-900 font-medium block">Tổng tài sản dự kiến</span>
+              <span className="text-xl sm:text-2xl font-bold text-blue-800 mt-1 block">
                 {formatCompactVND(summary.futureValue)}
               </span>
-              <span className="text-[11px] text-emerald-600 font-mono mt-0.5 block">{formatVND(summary.futureValue)}</span>
+              <span className="text-[11px] text-blue-700 font-mono mt-0.5 block">{formatVND(summary.futureValue)}</span>
             </div>
 
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
@@ -229,8 +229,8 @@ export default function CompoundInterestCalc() {
                 <span className="flex items-center gap-1 text-slate-600">
                   <span className="w-2.5 h-2.5 rounded-full bg-slate-400"></span> Tiền vốn
                 </span>
-                <span className="flex items-center gap-1 text-emerald-700 font-medium">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Tổng tài sản
+                <span className="flex items-center gap-1 text-blue-800 font-medium">
+                  <span className="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Tổng tài sản
                 </span>
               </div>
             </div>
@@ -290,8 +290,8 @@ export default function CompoundInterestCalc() {
           </div>
 
           {/* Insight Note */}
-          <div className="bg-emerald-50 border-l-4 border-emerald-500 p-3.5 rounded-r-lg">
-            <p className="text-xs text-emerald-900 leading-relaxed">
+          <div className="bg-blue-50 border-l-4 border-blue-600 p-3.5 rounded-r-lg">
+            <p className="text-xs text-blue-950 leading-relaxed">
               💡 <strong>Góc nhìn của Archonic:</strong> Tiền lãi sinh ra ({formatCompactVND(summary.totalInterest)}) chiếm đến{' '}
               <strong>{((summary.totalInterest / Math.max(1, summary.futureValue)) * 100).toFixed(0)}%</strong> tổng tài sản của bạn! Đó chính là lý do vì sao người giàu không làm việc vì tiền, mà để tiền làm việc cho mình.
             </p>

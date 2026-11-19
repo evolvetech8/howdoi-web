@@ -169,7 +169,7 @@ export default function GrossNetCalc() {
             <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden flex">
               <div
                 style={{ width: `${netPercent}%` }}
-                className="bg-emerald-500 h-full transition-all"
+                className="bg-blue-600 h-full transition-all"
                 title={`Net: ${netPercent}%`}
               />
               <div
@@ -185,7 +185,7 @@ export default function GrossNetCalc() {
             </div>
             <div className="flex justify-between text-[11px] text-slate-500 mt-2">
               <span className="flex items-center gap-1">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Net ({netPercent}%)
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Net ({netPercent}%)
               </span>
               <span className="flex items-center gap-1">
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Bảo hiểm 10.5% ({insurancePercent}%)

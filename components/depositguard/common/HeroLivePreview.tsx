@@ -17,7 +17,6 @@ export default function HeroLivePreview() {
   const router = useRouter();
   const { updateLoan, updateHousehold, resetStressScenario } = useSimulation();
 
-  // Interactive sliders (defaulting to the Golden Fixture: 2.0B loan, 55M net income, 12% post-promo rate)
   const [loanAmount, setLoanAmount] = useState<number>(2_000_000_000);
   const [netIncome, setNetIncome] = useState<number>(55_000_000);
   const [floatingRate, setFloatingRate] = useState<number>(12.0);
@@ -26,13 +25,11 @@ export default function HeroLivePreview() {
   const promoRate = 7.0;
   const essentialExpenses = 30_000_000;
 
-  // Deterministic Equal-Principal Month 1 vs Month 13 Math
   const monthlyPrincipal = Math.round(loanAmount / termMonths);
   const month1Interest = Math.round(loanAmount * (promoRate / 100 / 12));
   const month1Payment = monthlyPrincipal + month1Interest;
   const month1Surplus = netIncome - essentialExpenses - month1Payment;
 
-  // Remaining principal at start of Month 13 (after 12 principal payments)
   const balanceStartMonth13 = Math.max(0, loanAmount - monthlyPrincipal * 12);
   const month13Interest = Math.round(balanceStartMonth13 * (floatingRate / 100 / 12));
   const month13Payment = monthlyPrincipal + month13Interest;
@@ -40,7 +37,6 @@ export default function HeroLivePreview() {
   const month13Surplus = netIncome - essentialExpenses - month13Payment;
   const month13Dti = netIncome > 0 ? Math.round((month13Payment / netIncome) * 1000) / 10 : 0;
 
-  // Stress +2% rate at Month 13
   const shock13Interest = Math.round(balanceStartMonth13 * ((floatingRate + 2) / 100 / 12));
   const shock13Payment = monthlyPrincipal + shock13Interest;
   const shock13Surplus = netIncome - essentialExpenses - shock13Payment;
@@ -75,9 +71,9 @@ export default function HeroLivePreview() {
   };
 
   return (
-    <div className="bg-slate-900 text-white rounded-3xl border border-slate-800 shadow-2xl overflow-hidden">
+    <div className="bg-[#0B1D30] text-white rounded-3xl border border-slate-800 shadow-2xl overflow-hidden">
       {/* Terminal Top Bar */}
-      <div className="px-5 py-3.5 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between gap-2">
+      <div className="px-5 py-3.5 bg-[#060F1A] border-b border-slate-800 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
           <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
@@ -86,20 +82,20 @@ export default function HeroLivePreview() {
             DepositGuard Live Stress-Test Terminal v1.1
           </span>
         </div>
-        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-          Tương tác trực tiếp
+        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-400/30">
+          Mô phỏng trực tiếp
         </span>
       </div>
 
       <div className="p-5 sm:p-6 space-y-5">
-        {/* Status Banner */}
+        {/* Status Banner (Strictly Semantic Traffic-Light Colors) */}
         <div
           className={`p-3.5 rounded-2xl border flex items-start justify-between gap-3 ${
             isDeficitMonth13
-              ? 'bg-rose-950/60 border-rose-500/40 text-rose-100'
+              ? 'bg-rose-950/70 border-rose-500/40 text-rose-100'
               : isVulnerableMonth13
-              ? 'bg-amber-950/60 border-amber-500/40 text-amber-100'
-              : 'bg-emerald-950/60 border-emerald-500/40 text-emerald-100'
+              ? 'bg-amber-950/70 border-amber-500/40 text-amber-100'
+              : 'bg-emerald-950/70 border-emerald-500/40 text-emerald-100'
           }`}
         >
           <div className="flex items-start gap-2.5">
@@ -116,7 +112,7 @@ export default function HeroLivePreview() {
                   ? 'Cảnh báo: Thiếu hụt dòng tiền ngay Tháng thứ 13'
                   : isVulnerableMonth13
                   ? 'Lưu ý: Nhạy cảm với cú sốc lãi suất thả nổi'
-                  : 'Dư địa dòng tiền ổn định sau khi hết ưu đãi'}
+                  : 'Dư địa dự phòng an toàn sau khi hết ưu đãi'}
               </div>
               <p className="text-[11px] text-slate-300 leading-relaxed">
                 {isDeficitMonth13
@@ -127,11 +123,11 @@ export default function HeroLivePreview() {
           </div>
         </div>
 
-        {/* 3 Interactive Sliders */}
-        <div className="space-y-3.5 bg-slate-800/60 p-4 rounded-2xl border border-slate-700/80">
+        {/* 3 Interactive Sliders (Royal Banking Blue Controls) */}
+        <div className="space-y-3.5 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
           <div className="flex items-center justify-between text-[11px] text-slate-400 font-semibold uppercase tracking-wider">
             <span className="inline-flex items-center gap-1.5">
-              <Sliders className="w-3.5 h-3.5 text-emerald-400" />
+              <Sliders className="w-3.5 h-3.5 text-blue-400" />
               <span>Kéo thanh trượt để kiểm tra nhanh (Kỳ hạn 20 năm, Sinh hoạt 30 tr/tháng)</span>
             </span>
           </div>
@@ -142,7 +138,7 @@ export default function HeroLivePreview() {
               <label htmlFor="hero-slider-loan" className="text-slate-300 font-medium">
                 1. Số tiền vay ngân hàng:
               </label>
-              <span className="font-mono font-bold text-emerald-300">
+              <span className="font-mono font-bold text-blue-300">
                 {formatVND(loanAmount)} ({formatCompactVND(loanAmount)})
               </span>
             </div>
@@ -154,7 +150,7 @@ export default function HeroLivePreview() {
               step={100_000_000}
               value={loanAmount}
               onChange={(e) => setLoanAmount(Number(e.target.value))}
-              className="w-full accent-emerald-500 cursor-pointer h-1.5 bg-slate-700 rounded-lg"
+              className="w-full accent-blue-500 cursor-pointer h-1.5 bg-slate-700 rounded-lg"
             />
           </div>
 
@@ -176,7 +172,7 @@ export default function HeroLivePreview() {
               step={5_000_000}
               value={netIncome}
               onChange={(e) => setNetIncome(Number(e.target.value))}
-              className="w-full accent-emerald-500 cursor-pointer h-1.5 bg-slate-700 rounded-lg"
+              className="w-full accent-blue-500 cursor-pointer h-1.5 bg-slate-700 rounded-lg"
             />
           </div>
 
@@ -203,10 +199,10 @@ export default function HeroLivePreview() {
           </div>
         </div>
 
-        {/* 3-Column Comparison Metrics */}
+        {/* 3-Column Comparison Metrics (Semantic Output Colors) */}
         <div className="grid grid-cols-3 gap-2.5">
-          <div className="p-3 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-1">
-            <span className="block text-[10px] font-bold uppercase text-emerald-400">
+          <div className="p-3 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
+            <span className="block text-[10px] font-bold uppercase text-blue-300">
               Tháng 1 (Ưu đãi 7%)
             </span>
             <p className="font-mono text-sm sm:text-base font-extrabold text-white">
@@ -245,7 +241,7 @@ export default function HeroLivePreview() {
             </p>
           </div>
 
-          <div className="p-3 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-1">
+          <div className="p-3 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
             <span className="block text-[10px] font-bold uppercase text-rose-400">
               Sốc lãi +2% ({floatingRate + 2}%)
             </span>
@@ -267,13 +263,13 @@ export default function HeroLivePreview() {
         {/* Action Button to Open Full Simulation Results */}
         <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="text-[11px] text-slate-400 flex items-center gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
             <span>Chạy ngầm 240 tháng • Không gửi dữ liệu về máy chủ</span>
           </div>
           <button
             type="button"
             onClick={handleOpenInDashboard}
-            className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md"
+            className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md"
           >
             <TrendingUp className="w-4 h-4" />
             <span>Phân tích sâu kịch bản này (240 tháng)</span>

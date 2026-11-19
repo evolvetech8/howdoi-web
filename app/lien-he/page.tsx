@@ -16,8 +16,8 @@ export default function LienHePage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
       <header className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
-          <Mail className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold">
+          <Mail className="w-3.5 h-3.5 text-blue-700" />
           <span>Phản hồi &amp; Hiệu chỉnh mô hình</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -43,7 +43,7 @@ export default function LienHePage() {
             </p>
             <a
               href="mailto:archonic88@gmail.com"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-700 hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-blue-800 hover:underline"
             >
               <span>archonic88@gmail.com</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -52,7 +52,7 @@ export default function LienHePage() {
 
           <div className="bg-white p-6 rounded-3xl border border-slate-200/90 space-y-3">
             <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-              <HelpCircle className="w-4 h-4 text-emerald-600" />
+              <HelpCircle className="w-4 h-4 text-blue-700" />
               <h2>Hỗ trợ ứng dụng iOS (App Store)</h2>
             </div>
             <p className="text-xs text-slate-600 leading-relaxed">
@@ -60,7 +60,7 @@ export default function LienHePage() {
             </p>
             <Link
               href="/support"
-              className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 hover:underline"
+              className="inline-flex items-center gap-1 text-xs font-bold text-blue-800 hover:underline"
             >
               <span>Chuyển tới App Store Support (/support)</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -69,7 +69,7 @@ export default function LienHePage() {
 
           <div className="bg-slate-50 p-5 rounded-3xl border border-slate-200/80 space-y-2 text-xs text-slate-600">
             <div className="flex items-center gap-1.5 font-bold text-slate-800">
-              <Shield className="w-4 h-4 text-emerald-600" />
+              <Shield className="w-4 h-4 text-blue-700" />
               <span>Không tư vấn môi giới / Không bán thông tin</span>
             </div>
             <p className="leading-relaxed">

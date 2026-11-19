@@ -18,8 +18,8 @@ export default function CachTinhPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-12">
       {/* Header */}
       <header className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
-          <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold">
+          <BookOpen className="w-3.5 h-3.5 text-blue-700" />
           <span>Phiên bản mô hình: v1.1 (Deterministic Integer-VND Engine)</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -39,7 +39,7 @@ export default function CachTinhPage() {
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
           Trong phiên bản v1.1, lãi suất tháng <code>i[m]</code> tại tháng thứ <code>m</code> được xác định từ lãi suất danh nghĩa năm <code>r[m]</code> theo quy ước chuẩn 12 tháng đều nhau:
         </p>
-        <pre className="p-4 rounded-2xl bg-slate-900 text-emerald-300 text-xs sm:text-sm overflow-x-auto font-mono">
+        <pre className="p-4 rounded-2xl bg-slate-900 text-blue-300 text-xs sm:text-sm overflow-x-auto font-mono">
 {`i[m] = r[m] / 12
 I[m] = round(B[m - 1] * i[m])`}
         </pre>
@@ -60,13 +60,13 @@ I[m] = round(B[m - 1] * i[m])`}
         </h2>
 
         <div className="space-y-3">
-          <h3 className="text-sm sm:text-base font-bold text-emerald-800">
+          <h3 className="text-sm sm:text-base font-bold text-blue-900">
             2.1. Dư nợ giảm dần (Trả gốc đều — Equal Principal)
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Nếu khoản vay có tổng thời hạn <code>N</code> tháng và thời gian ân hạn nợ gốc <code>G</code> tháng (<code>0 &le; G &lt; N</code>):
           </p>
-          <pre className="p-4 rounded-2xl bg-slate-900 text-emerald-300 text-xs sm:text-sm overflow-x-auto font-mono">
+          <pre className="p-4 rounded-2xl bg-slate-900 text-blue-300 text-xs sm:text-sm overflow-x-auto font-mono">
 {`Trong thời gian ân hạn gốc (1 <= m <= G):
   P[m] = 0
   I[m] = round(B[m-1] * (r[m] / 12))
@@ -80,13 +80,13 @@ Sau khi hết ân hạn gốc (G < m <= N):
         </div>
 
         <div className="space-y-3 pt-2">
-          <h3 className="text-sm sm:text-base font-bold text-emerald-800">
+          <h3 className="text-sm sm:text-base font-bold text-blue-900">
             2.2. Trả góp đều hàng tháng (Niên kim — Level Payment / Annuity)
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Tại mỗi thời điểm bắt đầu trả gốc hoặc khi lãi suất thay đổi (hết thời gian ưu đãi hoặc chịu cú sốc lãi suất), khoản thanh toán cố định hàng tháng <code>A</code> được tính lại trên <strong>dư nợ còn lại</strong> <code>B[m-1]</code> và <strong>số tháng còn lại</strong> <code>n = N - m + 1</code>:
           </p>
-          <pre className="p-4 rounded-2xl bg-slate-900 text-emerald-300 text-xs sm:text-sm overflow-x-auto font-mono">
+          <pre className="p-4 rounded-2xl bg-slate-900 text-blue-300 text-xs sm:text-sm overflow-x-auto font-mono">
 {`Nếu i[m] > 0:
   A = B[m-1] * i[m] / (1 - (1 + i[m])^(-n))
 Nếu i[m] == 0 (vay 0% lãi suất):
@@ -103,7 +103,7 @@ DS[m] = P[m] + I[m]`}
         <h2 className="text-lg sm:text-xl font-bold text-slate-900">
           3. Mô hình dòng tiền hộ gia đình, Tỷ lệ DTI &amp; Quỹ dự phòng
         </h2>
-        <pre className="p-4 rounded-2xl bg-slate-900 text-emerald-300 text-xs sm:text-sm overflow-x-auto font-mono">
+        <pre className="p-4 rounded-2xl bg-slate-900 text-blue-300 text-xs sm:text-sm overflow-x-auto font-mono">
 {`UpfrontCashRequired = DownPayment + ClosingCosts
 InitialReserve[0]   = LiquidSavings - UpfrontCashRequired
 
@@ -152,7 +152,7 @@ Tại mỗi tháng m (1..N):
                 <td className="p-3">{formatVND(8_333_333)}</td>
                 <td className="p-3">{formatVND(11_666_667)}</td>
                 <td className="p-3 font-bold text-slate-900">{formatVND(20_000_000)}</td>
-                <td className="p-3 font-bold text-emerald-700">+{formatVND(5_000_000)}</td>
+                <td className="p-3 font-bold text-blue-800">+{formatVND(5_000_000)}</td>
               </tr>
               <tr>
                 <td className="p-3 font-semibold">Tháng 12</td>
@@ -160,7 +160,7 @@ Tại mỗi tháng m (1..N):
                 <td className="p-3">{formatVND(8_333_333)}</td>
                 <td className="p-3">{formatVND(11_129_167)}</td>
                 <td className="p-3 font-bold text-slate-900">{formatVND(19_462_500)}</td>
-                <td className="p-3 font-bold text-emerald-700">+{formatVND(5_537_500)}</td>
+                <td className="p-3 font-bold text-blue-800">+{formatVND(5_537_500)}</td>
               </tr>
               <tr className="bg-rose-50/70">
                 <td className="p-3 font-bold text-rose-900">Tháng 13 (Hết ưu đãi)</td>
@@ -178,7 +178,7 @@ Tại mỗi tháng m (1..N):
       {/* 5. Reverse Solver & Limitations */}
       <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 space-y-4">
         <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-          <Scale className="w-5 h-5 text-emerald-600" />
+          <Scale className="w-5 h-5 text-blue-700" />
           <span>5. Bộ giải ngược (Reverse Affordability Solver) &amp; Giới hạn phạm vi</span>
         </h2>
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -186,13 +186,13 @@ Tại mỗi tháng m (1..N):
         </p>
         <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
           <li className="flex items-start gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <span>
               Nếu thu nhập hiện tại thấp hơn cả chi phí sinh hoạt thiết yếu cộng nợ hiện hữu (ngay cả khi vay 0 ₫ vẫn âm dòng tiền), công cụ sẽ thông báo trung thực rằng việc giảm quy mô khoản vay không giải quyết được thâm hụt ngân sách cơ bản.
             </span>
           </li>
           <li className="flex items-start gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <span>
               <strong>Không thẩm định pháp lý hay định giá:</strong> DepositGuard không kiểm tra sổ hồng/sổ đỏ, quy hoạch, tiến độ chủ đầu tư, tính hợp pháp của hợp đồng đặt cọc hay giá trị thị trường của căn nhà.
             </span>
@@ -202,7 +202,7 @@ Tại mỗi tháng m (1..N):
         <div className="pt-4 flex flex-wrap gap-3">
           <Link
             href="/kiem-tra-mua-nha"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-xs sm:text-sm font-bold transition-colors"
           >
             <Calculator className="w-4 h-4" />
             <span>Bắt đầu mô phỏng khoản vay của bạn</span>

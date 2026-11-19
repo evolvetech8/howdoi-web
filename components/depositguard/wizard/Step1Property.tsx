@@ -63,7 +63,7 @@ export default function Step1Property() {
     <div className="space-y-6">
       {/* Step Header */}
       <div className="border-b border-slate-100 pb-4">
-        <div className="flex items-center gap-2 text-emerald-700 font-semibold text-xs tracking-wider uppercase mb-1">
+        <div className="flex items-center gap-2 text-blue-800 font-semibold text-xs tracking-wider uppercase mb-1">
           <Home className="w-4 h-4" /> Bước 1: Giá trị bất động sản
         </div>
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
@@ -77,7 +77,7 @@ export default function Step1Property() {
       {/* Property Type Selection */}
       <div className="space-y-2">
         <label className="text-xs sm:text-sm font-semibold text-slate-800 flex items-center gap-1.5">
-          <Building2 className="w-4 h-4 text-emerald-600" /> Loại hình bất động sản
+          <Building2 className="w-4 h-4 text-blue-700" /> Loại hình bất động sản
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {PROPERTY_TYPES.map((t) => {
@@ -89,7 +89,7 @@ export default function Step1Property() {
                 onClick={() => updateLoan({ propertyType: t.id as any })}
                 className={`p-3 rounded-xl border text-left transition-all ${
                   isSelected
-                    ? 'border-emerald-600 bg-emerald-50/60 ring-1 ring-emerald-600/30 shadow-2xs'
+                    ? 'border-blue-700 bg-blue-50/60 ring-1 ring-blue-700/30 shadow-2xs'
                     : 'border-slate-200 bg-white hover:border-slate-300'
                 }`}
               >
@@ -150,7 +150,7 @@ export default function Step1Property() {
             </div>
             <div className="bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs text-right">
               <span className="text-[10px] text-slate-400 block font-medium">Tỷ lệ vốn tự có</span>
-              <span className="text-xs sm:text-sm font-bold text-emerald-700">
+              <span className="text-xs sm:text-sm font-bold text-blue-800">
                 {equityRatioPercent.toFixed(1)}%
               </span>
             </div>
@@ -158,9 +158,9 @@ export default function Step1Property() {
         </div>
 
         {/* Visual LTV vs Equity Proportion Bar */}
-        <div className="w-full bg-emerald-600 h-2.5 rounded-full overflow-hidden flex shadow-inner">
+        <div className="w-full bg-blue-700 h-2.5 rounded-full overflow-hidden flex shadow-inner">
           <div
-            className="bg-emerald-500 h-full transition-all duration-300"
+            className="bg-blue-600 h-full transition-all duration-300"
             style={{ width: `${Math.min(100, Math.max(0, equityRatioPercent))}%` }}
             title={`Vốn tự có: ${equityRatioPercent.toFixed(1)}%`}
           />
@@ -172,7 +172,7 @@ export default function Step1Property() {
         </div>
         <div className="flex justify-between text-[11px] text-slate-500 font-medium">
           <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+            <span className="w-2 h-2 rounded-full bg-blue-600 inline-block" />
             Vốn tự có ({equityRatioPercent.toFixed(0)}%)
           </span>
           <span className="flex items-center gap-1.5">

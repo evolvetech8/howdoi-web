@@ -24,7 +24,7 @@ export default function CorrectiveLevers() {
   return (
     <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-6">
       <div className="border-b border-slate-100 pb-4">
-        <div className="flex items-center gap-2 text-emerald-700 font-semibold text-xs tracking-wider uppercase mb-1">
+        <div className="flex items-center gap-2 text-blue-800 font-semibold text-xs tracking-wider uppercase mb-1">
           <Lightbulb className="w-4 h-4" /> Giải Pháp Cân Bằng Dòng Tiền (Corrective Levers)
         </div>
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
@@ -36,13 +36,13 @@ export default function CorrectiveLevers() {
       </div>
 
       {simulationResult.affordabilityStatus === 'SAFE' ? (
-        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 flex items-start gap-3">
-          <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 flex items-start gap-3">
+          <ShieldCheck className="w-5 h-5 text-blue-700 shrink-0 mt-0.5" />
           <div className="space-y-1">
-            <h3 className="font-bold text-emerald-950 text-sm">
+            <h3 className="font-bold text-slate-900 text-sm">
               Khoản vay hiện tại đang nằm hoàn toàn trong ngưỡng an toàn
             </h3>
-            <p className="text-xs text-emerald-800 leading-relaxed">
+            <p className="text-xs text-blue-900 leading-relaxed">
               Dòng tiền hàng tháng của gia đình đủ sức chi trả nợ gốc, lãi và sinh hoạt phí mà không làm tổn hại đến quỹ dự phòng khẩn cấp. Bạn không cần phải điều chỉnh giảm khoản vay.
             </p>
           </div>
@@ -53,12 +53,12 @@ export default function CorrectiveLevers() {
           <div className="bg-slate-50 rounded-2xl p-5 border border-slate-200/90 flex flex-col justify-between space-y-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-700 uppercase tracking-wider">
-                <ArrowDownRight className="w-4 h-4 text-emerald-600" />
+                <ArrowDownRight className="w-4 h-4 text-blue-700" />
                 Phương án 1: Giảm số tiền vay
               </div>
               <div>
                 <span className="text-[11px] text-slate-500 block">Hạn mức vay an toàn tối đa:</span>
-                <span className="text-xl sm:text-2xl font-black text-emerald-700">
+                <span className="text-xl sm:text-2xl font-black text-blue-800">
                   {formatCompactVND(solverResult.maxSafeLoanAmount)}
                 </span>
               </div>
@@ -70,7 +70,7 @@ export default function CorrectiveLevers() {
             <button
               type="button"
               onClick={applySafeLoanLever}
-              className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 transition shadow-2xs cursor-pointer active:scale-[0.98]"
+              className="w-full py-2.5 px-4 rounded-xl bg-blue-700 text-white font-bold text-xs hover:bg-blue-800 transition shadow-2xs cursor-pointer active:scale-[0.98]"
             >
               Áp dụng hạn mức vay {formatCompactVND(solverResult.maxSafeLoanAmount)}
             </button>
@@ -80,7 +80,7 @@ export default function CorrectiveLevers() {
           <div className="bg-slate-50 rounded-2xl p-5 border border-slate-200/90 flex flex-col justify-between space-y-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-700 uppercase tracking-wider">
-                <ArrowUpRight className="w-4 h-4 text-emerald-600" />
+                <ArrowUpRight className="w-4 h-4 text-blue-700" />
                 Phương án 2: Tăng vốn tự có
               </div>
               <div>
@@ -92,7 +92,7 @@ export default function CorrectiveLevers() {
               <p className="text-xs text-slate-600 leading-relaxed">
                 Tổng vốn tự có cần đạt <strong className="text-slate-800">{formatCompactVND(loan.downPayment + solverResult.additionalEquityNeeded)}</strong>.{' '}
                 {solverResult.canAffordWithCurrentLiquidSavings ? (
-                  <span className="text-emerald-700 font-medium">
+                  <span className="text-blue-800 font-medium">
                     (Tiền tiết kiệm hiện có của bạn đủ để đáp ứng mà không cần vay mượn thêm).
                   </span>
                 ) : (
@@ -116,7 +116,7 @@ export default function CorrectiveLevers() {
           <div className="bg-slate-50 rounded-2xl p-5 border border-slate-200/90 flex flex-col justify-between space-y-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-700 uppercase tracking-wider">
-                <Clock className="w-4 h-4 text-emerald-600" />
+                <Clock className="w-4 h-4 text-blue-700" />
                 Phương án 3: Kéo dài thời hạn vay
               </div>
               <div>
@@ -136,7 +136,7 @@ export default function CorrectiveLevers() {
                 onClick={() => updateLoan({ loanTermMonths: 300 })}
                 className={`py-2 px-3 rounded-xl border text-xs font-bold transition ${
                   loan.loanTermMonths === 300
-                    ? 'bg-emerald-600 text-white border-emerald-600'
+                    ? 'bg-blue-700 text-white border-blue-700'
                     : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
                 }`}
               >
@@ -147,7 +147,7 @@ export default function CorrectiveLevers() {
                 onClick={() => updateLoan({ loanTermMonths: 360 })}
                 className={`py-2 px-3 rounded-xl border text-xs font-bold transition ${
                   loan.loanTermMonths === 360
-                    ? 'bg-emerald-600 text-white border-emerald-600'
+                    ? 'bg-blue-700 text-white border-blue-700'
                     : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
                 }`}
               >

@@ -41,11 +41,11 @@ export default function NewsletterWaitlist() {
   return (
     <div id="ios-app" className="relative rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950 p-8 sm:p-12 text-white overflow-hidden shadow-2xl border border-slate-800">
       {/* Background Decorative Glow */}
-      <div className="absolute -right-20 -top-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -right-20 -top-20 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center space-y-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-600/20 border border-blue-400/30 text-blue-300 text-xs font-semibold">
           <Smartphone className="w-4 h-4" />
           <span>Dự án ứng dụng di động tiếp theo của Archonic</span>
         </div>
@@ -62,8 +62,8 @@ export default function NewsletterWaitlist() {
         </p>
 
         {status === 'success' ? (
-          <div className="p-6 bg-emerald-950/60 border border-emerald-500/40 rounded-2xl max-w-md mx-auto animate-in fade-in">
-            <CheckCircle className="w-10 h-10 text-emerald-400 mx-auto mb-2" />
+          <div className="p-6 bg-emerald-950/60 border border-blue-600/40 rounded-2xl max-w-md mx-auto animate-in fade-in">
+            <CheckCircle className="w-10 h-10 text-blue-400 mx-auto mb-2" />
             <h4 className="text-lg font-bold text-white">Đăng ký thành công!</h4>
             <p className="text-xs text-emerald-200 mt-1">
               Cảm ơn bạn! Archonic sẽ gửi lời mời trải nghiệm bản TestFlight iOS và bản tin tài chính sớm nhất qua email của bạn.
@@ -81,13 +81,13 @@ export default function NewsletterWaitlist() {
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={status === 'loading'}
                   required
-                  className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-blue-600 transition-colors"
                 />
               </div>
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 shrink-0 disabled:opacity-50"
+                className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 shrink-0 disabled:opacity-50"
               >
                 {status === 'loading' ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
@@ -106,7 +106,7 @@ export default function NewsletterWaitlist() {
 
             <div className="flex items-center justify-center gap-4 text-xs text-slate-400 pt-1">
               <span className="flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" /> Miễn phí 100%
+                <Sparkles className="w-3.5 h-3.5 text-blue-400" /> Miễn phí 100%
               </span>
               <span>•</span>
               <span>Không spam</span>

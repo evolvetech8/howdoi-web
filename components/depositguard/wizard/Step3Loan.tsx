@@ -71,7 +71,7 @@ export default function Step3Loan() {
     <div className="space-y-6">
       {/* Step Header */}
       <div className="border-b border-slate-100 pb-4">
-        <div className="flex items-center gap-2 text-emerald-700 font-semibold text-xs tracking-wider uppercase mb-1">
+        <div className="flex items-center gap-2 text-blue-800 font-semibold text-xs tracking-wider uppercase mb-1">
           <Landmark className="w-4 h-4" /> Bước 3: Gói vay ngân hàng
         </div>
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
@@ -97,13 +97,13 @@ export default function Step3Loan() {
             onClick={() => handleMethodChange('EQUAL_PRINCIPAL')}
             className={`p-4 rounded-2xl border text-left transition-all ${
               loan.repaymentMethod === 'EQUAL_PRINCIPAL'
-                ? 'border-emerald-600 bg-emerald-50/60 ring-2 ring-emerald-600/30 shadow-2xs'
+                ? 'border-blue-700 bg-blue-50/60 ring-2 ring-blue-700/30 shadow-2xs'
                 : 'border-slate-200 bg-white hover:border-slate-300'
             }`}
           >
             <div className="flex justify-between items-center mb-1">
               <span className="font-bold text-sm text-slate-900">Dư nợ giảm dần</span>
-              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-bold text-blue-800 bg-blue-100/80 px-2 py-0.5 rounded-full">
                 Tiết kiệm lãi nhất
               </span>
             </div>
@@ -118,7 +118,7 @@ export default function Step3Loan() {
             onClick={() => handleMethodChange('ANNUITY')}
             className={`p-4 rounded-2xl border text-left transition-all ${
               loan.repaymentMethod === 'ANNUITY'
-                ? 'border-emerald-600 bg-emerald-50/60 ring-2 ring-emerald-600/30 shadow-2xs'
+                ? 'border-blue-700 bg-blue-50/60 ring-2 ring-blue-700/30 shadow-2xs'
                 : 'border-slate-200 bg-white hover:border-slate-300'
             }`}
           >

@@ -153,13 +153,13 @@ export default function ChoConSupportPage() {
 
         <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between">
           <div>
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-3">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700 mb-3">
               <Shield className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-slate-900 text-sm">Chính Sách Quyền Riêng Tư</h3>
             <p className="text-xs text-slate-500 mt-1">Tìm hiểu cách dữ liệu gia đình bạn được bảo vệ an toàn 100%.</p>
           </div>
-          <Link href="/privacy/cho-con" className="text-xs font-semibold text-emerald-600 mt-4 flex items-center gap-1">
+          <Link href="/privacy/cho-con" className="text-xs font-semibold text-blue-700 mt-4 flex items-center gap-1">
             Đọc chính sách quyền riêng tư →
           </Link>
         </div>
@@ -216,15 +216,15 @@ export default function ChoConSupportPage() {
         </div>
 
         {status === 'success' ? (
-          <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-3">
-            <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
+          <div className="p-6 rounded-2xl bg-blue-50 border border-blue-200 text-blue-950 flex items-start gap-3">
+            <CheckCircle2 className="w-6 h-6 text-blue-700 shrink-0 mt-0.5" />
             <div className="space-y-1">
               <h4 className="font-bold text-sm">Gửi tin nhắn thành công!</h4>
-              <p className="text-xs text-emerald-800 leading-relaxed">{feedbackMsg}</p>
+              <p className="text-xs text-blue-900 leading-relaxed">{feedbackMsg}</p>
               <button
                 type="button"
                 onClick={() => setStatus('idle')}
-                className="mt-3 text-xs font-bold text-emerald-700 underline"
+                className="mt-3 text-xs font-bold text-blue-800 underline"
               >
                 Gửi thêm yêu cầu khác
               </button>

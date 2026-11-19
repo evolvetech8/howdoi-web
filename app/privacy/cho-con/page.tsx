@@ -23,8 +23,8 @@ export default function ChoConPrivacyPage() {
 
       {/* Header */}
       <header className="space-y-4 border-b border-slate-200 pb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200">
-          <Shield className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-900 text-xs font-semibold border border-blue-200">
+          <Shield className="w-3.5 h-3.5 text-blue-700" />
           <span>Apple App Store Privacy Compliance (Guideline 5.1.1)</span>
         </div>
 
@@ -43,21 +43,21 @@ export default function ChoConPrivacyPage() {
       </header>
 
       {/* Quick Summary Box */}
-      <div className="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-6 space-y-3">
-        <h3 className="text-sm font-bold text-emerald-950 uppercase tracking-wider flex items-center gap-2">
-          <Lock className="w-4 h-4 text-emerald-700" /> Tóm tắt cam kết bảo vệ dữ liệu
+      <div className="bg-blue-50/80 border border-blue-200 rounded-2xl p-6 space-y-3">
+        <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+          <Lock className="w-4 h-4 text-blue-800" /> Tóm tắt cam kết bảo vệ dữ liệu
         </h3>
-        <ul className="space-y-2 text-xs sm:text-sm text-emerald-900">
+        <ul className="space-y-2 text-xs sm:text-sm text-blue-950">
           <li className="flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <span><strong>Không bán dữ liệu:</strong> Chúng tôi không bao giờ bán, cho thuê hoặc chia sẻ dữ liệu cá nhân của gia đình bạn cho bất kỳ bên thứ ba hay mạng quảng cáo nào.</span>
           </li>
           <li className="flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <span><strong>Lưu trữ trên máy (On-Device Storage):</strong> Toàn bộ danh sách đồ sơ sinh, thông tin ngân sách và ghi chú chuẩn bị sinh con được lưu trữ cục bộ ngay trên thiết bị iPhone của bạn.</span>
           </li>
           <li className="flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <span><strong>Không yêu cầu tài khoản nhạy cảm:</strong> Bạn có thể sử dụng trọn vẹn ứng dụng ngay sau khi tải về mà không bắt buộc phải khai báo danh tính cá nhân.</span>
           </li>
         </ul>

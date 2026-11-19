@@ -49,7 +49,7 @@ export default function WhatIfControls() {
     <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-6">
       <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-100 pb-4">
         <div>
-          <div className="flex items-center gap-2 text-emerald-700 font-semibold text-xs tracking-wider uppercase mb-0.5">
+          <div className="flex items-center gap-2 text-blue-800 font-semibold text-xs tracking-wider uppercase mb-0.5">
             <Sliders className="w-4 h-4" /> Bảng Điều Khiển Căng Thẳng (What-If Controls)
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
@@ -81,13 +81,13 @@ export default function WhatIfControls() {
                 onClick={() => applyPreset(p.id)}
                 className={`p-3 rounded-xl border text-left transition-all ${
                   isSelected
-                    ? 'border-emerald-600 bg-emerald-50 text-emerald-950 ring-1 ring-emerald-600/30 shadow-2xs font-bold'
+                    ? 'border-blue-700 bg-blue-50 text-slate-900 ring-1 ring-blue-700/30 shadow-2xs font-bold'
                     : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50/50'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs">{p.label}</span>
-                  {isSelected && <Zap className="w-3 h-3 text-emerald-600 shrink-0" />}
+                  {isSelected && <Zap className="w-3 h-3 text-blue-700 shrink-0" />}
                 </div>
                 <p className="text-[10px] font-normal text-slate-500 leading-tight line-clamp-2">
                   {p.desc}
@@ -154,7 +154,7 @@ export default function WhatIfControls() {
               onClick={() => handleIncomeShock(0, 0)}
               className={`py-2 text-xs font-semibold rounded-xl border transition-all ${
                 stress.incomeShockPercent === 0
-                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                  ? 'bg-blue-700 text-white border-blue-700 shadow-2xs'
                   : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
               }`}
             >
@@ -208,7 +208,7 @@ export default function WhatIfControls() {
               onClick={() => handleExpenseShock(0)}
               className={`py-2 text-xs font-semibold rounded-xl border transition-all ${
                 stress.expenseShockPercent === 0
-                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                  ? 'bg-blue-700 text-white border-blue-700 shadow-2xs'
                   : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
               }`}
             >

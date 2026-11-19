@@ -125,21 +125,21 @@ export default function BudgetCalc() {
             </div>
 
             {/* Savings */}
-            <div className="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-200 flex flex-col justify-between">
+            <div className="p-5 rounded-2xl bg-blue-50/60 border border-blue-200 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-600">
+                  <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-700">
                     <PiggyBank className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-bold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full">20%</span>
+                  <span className="text-xs font-bold px-2.5 py-1 bg-blue-100 text-blue-900 rounded-full">20%</span>
                 </div>
                 <h3 className="font-bold text-slate-900 text-base">Tích Lũy & Tương Lai</h3>
                 <p className="text-xs text-slate-500 mt-1">
                   Quỹ khẩn cấp 3-6 tháng, đầu tư chứng chỉ quỹ, trả nợ gốc.
                 </p>
               </div>
-              <div className="mt-6 pt-4 border-t border-emerald-200/60">
-                <span className="text-xl font-bold text-emerald-700 block">{formatVND(budget503020.savings)}</span>
+              <div className="mt-6 pt-4 border-t border-blue-200/60">
+                <span className="text-xl font-bold text-blue-800 block">{formatVND(budget503020.savings)}</span>
                 <span className="text-[11px] text-slate-400">Gửi tự động ngay ngày lương về</span>
               </div>
             </div>
@@ -154,7 +154,7 @@ export default function BudgetCalc() {
             </div>
 
             <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
-              <span className="text-xs font-bold text-emerald-700">10% — FFA (Tự do tài chính)</span>
+              <span className="text-xs font-bold text-blue-800">10% — FFA (Tự do tài chính)</span>
               <span className="text-lg font-bold text-slate-900 block mt-1">{formatVND(budget6Jars.ffa)}</span>
               <span className="text-[11px] text-slate-500">Đầu tư sinh lời không bao giờ rút tiêu</span>
             </div>
@@ -186,7 +186,7 @@ export default function BudgetCalc() {
         )}
 
         <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex items-start gap-3">
-          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+          <CheckCircle2 className="w-5 h-5 text-blue-700 shrink-0 mt-0.5" />
           <p className="text-xs text-slate-600 leading-relaxed">
             <strong>Mẹo từ Archonic:</strong> Đừng tự ép bản thân phải hoàn hảo ngay tháng đầu tiên. Nếu hiện tại chi phí thiết yếu của bạn đang chiếm 70%, hãy đặt mục tiêu giảm dần về 60%, rồi 50%. Sự kiên định quan trọng hơn sự cực đoan!
           </p>

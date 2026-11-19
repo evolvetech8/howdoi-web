@@ -40,7 +40,7 @@ export default function MetricCards() {
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                 Vốn Tự Có & Tiền Mặt Ban Đầu
               </span>
-              <Wallet className="w-4 h-4 text-emerald-600" />
+              <Wallet className="w-4 h-4 text-blue-700" />
             </div>
             <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               {formatVND(simulationResult.upfrontCashRequired)}
@@ -53,7 +53,7 @@ export default function MetricCards() {
               <span
                 className={`font-bold ${
                   simulationResult.initialReserveBalance >= (household.plannedEmergencyReserveFloor || 0)
-                    ? 'text-emerald-700'
+                    ? 'text-blue-800'
                     : simulationResult.initialReserveBalance >= 0
                     ? 'text-amber-700'
                     : 'text-rose-600'
@@ -75,7 +75,7 @@ export default function MetricCards() {
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                 Tiền Trả Nợ Tháng 1
               </span>
-              <CreditCard className="w-4 h-4 text-emerald-600" />
+              <CreditCard className="w-4 h-4 text-blue-700" />
             </div>
             <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               {formatVND(simulationResult.month1Payment)}
@@ -139,7 +139,7 @@ export default function MetricCards() {
               {simulationResult.firstNegativeCashFlowMonth ? (
                 <AlertTriangle className="w-4 h-4 text-rose-600" />
               ) : (
-                <CheckCircle className="w-4 h-4 text-emerald-600" />
+                <CheckCircle className="w-4 h-4 text-blue-700" />
               )}
             </div>
             <p
@@ -177,12 +177,12 @@ export default function MetricCards() {
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                 Đáy Quỹ Dự Phòng Khẩn Cấp
               </span>
-              <Shield className="w-4 h-4 text-emerald-600" />
+              <Shield className="w-4 h-4 text-blue-700" />
             </div>
             <p
               className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${
                 simulationResult.lowestReserveBalance >= (household.plannedEmergencyReserveFloor || 0)
-                  ? 'text-emerald-700'
+                  ? 'text-blue-800'
                   : simulationResult.lowestReserveBalance >= 0
                   ? 'text-amber-700'
                   : 'text-rose-600'
@@ -212,7 +212,7 @@ export default function MetricCards() {
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                 Tỷ Lệ Trả Nợ / Thu Nhập (DTI)
               </span>
-              <PieChart className="w-4 h-4 text-emerald-600" />
+              <PieChart className="w-4 h-4 text-blue-700" />
             </div>
             <div className="flex items-baseline gap-2">
               <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -234,7 +234,7 @@ export default function MetricCards() {
               <span
                 className={`font-bold ${
                   (simulationResult.postPromoDtiRatio ?? 0) <= 0.4
-                    ? 'text-emerald-700'
+                    ? 'text-blue-800'
                     : (simulationResult.postPromoDtiRatio ?? 0) <= 0.5
                     ? 'text-amber-700'
                     : 'text-rose-600'

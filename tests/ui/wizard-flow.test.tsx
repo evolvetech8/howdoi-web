@@ -85,7 +85,7 @@ describe('Regression & End-to-End Wizard Flow Test Suite', () => {
     const nextBtn = buttons.find((b) => b.textContent?.includes('Tiếp tục sang bước 2'));
     expect(nextBtn).toBeDefined();
     expect(nextBtn!.disabled).toBe(false);
-    expect(nextBtn!.className).toContain('bg-emerald-600');
+    expect(nextBtn!.className).toContain('bg-blue-700');
     expect(nextBtn!.className).not.toContain('cursor-not-allowed');
   });
 
@@ -133,7 +133,7 @@ describe('Regression & End-to-End Wizard Flow Test Suite', () => {
 
     expect(ctx.step1Validation.isValid).toBe(true);
     expect(getNextButton()!.disabled).toBe(false);
-    expect(getNextButton()!.className).toContain('bg-emerald-600');
+    expect(getNextButton()!.className).toContain('bg-blue-700');
   });
 
   it('completes the full 3-step wizard workflow via simulated user clicks on "Tiếp tục" to reach Results', () => {

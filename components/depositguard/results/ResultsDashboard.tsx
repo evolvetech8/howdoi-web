@@ -49,7 +49,7 @@ export default function ResultsDashboard() {
           </div>
           <Link
             href="/kiem-tra-mua-nha"
-            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-600 text-white font-bold text-sm hover:bg-emerald-700 transition shadow-md active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-700 text-white font-bold text-sm hover:bg-blue-800 transition shadow-md active:scale-[0.98]"
           >
             <span>Bắt đầu kiểm tra miễn phí</span>
             <ArrowRight className="w-4 h-4 stroke-[2.5]" />

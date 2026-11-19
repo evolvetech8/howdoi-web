@@ -17,8 +17,8 @@ export default function CauHoiThuongGapPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
       <header className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
-          <HelpCircle className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold">
+          <HelpCircle className="w-3.5 h-3.5 text-blue-700" />
           <span>Kiến thức &amp; Thuật ngữ Vay mua nhà</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -43,7 +43,7 @@ export default function CauHoiThuongGapPage() {
         <div className="flex flex-wrap gap-3">
           <Link
             href="/kiem-tra-mua-nha"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs sm:text-sm font-bold transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-bold transition-colors"
           >
             <Calculator className="w-4 h-4" />
             <span>Kiểm tra miễn phí</span>

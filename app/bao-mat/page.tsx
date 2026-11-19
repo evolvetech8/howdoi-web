@@ -15,8 +15,8 @@ export default function BaoMatPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
       <header className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
-          <Lock className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold">
+          <Lock className="w-3.5 h-3.5 text-blue-700" />
           <span>Tuân thủ Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -27,12 +27,12 @@ export default function BaoMatPage() {
         </p>
       </header>
 
-      <section className="bg-emerald-50/80 border border-emerald-200 rounded-3xl p-6 sm:p-8 space-y-3">
-        <h2 className="text-base sm:text-lg font-extrabold text-emerald-950 flex items-center gap-2">
-          <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+      <section className="bg-blue-50/80 border border-blue-200 rounded-3xl p-6 sm:p-8 space-y-3">
+        <h2 className="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+          <ShieldCheck className="w-5 h-5 text-blue-700 shrink-0" />
           <span>Tóm tắt cốt lõi: Số liệu tài chính của bạn không rời khỏi trình duyệt</span>
         </h2>
-        <p className="text-xs sm:text-sm text-emerald-900 leading-relaxed">
+        <p className="text-xs sm:text-sm text-blue-950 leading-relaxed">
           Khi bạn sử dụng công cụ mô phỏng mua nhà tại <code>/kiem-tra-mua-nha</code> và xem kết quả tại <code>/ket-qua</code>, toàn bộ phép tính toán học được thực thi <strong>100% trên trình duyệt thiết bị của bạn (Client-side execution)</strong>. Chúng tôi không yêu cầu đăng nhập, không thu thập họ tên, số điện thoại, số CCCD, địa chỉ căn hộ và tuyệt đối không gửi mức lương, giá nhà, số dư tiết kiệm hay khoản nợ của bạn về máy chủ hay bất kỳ công cụ phân tích bên thứ ba nào.
         </p>
       </section>
@@ -60,7 +60,7 @@ export default function BaoMatPage() {
 
         <div className="space-y-2">
           <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-            <EyeOff className="w-4 h-4 text-emerald-600" />
+            <EyeOff className="w-4 h-4 text-blue-700" />
             <span>2. Dữ liệu đo lường ẩn danh (Zero-PII Telemetry)</span>
           </h2>
           <p>
@@ -73,17 +73,17 @@ export default function BaoMatPage() {
             3. Thông tin khi bạn chủ động gửi biểu mẫu Liên hệ / Báo lỗi
           </h2>
           <p>
-            Khi và chỉ khi bạn chủ động điền biểu mẫu tại trang <Link href="/lien-he" className="text-emerald-700 font-semibold hover:underline">/lien-he</Link> hoặc gửi thư điện tử tới <code>archonic88@gmail.com</code>, chúng tôi mới tiếp nhận địa chỉ email và nội dung phản hồi của bạn với mục đích duy nhất là giải đáp thắc mắc hoặc sửa lỗi công thức. Chúng tôi không bao giờ bán, cho thuê hoặc chia sẻ email của bạn cho ngân hàng, công ty tài chính hay môi giới bất động sản.
+            Khi và chỉ khi bạn chủ động điền biểu mẫu tại trang <Link href="/lien-he" className="text-blue-800 font-semibold hover:underline">/lien-he</Link> hoặc gửi thư điện tử tới <code>archonic88@gmail.com</code>, chúng tôi mới tiếp nhận địa chỉ email và nội dung phản hồi của bạn với mục đích duy nhất là giải đáp thắc mắc hoặc sửa lỗi công thức. Chúng tôi không bao giờ bán, cho thuê hoặc chia sẻ email của bạn cho ngân hàng, công ty tài chính hay môi giới bất động sản.
           </p>
         </div>
 
         <div className="space-y-2">
           <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-            <Trash2 className="w-4 h-4 text-emerald-600" />
+            <Trash2 className="w-4 h-4 text-blue-700" />
             <span>4. Quyền của chủ thể dữ liệu &amp; Kênh liên hệ</span>
           </h2>
           <p>
-            Bạn có toàn quyền yêu cầu kiểm tra, đính chính hoặc xóa bỏ mọi thông tin liên hệ mà bạn đã từng gửi qua kênh hỗ trợ bằng cách gửi email tới <a href="mailto:archonic88@gmail.com" className="text-emerald-700 font-bold hover:underline">archonic88@gmail.com</a>.
+            Bạn có toàn quyền yêu cầu kiểm tra, đính chính hoặc xóa bỏ mọi thông tin liên hệ mà bạn đã từng gửi qua kênh hỗ trợ bằng cách gửi email tới <a href="mailto:archonic88@gmail.com" className="text-blue-800 font-bold hover:underline">archonic88@gmail.com</a>.
           </p>
         </div>
 
@@ -93,7 +93,7 @@ export default function BaoMatPage() {
           </span>
           <Link
             href="/privacy"
-            className="inline-flex items-center gap-1 font-bold text-emerald-700 hover:underline"
+            className="inline-flex items-center gap-1 font-bold text-blue-800 hover:underline"
           >
             <span>Xem App Store Privacy Policy (/privacy)</span>
             <ArrowUpRight className="w-3.5 h-3.5" />

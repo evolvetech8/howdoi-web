@@ -14,7 +14,7 @@ export default function UniversalPrivacyPage() {
       <div>
         <Link
           href="/support"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-emerald-700 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-blue-800 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>{lang === 'vi' ? 'Quay lại Trung tâm Hỗ trợ (Support Portal)' : 'Back to Support Portal'}</span>
@@ -23,8 +23,8 @@ export default function UniversalPrivacyPage() {
 
       {/* Header */}
       <header className="space-y-4 border-b border-slate-200 pb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200">
-          <Shield className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-900 text-xs font-semibold border border-blue-200">
+          <Shield className="w-3.5 h-3.5 text-blue-700" />
           <span>Apple App Store Privacy Compliance (Guideline 5.1.1)</span>
         </div>
 
@@ -55,14 +55,14 @@ export default function UniversalPrivacyPage() {
       </header>
 
       {/* Quick Summary Box */}
-      <div className="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-6 space-y-3">
-        <h3 className="text-sm font-bold text-emerald-950 uppercase tracking-wider flex items-center gap-2">
-          <Lock className="w-4 h-4 text-emerald-700" />{' '}
+      <div className="bg-blue-50/80 border border-blue-200 rounded-2xl p-6 space-y-3">
+        <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+          <Lock className="w-4 h-4 text-blue-800" />{' '}
           {lang === 'vi' ? 'Cam kết bảo mật cốt lõi' : 'Core Privacy Commitments'}
         </h3>
-        <ul className="space-y-2 text-xs sm:text-sm text-emerald-900">
+        <ul className="space-y-2 text-xs sm:text-sm text-blue-950">
           <li className="flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <span>
               <strong>{lang === 'vi' ? 'Không bán dữ liệu:' : 'Zero Data Selling:'}</strong>{' '}
               {lang === 'vi'
@@ -71,7 +71,7 @@ export default function UniversalPrivacyPage() {
             </span>
           </li>
           <li className="flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <span>
               <strong>{lang === 'vi' ? 'Lưu trữ trên thiết bị (On-Device):' : 'On-Device Storage:'}</strong>{' '}
               {lang === 'vi'
@@ -80,7 +80,7 @@ export default function UniversalPrivacyPage() {
             </span>
           </li>
           <li className="flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <span>
               <strong>{lang === 'vi' ? 'Không theo dõi:' : 'No Tracking:'}</strong>{' '}
               {lang === 'vi'

@@ -119,8 +119,8 @@ export default function InfographicGallery() {
       {/* Header & Filter Bar */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4">
         <div className="space-y-2 max-w-2xl">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold uppercase tracking-wider">
-            <Layers className="w-3.5 h-3.5 text-emerald-600" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold uppercase tracking-wider">
+            <Layers className="w-3.5 h-3.5 text-blue-700" />
             <span>Thư viện Đồ họa Phân tích Rủi ro (Archonic Visual Research)</span>
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -140,7 +140,7 @@ export default function InfographicGallery() {
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-white text-slate-600 border border-slate-200 hover:border-emerald-300 hover:text-emerald-700'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-800'
               }`}
             >
               {cat}
@@ -154,7 +154,7 @@ export default function InfographicGallery() {
         {filtered.map((item) => (
           <div
             key={item.id}
-            className="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group"
+            className="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col justify-between group"
           >
             <div>
               {/* Thumbnail with Click-to-Zoom */}
@@ -170,23 +170,23 @@ export default function InfographicGallery() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-4">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/95 text-slate-900 text-xs font-bold shadow-md">
-                    <ZoomIn className="w-3.5 h-3.5 text-emerald-600" />
+                    <ZoomIn className="w-3.5 h-3.5 text-blue-700" />
                     <span>Phóng to Infographic</span>
                   </span>
                 </div>
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-900/85 text-emerald-300 border border-slate-700 backdrop-blur-xs">
+                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-900/85 text-blue-300 border border-slate-700 backdrop-blur-xs">
                   {item.category}
                 </span>
               </div>
 
               {/* Card Body */}
               <div className="p-5 space-y-2.5">
-                <h3 className="text-base font-extrabold text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors">
+                <h3 className="text-base font-extrabold text-slate-900 leading-snug group-hover:text-blue-800 transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed">{item.summary}</p>
-                <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200/70 text-[11px] text-emerald-950 flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-200/70 text-[11px] text-slate-900 flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-700 shrink-0 mt-0.5" />
                   <span>
                     <strong>Kết luận cốt lõi:</strong> {item.keyTakeaway}
                   </span>
@@ -199,14 +199,14 @@ export default function InfographicGallery() {
               <button
                 type="button"
                 onClick={() => setActiveModalAsset(item)}
-                className="text-xs font-bold text-slate-700 hover:text-emerald-700 inline-flex items-center gap-1 cursor-pointer"
+                className="text-xs font-bold text-slate-700 hover:text-blue-800 inline-flex items-center gap-1 cursor-pointer"
               >
-                <ZoomIn className="w-3.5 h-3.5 text-emerald-600" />
+                <ZoomIn className="w-3.5 h-3.5 text-blue-700" />
                 <span>Xem ảnh lớn</span>
               </button>
               <Link
                 href={`/huong-dan/${item.relatedGuideSlug}`}
-                className="text-xs font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1"
+                className="text-xs font-bold text-blue-800 hover:text-blue-900 inline-flex items-center gap-1"
               >
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Đọc phân tích chi tiết</span>
@@ -232,7 +232,7 @@ export default function InfographicGallery() {
           >
             <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between gap-4">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 block">
                   {activeModalAsset.category}
                 </span>
                 <h3 className="text-sm sm:text-base font-extrabold">{activeModalAsset.title}</h3>
@@ -263,8 +263,8 @@ export default function InfographicGallery() {
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {activeModalAsset.summary}
                   </p>
-                  <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 space-y-1">
-                    <div className="font-bold text-emerald-800">Nguyên tắc bảo vệ tiền cọc:</div>
+                  <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 text-xs text-slate-900 space-y-1">
+                    <div className="font-bold text-blue-900">Nguyên tắc bảo vệ tiền cọc:</div>
                     <p className="leading-relaxed">{activeModalAsset.keyTakeaway}</p>
                   </div>
                 </div>
@@ -273,7 +273,7 @@ export default function InfographicGallery() {
                   <Link
                     href="/kiem-tra-mua-nha"
                     onClick={() => setActiveModalAsset(null)}
-                    className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xs"
+                    className="w-full py-3 px-4 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xs"
                   >
                     <Calculator className="w-4 h-4" />
                     <span>Áp dụng vào khoản vay của bạn</span>
@@ -284,7 +284,7 @@ export default function InfographicGallery() {
                     onClick={() => setActiveModalAsset(null)}
                     className="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5"
                   >
-                    <BookOpen className="w-4 h-4 text-emerald-700" />
+                    <BookOpen className="w-4 h-4 text-blue-800" />
                     <span>Đọc bài phân tích đầy đủ</span>
                   </Link>
                 </div>

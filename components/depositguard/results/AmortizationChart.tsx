@@ -56,7 +56,7 @@ export default function AmortizationChart() {
         </div>
         <div className="flex items-center gap-3 text-xs text-slate-600 font-medium">
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-sm bg-emerald-600 inline-block" />
+            <span className="w-2.5 h-2.5 rounded-sm bg-blue-700 inline-block" />
             Tiền gốc
           </span>
           <span className="flex items-center gap-1.5">
@@ -99,7 +99,7 @@ export default function AmortizationChart() {
                   const d = payload[0].payload;
                   return (
                     <div className="bg-slate-900 text-white p-3 rounded-xl shadow-xl text-xs space-y-1.5 border border-slate-700 pointer-events-none">
-                      <p className="font-bold border-b border-slate-700 pb-1 text-emerald-400">
+                      <p className="font-bold border-b border-slate-700 pb-1 text-blue-400">
                         Tháng {d.month} (Năm {Math.ceil(d.month / 12)})
                         {d.isPromo && <span className="ml-2 text-amber-300 font-normal">Giai đoạn ưu đãi</span>}
                       </p>
@@ -139,7 +139,7 @@ export default function AmortizationChart() {
                 }}
               />
             )}
-            <Bar dataKey="principalPayment" stackId="a" fill="#059669" radius={[0, 0, 0, 0]} />
+            <Bar dataKey="principalPayment" stackId="a" fill="#1d4ed8" radius={[0, 0, 0, 0]} />
             <Bar dataKey="interestPayment" stackId="a" fill="#f59e0b" radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>

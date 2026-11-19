@@ -32,8 +32,8 @@ export default function BaoCaoMauPage() {
       {/* Page Header */}
       <header className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
-            <FileCheck2 className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold">
+            <FileCheck2 className="w-3.5 h-3.5 text-blue-700" />
             <span>Hồ sơ Chẩn đoán Mẫu (Synthetic Diagnostic Dossier • Mã: DG-2026-HCM-2800)</span>
           </div>
           <span className="font-mono text-xs text-slate-500">
@@ -54,7 +54,7 @@ export default function BaoCaoMauPage() {
         {/* Dossier Top Stamp Bar */}
         <div className="p-6 sm:p-8 bg-slate-900 text-white flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
+            <div className="flex items-center gap-2 text-xs font-mono text-blue-400">
               <span>HỒ SƠ THẨM ĐỊNH ĐỘC LẬP #DG-2026-HCM-2800</span>
               <span>•</span>
               <span>NGÀY LẬP: 19/11/2026</span>
@@ -131,15 +131,15 @@ export default function BaoCaoMauPage() {
                     <td className="p-3.5 text-right font-mono font-bold">{formatVND(138_000_000)}</td>
                     <td className="p-3.5 text-slate-600">Thường bị đội vốn 20–30% nếu không khóa trần</td>
                   </tr>
-                  <tr className="bg-emerald-50/50">
-                    <td className="p-3.5 font-bold text-emerald-950">6. Quỹ dự phòng khẩn cấp tối thiểu (6 tháng)</td>
-                    <td className="p-3.5 text-emerald-800">6 tháng chi phí sinh hoạt thiết yếu</td>
-                    <td className="p-3.5 text-right font-mono font-extrabold text-emerald-800">{formatVND(180_000_000)}</td>
-                    <td className="p-3.5 text-emerald-900 font-medium">Lá chắn chống vỡ nợ khi hết ưu đãi lãi suất</td>
+                  <tr className="bg-blue-50/50">
+                    <td className="p-3.5 font-bold text-slate-900">6. Quỹ dự phòng khẩn cấp tối thiểu (6 tháng)</td>
+                    <td className="p-3.5 text-blue-900">6 tháng chi phí sinh hoạt thiết yếu</td>
+                    <td className="p-3.5 text-right font-mono font-extrabold text-blue-900">{formatVND(180_000_000)}</td>
+                    <td className="p-3.5 text-blue-950 font-medium">Lá chắn chống vỡ nợ khi hết ưu đãi lãi suất</td>
                   </tr>
                   <tr className="bg-slate-900 text-white font-bold">
                     <td className="p-4" colSpan={2}>TỔNG TIỀN MẶT CẦN CÓ TRƯỚC KHI KÝ ĐẶT CỌC (Mục 1 → 6)</td>
-                    <td className="p-4 text-right font-mono text-emerald-400 text-base">{formatVND(1_198_000_000)}</td>
+                    <td className="p-4 text-right font-mono text-blue-400 text-base">{formatVND(1_198_000_000)}</td>
                     <td className="p-4 text-xs text-slate-300">Tương đương 42,8% giá trị căn hộ</td>
                   </tr>
                 </tbody>
@@ -199,14 +199,14 @@ export default function BaoCaoMauPage() {
           </section>
 
           {/* Section 3: Reverse Affordability Solver Recommendations */}
-          <section className="p-6 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-3">
-            <h3 className="text-base font-extrabold text-emerald-950 flex items-center gap-2">
-              <Scale className="w-5 h-5 text-emerald-700" />
+          <section className="p-6 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-3">
+            <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
+              <Scale className="w-5 h-5 text-blue-800" />
               <span>Phần 3. Phương án hiệu chỉnh an toàn từ Bộ giải ngược (Reverse Affordability Solver)</span>
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
-              <div className="bg-white p-4 rounded-xl border border-emerald-200/80 space-y-1">
-                <span className="text-[11px] font-bold uppercase text-emerald-700">Đòn bẩy 1: Giảm dư nợ vay</span>
+              <div className="bg-white p-4 rounded-xl border border-blue-200/80 space-y-1">
+                <span className="text-[11px] font-bold uppercase text-blue-800">Đòn bẩy 1: Giảm dư nợ vay</span>
                 <p className="font-mono text-base font-extrabold text-slate-900">
                   Tối đa {formatVND(1_639_344_311)}
                 </p>
@@ -214,8 +214,8 @@ export default function BaoCaoMauPage() {
                   Giảm khoản vay từ 2,0 tỷ xuống 1,64 tỷ giúp dòng tiền Tháng 13 ở mức lãi 12% cân bằng (&ge; 0 ₫).
                 </p>
               </div>
-              <div className="bg-white p-4 rounded-xl border border-emerald-200/80 space-y-1">
-                <span className="text-[11px] font-bold uppercase text-emerald-700">Đòn bẩy 2: Bổ sung vốn tự có</span>
+              <div className="bg-white p-4 rounded-xl border border-blue-200/80 space-y-1">
+                <span className="text-[11px] font-bold uppercase text-blue-800">Đòn bẩy 2: Bổ sung vốn tự có</span>
                 <p className="font-mono text-base font-extrabold text-slate-900">
                   +{formatVND(360_655_689)}
                 </p>
@@ -223,8 +223,8 @@ export default function BaoCaoMauPage() {
                   Tăng vốn tự có (hoặc vay hỗ trợ không lãi từ người thân) để không vượt trần nợ an toàn.
                 </p>
               </div>
-              <div className="bg-white p-4 rounded-xl border border-emerald-200/80 space-y-1">
-                <span className="text-[11px] font-bold uppercase text-emerald-700">Đòn bẩy 3: Chọn căn hộ tầm giá</span>
+              <div className="bg-white p-4 rounded-xl border border-blue-200/80 space-y-1">
+                <span className="text-[11px] font-bold uppercase text-blue-800">Đòn bẩy 3: Chọn căn hộ tầm giá</span>
                 <p className="font-mono text-base font-extrabold text-slate-900">
                   ~{formatVND(2_440_000_000)}
                 </p>
@@ -239,7 +239,7 @@ export default function BaoCaoMauPage() {
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-3">
               <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <Building2 className="w-4 h-4 text-blue-700 shrink-0" />
                 <span>Phần 4A. 5 Câu hỏi bắt buộc yêu cầu Tín dụng viên xác nhận bằng văn bản</span>
               </h3>
               <ol className="space-y-2.5 text-xs text-slate-700 list-decimal pl-4 leading-relaxed">
@@ -293,7 +293,7 @@ export default function BaoCaoMauPage() {
         {/* Dossier Footer CTA */}
         <div className="p-6 sm:p-8 bg-slate-900 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400">
               <Lock className="w-3.5 h-3.5" />
               <span>Miễn phí 100% • Không yêu cầu số điện thoại hay đăng nhập</span>
             </div>
@@ -304,7 +304,7 @@ export default function BaoCaoMauPage() {
           <div className="flex flex-wrap gap-3 shrink-0">
             <Link
               href="/kiem-tra-mua-nha"
-              className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 transition-colors"
+              className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 transition-colors"
             >
               <Calculator className="w-4 h-4" />
               <span>Tạo hồ sơ cho căn nhà của bạn</span>

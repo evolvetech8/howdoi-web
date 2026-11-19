@@ -18,7 +18,7 @@ export default function ResultsHeader() {
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
         <Link
           href="/kiem-tra-mua-nha"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-blue-800 hover:text-blue-900 transition"
         >
           <ArrowLeft className="w-4 h-4" /> Quay lại chỉnh sửa thông số
         </Link>

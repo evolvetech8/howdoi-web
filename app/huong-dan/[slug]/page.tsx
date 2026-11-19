@@ -61,13 +61,13 @@ export default async function GuideDetailPage({ params }: Props) {
       <div className="flex items-center justify-between gap-2">
         <Link
           href="/huong-dan"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-700 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-blue-800 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Quay lại tất cả cẩm nang mua nhà</span>
         </Link>
         {guide.scenarioBadge && (
-          <span className="font-mono text-[11px] font-bold px-3 py-1 rounded-full bg-slate-900 text-emerald-300">
+          <span className="font-mono text-[11px] font-bold px-3 py-1 rounded-full bg-slate-900 text-blue-300">
             {guide.scenarioBadge}
           </span>
         )}
@@ -76,7 +76,7 @@ export default async function GuideDetailPage({ params }: Props) {
       {/* Article Header */}
       <header className="space-y-4 border-b border-slate-200 pb-8">
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
+          <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-900 text-xs font-bold border border-blue-200">
             {guide.category}
           </span>
         </div>
@@ -87,7 +87,7 @@ export default async function GuideDetailPage({ params }: Props) {
 
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 pt-2">
           <span className="flex items-center gap-1 font-semibold text-slate-700">
-            <User className="w-3.5 h-3.5 text-emerald-600" />
+            <User className="w-3.5 h-3.5 text-blue-700" />
             {guide.author}
           </span>
           <span>•</span>
@@ -104,14 +104,14 @@ export default async function GuideDetailPage({ params }: Props) {
       </header>
 
       {/* Key Takeaways Box */}
-      <div className="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-6 space-y-3">
-        <h2 className="text-sm font-extrabold text-emerald-900 uppercase tracking-wider flex items-center gap-2">
-          <Lightbulb className="w-4 h-4 text-emerald-700" /> Điểm cốt lõi cần nhớ trước khi đặt cọc
+      <div className="bg-blue-50/80 border border-blue-200 rounded-2xl p-6 space-y-3">
+        <h2 className="text-sm font-extrabold text-blue-950 uppercase tracking-wider flex items-center gap-2">
+          <Lightbulb className="w-4 h-4 text-blue-800" /> Điểm cốt lõi cần nhớ trước khi đặt cọc
         </h2>
-        <ul className="space-y-2 text-xs sm:text-sm text-emerald-950">
+        <ul className="space-y-2 text-xs sm:text-sm text-slate-900">
           {guide.content.keyTakeaways.map((item, idx) => (
             <li key={idx} className="flex items-start gap-2">
-              <span className="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+              <span className="text-blue-700 font-bold shrink-0 mt-0.5">✓</span>
               <span>{item}</span>
             </li>
           ))}
@@ -122,7 +122,7 @@ export default async function GuideDetailPage({ params }: Props) {
       {guide.infographicUrl && (
         <figure className="bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-800 space-y-3">
           <div className="flex items-center justify-between text-xs text-slate-300 px-1">
-            <span className="font-bold text-emerald-400 uppercase tracking-wider">
+            <span className="font-bold text-blue-400 uppercase tracking-wider">
               Đồ họa trực quan (Archonic Visual Research)
             </span>
             <span className="text-[11px] text-slate-400">Mô hình DepositGuard v1.1</span>
@@ -177,7 +177,7 @@ export default async function GuideDetailPage({ params }: Props) {
       {/* Actionable Simulator Banner */}
       <div className="p-6 sm:p-8 bg-slate-900 text-white rounded-3xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
         <div className="space-y-1">
-          <span className="text-xs uppercase tracking-wider text-emerald-400 font-bold block">
+          <span className="text-xs uppercase tracking-wider text-blue-400 font-bold block">
             Kiểm chứng trên số liệu thực của gia đình bạn
           </span>
           <h4 className="text-base sm:text-lg font-extrabold">
@@ -190,7 +190,7 @@ export default async function GuideDetailPage({ params }: Props) {
         <div className="flex flex-wrap gap-2.5 shrink-0">
           <Link
             href="/kiem-tra-mua-nha"
-            className="px-5 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs sm:text-sm font-extrabold rounded-xl flex items-center gap-1.5 transition-colors"
+            className="px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-extrabold rounded-xl flex items-center gap-1.5 transition-colors"
           >
             <Calculator className="w-4 h-4" />
             <span>Mô phỏng ngay</span>
@@ -200,7 +200,7 @@ export default async function GuideDetailPage({ params }: Props) {
             href="/bao-cao-mau"
             className="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-1.5 transition-colors"
           >
-            <FileCheck2 className="w-4 h-4 text-emerald-400" />
+            <FileCheck2 className="w-4 h-4 text-blue-400" />
             <span>Hồ sơ mẫu</span>
           </Link>
         </div>
@@ -208,13 +208,13 @@ export default async function GuideDetailPage({ params }: Props) {
 
       {/* Author Bio */}
       <div className="p-6 bg-white border border-slate-200/90 rounded-2xl flex items-center gap-4">
-        <div className="w-12 h-12 rounded-xl bg-emerald-600 text-white font-extrabold flex items-center justify-center text-lg shrink-0">
+        <div className="w-12 h-12 rounded-xl bg-blue-700 text-white font-extrabold flex items-center justify-center text-lg shrink-0">
           A
         </div>
         <div>
           <span className="font-extrabold text-slate-900 flex items-center gap-1.5 text-sm">
             <span>Biên soạn bởi Archonic FinLab (EvolveTech)</span>
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <ShieldCheck className="w-4 h-4 text-blue-700" />
           </span>
           <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
             Đơn vị nghiên cứu &amp; phát triển mô hình chẩn đoán rủi ro tài chính mua nhà DepositGuard tại evolvetech.biz.vn. Cam kết 100% độc lập, không nhận hoa hồng ẩn từ ngân hàng hay sàn môi giới bất động sản.

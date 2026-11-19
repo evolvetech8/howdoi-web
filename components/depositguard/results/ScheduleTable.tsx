@@ -127,7 +127,7 @@ export default function ScheduleTable() {
       {/* Table Header & Controls */}
       <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-100 pb-4">
         <div>
-          <div className="flex items-center gap-2 text-emerald-700 font-semibold text-xs tracking-wider uppercase mb-0.5">
+          <div className="flex items-center gap-2 text-blue-800 font-semibold text-xs tracking-wider uppercase mb-0.5">
             <Table className="w-4 h-4" /> Bảng Lịch Trả Nợ & Dòng Tiền Chi Tiết
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
@@ -143,7 +143,7 @@ export default function ScheduleTable() {
               onClick={() => handleViewModeChange('24_MONTHS')}
               className={`px-3 py-1.5 rounded-lg transition ${
                 viewMode === '24_MONTHS'
-                  ? 'bg-white text-emerald-800 shadow-2xs font-bold'
+                  ? 'bg-white text-blue-900 shadow-2xs font-bold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -154,7 +154,7 @@ export default function ScheduleTable() {
               onClick={() => handleViewModeChange('YEARLY')}
               className={`px-3 py-1.5 rounded-lg transition ${
                 viewMode === 'YEARLY'
-                  ? 'bg-white text-emerald-800 shadow-2xs font-bold'
+                  ? 'bg-white text-blue-900 shadow-2xs font-bold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -165,7 +165,7 @@ export default function ScheduleTable() {
               onClick={() => handleViewModeChange('ALL')}
               className={`px-3 py-1.5 rounded-lg transition ${
                 viewMode === 'ALL'
-                  ? 'bg-white text-emerald-800 shadow-2xs font-bold'
+                  ? 'bg-white text-blue-900 shadow-2xs font-bold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >

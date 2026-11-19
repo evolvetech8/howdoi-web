@@ -50,14 +50,14 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="bg-emerald-50 border border-emerald-200 rounded-3xl p-6 sm:p-8 space-y-4 text-emerald-950">
+      <div className="bg-blue-50 border border-blue-200 rounded-3xl p-6 sm:p-8 space-y-4 text-slate-900">
         <div className="flex items-center gap-3">
-          <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
+          <CheckCircle2 className="w-6 h-6 text-blue-700 shrink-0" />
           <h2 className="text-lg font-extrabold">
             Đã ghi nhận phản hồi của bạn!
           </h2>
         </div>
-        <p className="text-xs sm:text-sm text-emerald-900 leading-relaxed">
+        <p className="text-xs sm:text-sm text-blue-950 leading-relaxed">
           Cảm ơn bạn đã đóng góp ý kiến để cải thiện độ chính xác của mô hình DepositGuard. Nếu cần trao đổi trực tiếp kèm bảng tính đối chiếu, bạn cũng có thể gửi email tới{' '}
           <a href="mailto:archonic88@gmail.com" className="font-bold underline">
             archonic88@gmail.com
@@ -70,7 +70,7 @@ export default function ContactForm() {
             setSubmitted(false);
             setMessage('');
           }}
-          className="px-4 py-2 rounded-xl bg-white border border-emerald-300 text-emerald-800 text-xs font-bold hover:bg-emerald-100 transition-colors"
+          className="px-4 py-2 rounded-xl bg-white border border-blue-300 text-blue-900 text-xs font-bold hover:bg-blue-100 transition-colors"
         >
           Gửi phản hồi khác
         </button>
@@ -105,7 +105,7 @@ export default function ContactForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Ví dụ: Minh Anh"
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
           />
         </div>
 
@@ -128,7 +128,7 @@ export default function ContactForm() {
             className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-900 focus:outline-none focus:ring-2 ${
               errors.email
                 ? 'border-rose-300 bg-rose-50/40 focus:ring-rose-500/20'
-                : 'border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500'
+                : 'border-slate-200 focus:ring-blue-600/20 focus:border-blue-600'
             }`}
           />
           {errors.email && (
@@ -148,7 +148,7 @@ export default function ContactForm() {
           id="contact-category"
           value={category}
           onChange={(e) => setCategory(e.target.value as FeedbackCategory)}
-          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
         >
           <option value="calculation">Đối chiếu / Báo cáo sai lệch công thức tính</option>
           <option value="bug">Báo lỗi hiển thị hoặc giao diện di động</option>
@@ -177,7 +177,7 @@ export default function ContactForm() {
           className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-900 focus:outline-none focus:ring-2 ${
             errors.message
               ? 'border-rose-300 bg-rose-50/40 focus:ring-rose-500/20'
-              : 'border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500'
+              : 'border-slate-200 focus:ring-blue-600/20 focus:border-blue-600'
           }`}
         />
         {errors.message && (
@@ -189,7 +189,7 @@ export default function ContactForm() {
       </div>
 
       <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 flex items-start gap-2.5">
-        <Lock className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+        <Lock className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
         <span>
           <strong>Lưu ý bảo mật dữ liệu:</strong> Vui lòng chỉ chia sẻ các con số giả định để đối chiếu toán học. Không đính kèm số căn cước công dân, hợp đồng tín dụng có thông tin định danh hoặc địa chỉ nhà cụ thể.
         </span>
@@ -197,7 +197,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow-xs transition-colors inline-flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-sm font-bold shadow-xs transition-colors inline-flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
       >
         <Send className="w-4 h-4" />
         <span>Gửi phản hồi</span>

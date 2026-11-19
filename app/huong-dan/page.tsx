@@ -37,7 +37,7 @@ export default function GuidesPage() {
       {/* Header */}
       <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="max-w-3xl space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-400/30">
             <BookOpen className="w-4 h-4" />
             <span>Cẩm Nang Thẩm Định Tài Chính Mua Nhà • Archonic FinLab</span>
           </div>
@@ -52,7 +52,7 @@ export default function GuidesPage() {
         <div className="flex flex-wrap gap-3 shrink-0">
           <Link
             href="/kiem-tra-mua-nha"
-            className="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 transition-colors"
+            className="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 transition-colors"
           >
             <Calculator className="w-4 h-4" />
             <span>Mở bộ mô phỏng 3 bước</span>
@@ -62,7 +62,7 @@ export default function GuidesPage() {
             href="/bao-cao-mau"
             className="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm font-semibold inline-flex items-center gap-1.5 transition-colors"
           >
-            <FileCheck2 className="w-4 h-4 text-emerald-400" />
+            <FileCheck2 className="w-4 h-4 text-blue-400" />
             <span>Xem hồ sơ mẫu</span>
           </Link>
         </div>
@@ -72,7 +72,7 @@ export default function GuidesPage() {
       <section className="space-y-6">
         <div className="flex items-center justify-between gap-2">
           <div className="space-y-1">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700">
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-800">
               <Sparkles className="w-3.5 h-3.5" />
               Chuyên đề trọng tâm DepositGuard (Mục 7.1 PRD)
             </span>
@@ -86,7 +86,7 @@ export default function GuidesPage() {
           {featuredGuides.map((guide, index) => (
             <article
               key={guide.slug}
-              className="bg-white rounded-3xl border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-emerald-300 hover:shadow-md transition-all group"
+              className="bg-white rounded-3xl border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-blue-300 hover:shadow-md transition-all group"
             >
               <div>
                 {guide.infographicUrl && (
@@ -101,7 +101,7 @@ export default function GuidesPage() {
                       className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent flex items-end p-4">
-                      <span className="text-[11px] font-mono font-bold text-emerald-300 bg-slate-900/90 px-2.5 py-1 rounded-lg border border-slate-700">
+                      <span className="text-[11px] font-mono font-bold text-blue-300 bg-slate-900/90 px-2.5 py-1 rounded-lg border border-slate-700">
                         Chuyên đề #{index + 1} • {guide.scenarioBadge}
                       </span>
                     </div>
@@ -110,12 +110,12 @@ export default function GuidesPage() {
 
                 <div className="p-6 space-y-3">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200/60">
+                    <span className="font-bold text-blue-900 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200/60">
                       {guide.category}
                     </span>
                     <span className="text-slate-400 font-medium">{guide.readTime}</span>
                   </div>
-                  <h3 className="font-extrabold text-slate-900 text-base sm:text-lg group-hover:text-emerald-700 transition-colors leading-snug">
+                  <h3 className="font-extrabold text-slate-900 text-base sm:text-lg group-hover:text-blue-800 transition-colors leading-snug">
                     <Link href={`/huong-dan/${guide.slug}`}>{guide.title}</Link>
                   </h3>
                   <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
@@ -126,12 +126,12 @@ export default function GuidesPage() {
 
               <div className="px-6 pb-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
                 <span className="text-slate-500 font-semibold flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-blue-700" />
                   {guide.author}
                 </span>
                 <Link
                   href={`/huong-dan/${guide.slug}`}
-                  className="font-bold text-emerald-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                  className="font-bold text-blue-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                 >
                   <span>Đọc phân tích</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -156,7 +156,7 @@ export default function GuidesPage() {
               className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:border-emerald-300'
+                  : 'bg-white border border-slate-200 text-slate-600 hover:border-blue-300'
               }`}
             >
               {cat}
@@ -168,16 +168,16 @@ export default function GuidesPage() {
           {filteredGuides.map((guide) => (
             <article
               key={guide.slug}
-              className="bg-white rounded-2xl border border-slate-200/80 p-6 flex flex-col justify-between hover:border-emerald-300 hover:shadow-md transition-all group"
+              className="bg-white rounded-2xl border border-slate-200/80 p-6 flex flex-col justify-between hover:border-blue-300 hover:shadow-md transition-all group"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
+                  <span className="font-semibold text-blue-800 bg-blue-50 px-2.5 py-1 rounded-md">
                     {guide.category}
                   </span>
                   <span className="text-slate-400">{guide.readTime}</span>
                 </div>
-                <h3 className="font-bold text-slate-900 text-base sm:text-lg group-hover:text-emerald-700 transition-colors leading-snug">
+                <h3 className="font-bold text-slate-900 text-base sm:text-lg group-hover:text-blue-800 transition-colors leading-snug">
                   <Link href={`/huong-dan/${guide.slug}`}>{guide.title}</Link>
                 </h3>
                 <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed">
@@ -189,7 +189,7 @@ export default function GuidesPage() {
                 <span className="text-slate-400 font-medium">{guide.date}</span>
                 <Link
                   href={`/huong-dan/${guide.slug}`}
-                  className="font-bold text-emerald-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                  className="font-bold text-blue-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                 >
                   <span>Đọc bài</span>
                   <ArrowRight className="w-3.5 h-3.5" />

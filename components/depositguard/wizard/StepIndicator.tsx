@@ -25,7 +25,7 @@ export default function StepIndicator({
       {/* Mobile simplified progress bar */}
       <div className="sm:hidden mb-4 space-y-1.5">
         <div className="flex justify-between items-center text-xs">
-          <span className="font-semibold text-emerald-700">
+          <span className="font-semibold text-blue-800">
             Bước {currentStep}/3: {STEPS[currentStep - 1].title}
           </span>
           <span className="text-slate-400 font-medium">
@@ -34,7 +34,7 @@ export default function StepIndicator({
         </div>
         <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
           <div
-            className="bg-emerald-600 h-full rounded-full transition-all duration-300"
+            className="bg-blue-700 h-full rounded-full transition-all duration-300"
             style={{ width: `${(currentStep / 3) * 100}%` }}
           />
         </div>
@@ -55,7 +55,7 @@ export default function StepIndicator({
               onClick={() => onSelectStep && canClick && onSelectStep(step)}
               className={`text-left p-3 rounded-2xl border transition-all text-sm flex items-center gap-3 ${
                 isCurrent
-                  ? 'bg-emerald-50/70 border-emerald-500 shadow-2xs ring-1 ring-emerald-500/20'
+                  ? 'bg-blue-50/70 border-blue-600 shadow-2xs ring-1 ring-blue-600/20'
                   : isDone
                   ? 'bg-white border-slate-200 hover:border-slate-300'
                   : 'bg-slate-50/50 border-slate-200/60 opacity-60'
@@ -64,9 +64,9 @@ export default function StepIndicator({
               <div
                 className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 font-bold text-xs transition-all ${
                   isDone
-                    ? 'bg-emerald-600 text-white'
+                    ? 'bg-blue-700 text-white'
                     : isCurrent
-                    ? 'bg-emerald-600 text-white shadow-2xs'
+                    ? 'bg-blue-700 text-white shadow-2xs'
                     : 'bg-slate-200 text-slate-600'
                 }`}
               >
@@ -75,7 +75,7 @@ export default function StepIndicator({
               <div className="min-w-0">
                 <p
                   className={`font-semibold truncate text-xs ${
-                    isCurrent ? 'text-emerald-900' : 'text-slate-800'
+                    isCurrent ? 'text-blue-950' : 'text-slate-800'
                   }`}
                 >
                   {title}

@@ -15,8 +15,8 @@ export default function DieuKhoanPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
       <header className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
-          <Scale className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold">
+          <Scale className="w-3.5 h-3.5 text-blue-700" />
           <span>Điều khoản sử dụng &amp; Tuyên bố pháp lý</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -75,25 +75,25 @@ export default function DieuKhoanPage() {
 
         <div className="space-y-2">
           <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-            <FileCheck2 className="w-4 h-4 text-emerald-600" />
+            <FileCheck2 className="w-4 h-4 text-blue-700" />
             <span>4. Luật áp dụng &amp; Giải quyết khiếu nại</span>
           </h2>
           <p>
-            Các điều khoản này được điều chỉnh và giải thích theo pháp luật nước Cộng hòa Xã hội Chủ nghĩa Việt Nam. Mọi thắc mắc, báo cáo sai số hoặc góp ý xin gửi về địa chỉ <a href="mailto:archonic88@gmail.com" className="text-emerald-700 font-bold hover:underline">archonic88@gmail.com</a> hoặc qua trang <Link href="/lien-he" className="text-emerald-700 font-semibold hover:underline">/lien-he</Link>.
+            Các điều khoản này được điều chỉnh và giải thích theo pháp luật nước Cộng hòa Xã hội Chủ nghĩa Việt Nam. Mọi thắc mắc, báo cáo sai số hoặc góp ý xin gửi về địa chỉ <a href="mailto:archonic88@gmail.com" className="text-blue-800 font-bold hover:underline">archonic88@gmail.com</a> hoặc qua trang <Link href="/lien-he" className="text-blue-800 font-semibold hover:underline">/lien-he</Link>.
           </p>
         </div>
 
         <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-4">
           <Link
             href="/cach-tinh"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-800 hover:underline"
           >
             <span>Xem phương pháp tính toán (v1.1)</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
           <Link
             href="/bao-mat"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-emerald-700"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-blue-800"
           >
             <span>Xem chính sách bảo mật dữ liệu</span>
             <ArrowRight className="w-3.5 h-3.5" />

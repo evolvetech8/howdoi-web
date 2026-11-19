@@ -16,8 +16,8 @@ export default function VeEvolveTechPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
       <header className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
-          <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold">
+          <UserCheck className="w-3.5 h-3.5 text-blue-700" />
           <span>Minh bạch đơn vị vận hành &amp; Mô hình hoạt động</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -30,19 +30,19 @@ export default function VeEvolveTechPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <section className="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200/90 space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-200">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-800 flex items-center justify-center border border-blue-200">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <h2 className="text-lg font-bold text-slate-900">
             1. Đơn vị vận hành là ai?
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Nền tảng được phát triển và vận hành độc lập bởi <strong>Archonic</strong> (công ty công nghệ đứng sau hệ sinh thái sản phẩm <strong>EvolveTech</strong> tại <strong>evolvetech.biz.vn</strong>). Các ứng dụng di động iOS và dự án phần mềm khác được lưu trữ tại danh mục kỹ thuật <Link href="/projects" className="text-emerald-700 font-semibold hover:underline">/projects</Link>, kết hợp cùng mô-đun chuyên sâu <strong>DepositGuard</strong> phục vụ bài toán an toàn tài chính khi mua nhà.
+            Nền tảng được phát triển và vận hành độc lập bởi <strong>Archonic</strong> (công ty công nghệ đứng sau hệ sinh thái sản phẩm <strong>EvolveTech</strong> tại <strong>evolvetech.biz.vn</strong>). Các ứng dụng di động iOS và dự án phần mềm khác được lưu trữ tại danh mục kỹ thuật <Link href="/projects" className="text-blue-800 font-semibold hover:underline">/projects</Link>, kết hợp cùng mô-đun chuyên sâu <strong>DepositGuard</strong> phục vụ bài toán an toàn tài chính khi mua nhà.
           </p>
         </section>
 
         <section className="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200/90 space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-200">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-800 flex items-center justify-center border border-blue-200">
             <Scale className="w-5 h-5" />
           </div>
           <h2 className="text-lg font-bold text-slate-900">
@@ -56,7 +56,7 @@ export default function VeEvolveTechPage() {
 
       <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 space-y-4">
         <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-          <Lock className="w-5 h-5 text-emerald-600" />
+          <Lock className="w-5 h-5 text-blue-700" />
           <span>3. Bốn nguyên tắc bất khả xâm phạm của DepositGuard</span>
         </h2>
         <ul className="space-y-3 text-xs sm:text-sm text-slate-600">
@@ -77,7 +77,7 @@ export default function VeEvolveTechPage() {
         <div className="pt-4 flex flex-wrap gap-3">
           <Link
             href="/kiem-tra-mua-nha"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-xs sm:text-sm font-bold transition-colors"
           >
             <Calculator className="w-4 h-4" />
             <span>Trải nghiệm bộ mô phỏng</span>

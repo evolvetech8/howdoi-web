@@ -107,7 +107,7 @@ export default function FaqAccordion() {
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Tìm kiếm câu hỏi (ví dụ: lãi thả nổi, ân hạn gốc, DTI, bảo mật...)"
           aria-label="Tìm kiếm câu hỏi thường gặp"
-          className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+          className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
         />
       </div>
 
@@ -126,10 +126,10 @@ export default function FaqAccordion() {
                 aria-expanded={isOpen}
                 aria-controls={`panel-${item.id}`}
                 id={`button-${item.id}`}
-                className="w-full text-left p-5 flex items-start justify-between gap-4 hover:bg-slate-50/70 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500/20 min-h-[56px]"
+                className="w-full text-left p-5 flex items-start justify-between gap-4 hover:bg-slate-50/70 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600/20 min-h-[56px]"
               >
                 <div className="space-y-1">
-                  <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-emerald-700">
+                  <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-blue-800">
                     {item.category}
                   </span>
                   <h2 className="text-sm sm:text-base font-bold text-slate-900">
@@ -138,7 +138,7 @@ export default function FaqAccordion() {
                 </div>
                 <ChevronDown
                   className={`w-5 h-5 text-slate-400 shrink-0 mt-1 transition-transform ${
-                    isOpen ? 'rotate-180 text-emerald-600' : ''
+                    isOpen ? 'rotate-180 text-blue-700' : ''
                   }`}
                 />
               </button>

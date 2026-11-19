@@ -90,7 +90,7 @@ export default function RedFlagsChecklist() {
               ? 'bg-rose-950/90 border-rose-500/50 text-rose-200'
               : activeCount === 1
               ? 'bg-amber-950/90 border-amber-500/50 text-amber-200'
-              : 'bg-emerald-950/90 border-emerald-500/50 text-emerald-200'
+              : 'bg-emerald-950/90 border-blue-600/50 text-emerald-200'
           }`}
         >
           <span className="font-mono text-lg font-extrabold px-2.5 py-0.5 rounded-lg bg-black/30">
@@ -165,7 +165,7 @@ export default function RedFlagsChecklist() {
                 </>
               ) : (
                 <>
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-blue-700 shrink-0" />
                   <span>
                     Hãy đưa các con số thực tế của căn nhà vào bộ mô phỏng để kiểm chứng độ bền quỹ dự phòng.
                   </span>
@@ -180,7 +180,7 @@ export default function RedFlagsChecklist() {
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
               href="/kiem-tra-mua-nha"
-              className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold inline-flex items-center gap-1.5 shadow-xs transition-colors"
+              className="px-5 py-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-xs sm:text-sm font-bold inline-flex items-center gap-1.5 shadow-xs transition-colors"
             >
               <Calculator className="w-4 h-4" />
               <span>Chạy Stress-Test miễn phí</span>
@@ -190,7 +190,7 @@ export default function RedFlagsChecklist() {
               href="/bao-cao-mau"
               className="px-4 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 text-xs sm:text-sm font-semibold inline-flex items-center gap-1.5 transition-colors"
             >
-              <FileCheck2 className="w-4 h-4 text-emerald-600" />
+              <FileCheck2 className="w-4 h-4 text-blue-700" />
               <span>Xem hồ sơ mẫu</span>
             </Link>
           </div>

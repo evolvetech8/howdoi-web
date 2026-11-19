@@ -58,7 +58,7 @@ export default function WizardNav({
         onClick={onNext}
         className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-sm sm:text-base transition shadow-md ${
           canProceed
-            ? 'bg-emerald-600 text-white hover:bg-emerald-700 hover:shadow-lg cursor-pointer active:scale-[0.98]'
+            ? 'bg-blue-700 text-white hover:bg-blue-800 hover:shadow-lg cursor-pointer active:scale-[0.98]'
             : 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none'
         }`}
       >

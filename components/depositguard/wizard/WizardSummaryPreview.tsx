@@ -15,7 +15,7 @@ export default function WizardSummaryPreview() {
     <div className="bg-slate-900 text-white rounded-2xl p-5 border border-slate-800 shadow-lg space-y-4">
       <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-slate-800 pb-3">
         <div>
-          <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">
+          <span className="text-[11px] font-bold text-blue-400 uppercase tracking-wider block">
             Xem trước nghĩa vụ trả nợ
           </span>
           <p className="text-sm text-slate-300">
@@ -35,7 +35,7 @@ export default function WizardSummaryPreview() {
             {formatVND(simulationResult.month1Payment)}
             <span className="text-xs font-normal text-slate-400 ml-1">/tháng</span>
           </span>
-          <span className="text-[11px] text-emerald-400 mt-1 block">
+          <span className="text-[11px] text-blue-400 mt-1 block">
             Lãi suất ưu đãi: {loan.promoInterestRate}%/năm
           </span>
         </div>
@@ -67,8 +67,8 @@ export default function WizardSummaryPreview() {
             </p>
           </div>
         ) : (
-          <div className="flex items-start gap-2 text-emerald-300 bg-emerald-950/60 p-2.5 rounded-xl border border-emerald-800/80">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 text-blue-300 bg-emerald-950/60 p-2.5 rounded-xl border border-emerald-800/80">
+            <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
             <p className="leading-relaxed">
               Dòng tiền hàng tháng duy trì thặng dư dương trong toàn bộ chu kỳ 240 tháng ở kịch bản cơ sở.
             </p>
