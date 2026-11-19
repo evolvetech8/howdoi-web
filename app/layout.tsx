@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Be_Vietnam_Pro, JetBrains_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -7,9 +7,17 @@ import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { SimulationProvider } from "@/lib/depositguard/context";
 
-const inter = Inter({
+const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin", "vietnamese"],
+  weight: ["500", "600", "700"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -27,6 +35,7 @@ export const metadata: Metadata = {
   keywords: [
     "DepositGuard",
     "EvolveTech",
+    "Archonic",
     "evolvetech.biz.vn",
     "tính lãi vay mua nhà",
     "mô phỏng dòng tiền mua nhà",
@@ -61,7 +70,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col`}>
+      <body
+        className={`${beVietnamPro.variable} ${jetbrainsMono.variable} font-sans antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col`}
+      >
         <LanguageProvider>
           <SimulationProvider>
             <Navbar />

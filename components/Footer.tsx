@@ -2,15 +2,15 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ShieldCheck, ArrowUpRight, Lock } from 'lucide-react';
+import { ShieldCheck, ArrowUpRight, Lock, CheckCircle2 } from 'lucide-react';
 
 export default function Footer() {
   return (
     <footer className="bg-white border-t border-slate-200 mt-20 text-slate-600 text-xs">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Brand & Non-Advisory Notice */}
-          <div className="md:col-span-5 space-y-3">
+          <div className="md:col-span-5 space-y-3.5">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">
                 <ShieldCheck className="w-4 h-4" />
@@ -18,48 +18,59 @@ export default function Footer() {
               <div>
                 <span className="font-extrabold text-slate-900 text-sm">EvolveTech • DepositGuard</span>
                 <span className="block text-[11px] text-slate-500">
-                  evolvetech.biz.vn — Công cụ mô phỏng tài chính mua nhà
+                  evolvetech.biz.vn — Hệ thống chẩn đoán rủi ro tài chính trước đặt cọc
                 </span>
               </div>
             </div>
             <p className="text-slate-600 leading-relaxed max-w-md">
-              Đừng đặt cọc trước khi biết mình có đủ sức trả nợ. DepositGuard giúp gia đình Việt tự kiểm tra lịch trả nợ sau ưu đãi, sức chịu đựng trước biến động lãi suất và ngưỡng an toàn của quỹ dự phòng.
+              Đừng đặt cọc trước khi biết mình có đủ sức trả nợ. DepositGuard được phát triển bởi <strong>Archonic</strong> nhằm giúp gia đình Việt tự kiểm tra lịch trả nợ sau ưu đãi, sức chịu đựng trước biến động lãi suất và ngưỡng an toàn của quỹ dự phòng.
             </p>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200/70 text-[11px] font-medium">
-              <Lock className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-              <span>Tính toán 100% trên trình duyệt • Không thu thập lương, tài sản hay SĐT</span>
+            <div className="flex flex-wrap gap-2">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200/70 text-[11px] font-semibold">
+                <Lock className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span>Tính toán 100% trên trình duyệt • Không thu thập SĐT/Lương</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 border border-slate-200 text-[11px] font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span>311+ Kịch bản kiểm định toán học (Sai số 0 VND)</span>
+              </div>
             </div>
           </div>
 
           {/* Simulator & Methodology Links */}
           <div className="md:col-span-3 space-y-2.5">
             <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
-              Công cụ & Phương pháp
+              Công cụ &amp; Hồ sơ chẩn đoán
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/kiem-tra-mua-nha" className="hover:text-emerald-700 transition-colors font-medium">
+                <Link href="/kiem-tra-mua-nha" className="hover:text-emerald-700 transition-colors font-semibold text-slate-800">
                   Kiểm tra mua nhà (3 bước ẩn danh)
                 </Link>
               </li>
               <li>
                 <Link href="/ket-qua" className="hover:text-emerald-700 transition-colors">
-                  Bảng kết quả & Kịch bản sốc
+                  Bảng điều khiển kết quả &amp; Stress-Test
+                </Link>
+              </li>
+              <li>
+                <Link href="/bao-cao-mau" className="hover:text-emerald-700 transition-colors font-medium text-emerald-700">
+                  Xem Hồ sơ Chẩn đoán Mẫu (DG-2026)
                 </Link>
               </li>
               <li>
                 <Link href="/cach-tinh" className="hover:text-emerald-700 transition-colors">
-                  Phương pháp tính & Công thức (v1.1)
+                  Phương pháp tính &amp; Công thức (v1.1)
+                </Link>
+              </li>
+              <li>
+                <Link href="/huong-dan" className="hover:text-emerald-700 transition-colors">
+                  5 Cẩm nang tài chính trước đặt cọc
                 </Link>
               </li>
               <li>
                 <Link href="/cau-hoi-thuong-gap" className="hover:text-emerald-700 transition-colors">
                   Câu hỏi thường gặp (FAQ)
-                </Link>
-              </li>
-              <li>
-                <Link href="/huong-dan" className="hover:text-emerald-700 transition-colors">
-                  Cẩm nang tài chính mua nhà
                 </Link>
               </li>
             </ul>
@@ -68,12 +79,12 @@ export default function Footer() {
           {/* Trust, Legal & App Store Obligations */}
           <div className="md:col-span-4 space-y-2.5">
             <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
-              Minh bạch, Pháp lý & Hỗ trợ
+              Đơn vị vận hành, Pháp lý &amp; Hỗ trợ
             </h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/ve-evolvetech" className="hover:text-emerald-700 transition-colors">
-                  Về EvolveTech & Cam kết độc lập
+                  Về EvolveTech (Archonic) &amp; Cam kết độc lập
                 </Link>
               </li>
               <li>
@@ -83,12 +94,12 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/dieu-khoan" className="hover:text-emerald-700 transition-colors">
-                  Điều khoản sử dụng & Giới hạn trách nhiệm
+                  Điều khoản sử dụng &amp; Giới hạn trách nhiệm
                 </Link>
               </li>
               <li>
                 <Link href="/lien-he" className="hover:text-emerald-700 transition-colors">
-                  Liên hệ & Báo lỗi phép tính
+                  Liên hệ &amp; Báo lỗi phép tính
                 </Link>
               </li>
               <li className="pt-1 border-t border-slate-100 flex flex-wrap gap-x-4 gap-y-1">

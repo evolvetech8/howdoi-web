@@ -2,8 +2,19 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { GUIDES } from '@/content/guides-data';
-import { ArrowLeft, Clock, Calendar, User, Lightbulb, Calculator, ArrowRight, Share2 } from 'lucide-react';
+import {
+  ArrowLeft,
+  Clock,
+  Calendar,
+  User,
+  Lightbulb,
+  Calculator,
+  ArrowRight,
+  FileCheck2,
+  ShieldCheck,
+} from 'lucide-react';
 import type { Metadata } from 'next';
+import DisclaimerBanner from '@/components/depositguard/common/DisclaimerBanner';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -18,11 +29,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const guide = GUIDES.find((g) => g.slug === slug);
-  if (!guide) return { title: 'Bài viết không tìm thấy — EvolveTech' };
+  if (!guide) return { title: 'Bài viết không tìm thấy — EvolveTech DepositGuard' };
 
   return {
-    title: `${guide.title} — EvolveTech.biz.vn`,
+    title: `${guide.title} | EvolveTech DepositGuard`,
     description: guide.excerpt,
+    alternates: {
+      canonical: `https://www.evolvetech.biz.vn/huong-dan/${guide.slug}`,
+    },
     openGraph: {
       title: guide.title,
       description: guide.excerpt,
@@ -44,20 +58,25 @@ export default async function GuideDetailPage({ params }: Props) {
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       {/* Back Link */}
-      <div>
+      <div className="flex items-center justify-between gap-2">
         <Link
           href="/huong-dan"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-emerald-700 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-700 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Quay lại tất cả bài viết</span>
+          <span>Quay lại tất cả cẩm nang mua nhà</span>
         </Link>
+        {guide.scenarioBadge && (
+          <span className="font-mono text-[11px] font-bold px-3 py-1 rounded-full bg-slate-900 text-emerald-300">
+            {guide.scenarioBadge}
+          </span>
+        )}
       </div>
 
       {/* Article Header */}
       <header className="space-y-4 border-b border-slate-200 pb-8">
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200">
+          <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
             {guide.category}
           </span>
         </div>
@@ -67,14 +86,14 @@ export default async function GuideDetailPage({ params }: Props) {
         </h1>
 
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 pt-2">
-          <span className="flex items-center gap-1 font-medium text-slate-700">
+          <span className="flex items-center gap-1 font-semibold text-slate-700">
             <User className="w-3.5 h-3.5 text-emerald-600" />
             {guide.author}
           </span>
           <span>•</span>
           <span className="flex items-center gap-1">
             <Calendar className="w-3.5 h-3.5" />
-            {guide.date}
+            Cập nhật: {guide.date}
           </span>
           <span>•</span>
           <span className="flex items-center gap-1">
@@ -86,9 +105,9 @@ export default async function GuideDetailPage({ params }: Props) {
 
       {/* Key Takeaways Box */}
       <div className="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-6 space-y-3">
-        <h3 className="text-sm font-bold text-emerald-900 uppercase tracking-wider flex items-center gap-2">
-          <Lightbulb className="w-4 h-4 text-emerald-700" /> Điểm cốt lõi cần nhớ
-        </h3>
+        <h2 className="text-sm font-extrabold text-emerald-900 uppercase tracking-wider flex items-center gap-2">
+          <Lightbulb className="w-4 h-4 text-emerald-700" /> Điểm cốt lõi cần nhớ trước khi đặt cọc
+        </h2>
         <ul className="space-y-2 text-xs sm:text-sm text-emerald-950">
           {guide.content.keyTakeaways.map((item, idx) => (
             <li key={idx} className="flex items-start gap-2">
@@ -99,16 +118,35 @@ export default async function GuideDetailPage({ params }: Props) {
         </ul>
       </div>
 
+      {/* Embedded Infographic Visual if present */}
+      {guide.infographicUrl && (
+        <figure className="bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-800 space-y-3">
+          <div className="flex items-center justify-between text-xs text-slate-300 px-1">
+            <span className="font-bold text-emerald-400 uppercase tracking-wider">
+              Đồ họa trực quan (Archonic Visual Research)
+            </span>
+            <span className="text-[11px] text-slate-400">Mô hình DepositGuard v1.1</span>
+          </div>
+          <div className="flex justify-center bg-slate-950 rounded-2xl p-2 overflow-hidden">
+            <img
+              src={guide.infographicUrl}
+              alt={guide.title}
+              className="max-h-[640px] w-auto object-contain rounded-xl"
+            />
+          </div>
+        </figure>
+      )}
+
       {/* Introduction */}
       <div className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
         <p>{guide.content.introduction}</p>
       </div>
 
       {/* Main Sections */}
-      <div className="space-y-8 pt-4">
+      <div className="space-y-8 pt-2">
         {guide.content.sections.map((section, idx) => (
-          <section key={idx} className="space-y-3">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+          <section key={idx} className="space-y-3 bg-white p-6 rounded-2xl border border-slate-200/80">
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
               {section.heading}
             </h2>
             <div className="space-y-3 text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -120,7 +158,7 @@ export default async function GuideDetailPage({ params }: Props) {
               <div className="mt-3 p-4 bg-amber-50/80 rounded-xl border border-amber-200 text-xs sm:text-sm text-amber-900 flex items-start gap-2.5">
                 <Lightbulb className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                 <div>
-                  <strong>Mẹo thực tế:</strong> {section.tip}
+                  <strong>Khuyến nghị thực chiến:</strong> {section.tip}
                 </div>
               </div>
             )}
@@ -129,50 +167,62 @@ export default async function GuideDetailPage({ params }: Props) {
       </div>
 
       {/* Conclusion */}
-      <div className="pt-6 border-t border-slate-200 space-y-3">
-        <h3 className="text-lg font-bold text-slate-900">Lời kết</h3>
+      <div className="pt-4 border-t border-slate-200 space-y-3">
+        <h3 className="text-lg font-extrabold text-slate-900">Lời kết</h3>
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
           {guide.content.conclusion}
         </p>
       </div>
 
-      {/* Related Tool Banner if applicable */}
-      {guide.relatedTool && (
-        <div className="p-6 bg-slate-900 text-white rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
-          <div>
-            <span className="text-xs uppercase tracking-wider text-emerald-400 font-semibold block">
-              Thực hành ngay
-            </span>
-            <h4 className="text-base sm:text-lg font-bold mt-0.5">
-              Tự tính toán các con số trên máy của bạn
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Dùng công cụ tính toán tự động của EvolveTech để lập kế hoạch tài chính cá nhân.
-            </p>
-          </div>
+      {/* Actionable Simulator Banner */}
+      <div className="p-6 sm:p-8 bg-slate-900 text-white rounded-3xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
+        <div className="space-y-1">
+          <span className="text-xs uppercase tracking-wider text-emerald-400 font-bold block">
+            Kiểm chứng trên số liệu thực của gia đình bạn
+          </span>
+          <h4 className="text-base sm:text-lg font-extrabold">
+            Đưa giá căn nhà và thu nhập của bạn vào bộ mô phỏng DepositGuard
+          </h4>
+          <p className="text-xs text-slate-300">
+            Chạy hoàn toàn trên trình duyệt của bạn trong 2 phút — không cần đăng nhập hay để lại số điện thoại.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2.5 shrink-0">
           <Link
-            href="/#calculators"
-            className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold rounded-xl flex items-center gap-1.5 shrink-0 transition-transform hover:scale-105"
+            href="/kiem-tra-mua-nha"
+            className="px-5 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs sm:text-sm font-extrabold rounded-xl flex items-center gap-1.5 transition-colors"
           >
             <Calculator className="w-4 h-4" />
-            <span>Mở công cụ tính</span>
+            <span>Mô phỏng ngay</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
+          <Link
+            href="/bao-cao-mau"
+            className="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-1.5 transition-colors"
+          >
+            <FileCheck2 className="w-4 h-4 text-emerald-400" />
+            <span>Hồ sơ mẫu</span>
+          </Link>
         </div>
-      )}
+      </div>
 
       {/* Author Bio */}
-      <div className="p-6 bg-slate-100/80 rounded-2xl flex items-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-lg shrink-0">
-          F
+      <div className="p-6 bg-white border border-slate-200/90 rounded-2xl flex items-center gap-4">
+        <div className="w-12 h-12 rounded-xl bg-emerald-600 text-white font-extrabold flex items-center justify-center text-lg shrink-0">
+          A
         </div>
         <div>
-          <span className="font-bold text-slate-900 block text-sm">Viết bởi Archonic</span>
-          <p className="text-xs text-slate-600 mt-0.5">
-            Kỹ sư công nghệ & người sáng lập EvolveTech.biz.vn. Với mong muốn người Việt không còn nỗi sợ về tiền bạc và sống tự do, bình an hơn mỗi ngày.
+          <span className="font-extrabold text-slate-900 flex items-center gap-1.5 text-sm">
+            <span>Biên soạn bởi Archonic FinLab (EvolveTech)</span>
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+          </span>
+          <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+            Đơn vị nghiên cứu &amp; phát triển mô hình chẩn đoán rủi ro tài chính mua nhà DepositGuard tại evolvetech.biz.vn. Cam kết 100% độc lập, không nhận hoa hồng ẩn từ ngân hàng hay sàn môi giới bất động sản.
           </p>
         </div>
       </div>
+
+      <DisclaimerBanner />
     </article>
   );
 }

@@ -8,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: [
           '/',
           '/kiem-tra-mua-nha',
+          '/bao-cao-mau',
           '/cach-tinh',
           '/cau-hoi-thuong-gap',
           '/lien-he',

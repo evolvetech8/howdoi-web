@@ -18,73 +18,341 @@ import {
   BookOpen,
   Scale,
   Sparkles,
+  FileCheck2,
+  Users,
+  Cpu,
 } from 'lucide-react';
 import { useSimulation } from '@/lib/depositguard/context';
 import { formatVND, formatCompactVND } from '@/lib/depositguard/formatters';
 import RiskBadge from '@/components/depositguard/common/RiskBadge';
 import DisclaimerBanner from '@/components/depositguard/common/DisclaimerBanner';
+import HeroLivePreview from '@/components/depositguard/common/HeroLivePreview';
+import RedFlagsChecklist from '@/components/depositguard/common/RedFlagsChecklist';
+import InfographicGallery from '@/components/depositguard/common/InfographicGallery';
 
 export default function DepositGuardHomePage() {
   const router = useRouter();
-  const { loadGoldenFixture } = useSimulation();
+  const { loadGoldenFixture, updateLoan, updateHousehold, resetStressScenario } = useSimulation();
 
   const handleLoadGoldenExample = () => {
     loadGoldenFixture();
     router.push('/ket-qua');
   };
 
+  const handleLoadPersona = (persona: 'hcm' | 'hanoi' | 'danang') => {
+    if (persona === 'hcm') {
+      loadGoldenFixture();
+    } else if (persona === 'hanoi') {
+      updateLoan({
+        propertyPrice: 4_200_000_000,
+        purchasePrice: 4_200_000_000,
+        downPayment: 1_400_000_000,
+        loanAmount: 2_800_000_000,
+        loanTermMonths: 240,
+        repaymentMethod: 'EQUAL_PRINCIPAL',
+        promoInterestRate: 7.5,
+        promoPeriodMonths: 24,
+        postPromoRate: 12.5,
+        gracePeriodMonths: 24,
+      });
+      updateHousehold({
+        monthlyNetIncome: 75_000_000,
+        essentialLivingExpenses: 40_000_000,
+        existingDebtPayments: 0,
+        liquidSavings: 1_650_000_000,
+        plannedEmergencyReserveFloor: 180_000_000,
+      });
+      resetStressScenario();
+    } else {
+      updateLoan({
+        propertyPrice: 2_400_000_000,
+        purchasePrice: 2_400_000_000,
+        downPayment: 1_080_000_000,
+        loanAmount: 1_320_000_000,
+        loanTermMonths: 240,
+        repaymentMethod: 'EQUAL_PRINCIPAL',
+        promoInterestRate: 7.0,
+        promoPeriodMonths: 12,
+        postPromoRate: 11.5,
+        gracePeriodMonths: 0,
+      });
+      updateHousehold({
+        monthlyNetIncome: 48_000_000,
+        essentialLivingExpenses: 22_000_000,
+        existingDebtPayments: 0,
+        liquidSavings: 1_350_000_000,
+        plannedEmergencyReserveFloor: 132_000_000,
+      });
+      resetStressScenario();
+    }
+    router.push('/ket-qua');
+  };
+
   return (
     <div className="space-y-20 pb-16">
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-12 sm:pt-20 pb-6 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-80 bg-gradient-to-b from-emerald-100/60 via-teal-50/30 to-transparent pointer-events-none -z-10 blur-3xl" />
+      {/* 1. TWO-COLUMN INSTITUTIONAL FINTECH HERO SECTION */}
+      <section className="relative pt-8 sm:pt-14 pb-8 overflow-hidden border-b border-slate-200/80 bg-gradient-to-b from-white via-emerald-50/20 to-slate-50">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-emerald-100/50 via-teal-50/20 to-transparent pointer-events-none -z-10 blur-3xl" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-semibold shadow-2xs">
-            <Lock className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Kiểm tra ẩn danh 100% • Không cần SĐT, Email hay Đăng nhập</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            {/* Left Column: High-Urgency Value Proposition & Proof */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-950 border border-emerald-200 text-xs font-bold shadow-2xs">
+                <Lock className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span>Kiểm tra ẩn danh 100% • Không cần SĐT, Email hay Đăng nhập</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.13]">
+                Đừng đặt cọc trước khi biết{' '}
+                <span className="text-emerald-700">mình có đủ sức trả nợ.</span>
+              </h1>
+
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Tại Việt Nam, <strong>100 – 300 triệu tiền đặt cọc</strong> có thể mất trắng hoặc đẩy gia đình vào thâm hụt ngay <strong>tháng thứ 13 / 25</strong> khi lãi suất ưu đãi 6–7% khép lại và nhảy vọt lên 11–14%/năm. Hãy kiểm định sức chịu đựng của dòng tiền và quỹ dự phòng gia đình trước khi đặt bút ký cọc.
+              </p>
+
+              {/* Urgency Highlight Box */}
+              <div className="p-4 rounded-2xl bg-amber-50/90 border border-amber-200/90 text-xs text-amber-950 flex items-start gap-3">
+                <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                <div className="space-y-0.5 leading-relaxed">
+                  <strong className="text-amber-900 block">
+                    Vì sao không thể chỉ dùng bảng tính lãi vay thông thường?
+                  </strong>
+                  <span>
+                    Ngân hàng duyệt vay dựa trên tài sản thế chấp, nhưng <strong>không tính hộ bạn</strong> xem sau khi lãi thả nổi tăng +4–5% và trừ chi phí nuôi con, tài khoản gia đình còn lại bao nhiêu đồng mỗi tháng.
+                  </span>
+                </div>
+              </div>
+
+              {/* Action CTAs */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+                <Link
+                  href="/kiem-tra-mua-nha"
+                  className="px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm sm:text-base shadow-sm transition-all flex items-center justify-center gap-2 min-h-[48px]"
+                >
+                  <span>Kiểm tra miễn phí</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/bao-cao-mau"
+                  className="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 font-bold text-sm sm:text-base border border-slate-200 shadow-2xs transition-all flex items-center justify-center gap-2 min-h-[48px]"
+                >
+                  <FileCheck2 className="w-4 h-4 text-emerald-600" />
+                  <span>Xem hồ sơ chẩn đoán mẫu</span>
+                </Link>
+              </div>
+
+              {/* 4-Metric Institutional Trust Strip */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-200/80">
+                <div className="space-y-0.5">
+                  <span className="font-mono text-lg sm:text-xl font-extrabold text-slate-900 block">
+                    311+
+                  </span>
+                  <span className="text-[11px] text-slate-500 font-medium block">
+                    Kịch bản kiểm định tự động
+                  </span>
+                </div>
+                <div className="space-y-0.5">
+                  <span className="font-mono text-lg sm:text-xl font-extrabold text-emerald-700 block">
+                    0 VND
+                  </span>
+                  <span className="text-[11px] text-slate-500 font-medium block">
+                    Sai số số học (BigInt Oracle)
+                  </span>
+                </div>
+                <div className="space-y-0.5">
+                  <span className="font-mono text-lg sm:text-xl font-extrabold text-slate-900 block">
+                    100%
+                  </span>
+                  <span className="text-[11px] text-slate-500 font-medium block">
+                    Chạy trên trình duyệt
+                  </span>
+                </div>
+                <div className="space-y-0.5">
+                  <span className="font-mono text-lg sm:text-xl font-extrabold text-emerald-700 block">
+                    0%
+                  </span>
+                  <span className="text-[11px] text-slate-500 font-medium block">
+                    Hoa hồng ngân hàng/môi giới
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Live Interactive Stress-Test Terminal */}
+            <div className="lg:col-span-6">
+              <HeroLivePreview />
+            </div>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15] max-w-4xl mx-auto">
-            Đừng đặt cọc trước khi biết{' '}
-            <span className="text-emerald-700">mình có đủ sức trả nợ.</span>
-          </h1>
+          <DisclaimerBanner />
+        </div>
+      </section>
 
-          <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Mô phỏng dòng tiền gia đình, lịch trả nợ sau khi hết lãi suất ưu đãi và sức chịu đựng của quỹ dự phòng trước các kịch bản tăng lãi suất hoặc giảm thu nhập — trước khi bạn ký hợp đồng đặt cọc mua nhà.
-          </p>
+      {/* 2. INTERACTIVE 5 RED FLAGS SELF-DIAGNOSIS CHECKLIST */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <RedFlagsChecklist />
+      </section>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 pt-2">
-            <Link
-              href="/kiem-tra-mua-nha"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base shadow-sm transition-all flex items-center justify-center gap-2 min-h-[48px]"
+      {/* 3. THREE REAL-WORLD VIETNAMESE FAMILY CASE STUDIES (1-CLICK PRESETS) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4">
+          <div className="space-y-2 max-w-2xl">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold uppercase tracking-wider">
+              <Users className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Hồ sơ thực tế tại Việt Nam (Bấm 1 chạm để nạp kịch bản)</span>
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+              3 Tình Huống Điển Hình Khi Gia Đình Việt Mua Nhà Trả Góp
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Mỗi hồ sơ dưới đây được trích xuất từ bộ kiểm thử thực tế (Tier-4 Persona Suite). Bấm vào bất kỳ hồ sơ nào để mở toàn bộ biểu đồ dòng tiền 240 tháng và bảng điều khiển What-If trên máy của bạn.
+            </p>
+          </div>
+          <Link
+            href="/bao-cao-mau"
+            className="text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1.5 shrink-0"
+          >
+            <FileCheck2 className="w-4 h-4" />
+            <span>Xem bản Hồ sơ Chẩn đoán Mẫu đầy đủ →</span>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Case Study 1: HCM Young Couple */}
+          <div className="bg-white rounded-3xl border border-slate-200/90 p-6 flex flex-col justify-between space-y-5 shadow-2xs hover:border-emerald-300 transition-all">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between gap-2">
+                <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 text-[11px] font-bold">
+                  Hồ sơ #1 • TP.HCM
+                </span>
+                <RiskBadge status="DEFICIT" size="sm" />
+              </div>
+              <h3 className="text-lg font-extrabold text-slate-900 leading-snug">
+                Vợ chồng trẻ mua căn hộ 2,5 – 2,8 tỷ (Vay 2,0 tỷ, ưu đãi 7% năm đầu)
+              </h3>
+              <dl className="divide-y divide-slate-100 text-xs bg-slate-50 rounded-2xl p-3.5 border border-slate-200/60">
+                <div className="py-1.5 flex justify-between">
+                  <dt className="text-slate-500">Khoản vay / Kỳ hạn:</dt>
+                  <dd className="font-mono font-bold text-slate-900">2,00 tỷ ₫ (240 tháng)</dd>
+                </div>
+                <div className="py-1.5 flex justify-between">
+                  <dt className="text-slate-500">Thu nhập ròng / Chi tiêu:</dt>
+                  <dd className="font-mono font-bold text-slate-900">55 tr / 30 tr ₫</dd>
+                </div>
+                <div className="py-1.5 flex justify-between">
+                  <dt className="text-slate-500">Trả Tháng 1 → Tháng 13:</dt>
+                  <dd className="font-mono font-bold text-rose-700">20,00 tr → 27,33 tr ₫</dd>
+                </div>
+              </dl>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                <strong>Phát hiện từ DepositGuard:</strong> Năm đầu gia đình dư +5 triệu/tháng nhưng ngay Tháng 13 khi lãi thả nổi lên 12%, dòng tiền âm <strong>-2,33 triệu/tháng</strong>. Cần giảm nợ vay về 1,64 tỷ để an toàn.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleLoadPersona('hcm')}
+              className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
             >
-              <span>Kiểm tra miễn phí</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a
-              href="#vi-du-mo-phong"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm sm:text-base border border-slate-200 shadow-2xs transition-all flex items-center justify-center gap-2 min-h-[48px]"
-            >
-              <Calculator className="w-4 h-4 text-emerald-600" />
-              <span>Xem ví dụ báo cáo 2 phút</span>
-            </a>
+              <span>Nạp Hồ sơ #1 vào Bảng kết quả</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
 
-          <div className="max-w-3xl mx-auto pt-4">
-            <DisclaimerBanner />
+          {/* Case Study 2: Hanoi 24m Grace Period Cliff */}
+          <div className="bg-white rounded-3xl border border-slate-200/90 p-6 flex flex-col justify-between space-y-5 shadow-2xs hover:border-emerald-300 transition-all">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between gap-2">
+                <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 text-[11px] font-bold">
+                  Hồ sơ #2 • Hà Nội (Ân hạn gốc 24T)
+                </span>
+                <RiskBadge status="DEFICIT" size="sm" />
+              </div>
+              <h3 className="text-lg font-extrabold text-slate-900 leading-snug">
+                Gia đình nâng cấp căn hộ 4,2 tỷ (Vay 2,8 tỷ, ân hạn gốc 24 tháng)
+              </h3>
+              <dl className="divide-y divide-slate-100 text-xs bg-slate-50 rounded-2xl p-3.5 border border-slate-200/60">
+                <div className="py-1.5 flex justify-between">
+                  <dt className="text-slate-500">Khoản vay / Ân hạn gốc:</dt>
+                  <dd className="font-mono font-bold text-slate-900">2,80 tỷ ₫ (Ân hạn 24T)</dd>
+                </div>
+                <div className="py-1.5 flex justify-between">
+                  <dt className="text-slate-500">Thu nhập ròng / Chi tiêu:</dt>
+                  <dd className="font-mono font-bold text-slate-900">75 tr / 40 tr ₫</dd>
+                </div>
+                <div className="py-1.5 flex justify-between">
+                  <dt className="text-slate-500">Trả Tháng 1 → Tháng 25:</dt>
+                  <dd className="font-mono font-bold text-rose-700">17,50 tr → 42,13 tr ₫</dd>
+                </div>
+              </dl>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                <strong>Phát hiện từ DepositGuard:</strong> 24 tháng đầu chỉ trả lãi 17,5 tr/tháng. Nhưng tại <strong>Tháng 25</strong>, nợ gốc bị nén vào 216 tháng cộng lãi thả nổi 12,5% đẩy tiền trả lên <strong>42,13 tr/tháng</strong>!
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleLoadPersona('hanoi')}
+              className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            >
+              <span>Nạp Hồ sơ #2 vào Bảng kết quả</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* Case Study 3: Safe Cushion Profile */}
+          <div className="bg-white rounded-3xl border border-slate-200/90 p-6 flex flex-col justify-between space-y-5 shadow-2xs hover:border-emerald-300 transition-all">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between gap-2">
+                <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 text-[11px] font-bold">
+                  Hồ sơ #3 • Chuẩn An Toàn (45% Vốn)
+                </span>
+                <RiskBadge status="SAFE" size="sm" />
+              </div>
+              <h3 className="text-lg font-extrabold text-slate-900 leading-snug">
+                Mua nhà 2,4 tỷ khi đã tích lũy 45% vốn tự có &amp; quỹ dự phòng 6 tháng
+              </h3>
+              <dl className="divide-y divide-slate-100 text-xs bg-slate-50 rounded-2xl p-3.5 border border-slate-200/60">
+                <div className="py-1.5 flex justify-between">
+                  <dt className="text-slate-500">Khoản vay / Kỳ hạn:</dt>
+                  <dd className="font-mono font-bold text-slate-900">1,32 tỷ ₫ (240 tháng)</dd>
+                </div>
+                <div className="py-1.5 flex justify-between">
+                  <dt className="text-slate-500">Thu nhập ròng / Chi tiêu:</dt>
+                  <dd className="font-mono font-bold text-slate-900">48 tr / 22 tr ₫</dd>
+                </div>
+                <div className="py-1.5 flex justify-between">
+                  <dt className="text-slate-500">Trả Tháng 1 → Tháng 13:</dt>
+                  <dd className="font-mono font-bold text-emerald-700">13,20 tr → 17,52 tr ₫</dd>
+                </div>
+              </dl>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                <strong>Phát hiện từ DepositGuard:</strong> Ngay cả khi hết ưu đãi 7% và lên 11,5% ở Tháng 13, nghĩa vụ trả nợ chỉ chiếm 36,5% thu nhập ròng; gia đình vẫn dư <strong>+8,48 triệu/tháng</strong>.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleLoadPersona('danang')}
+              className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            >
+              <span>Nạp Hồ sơ #3 vào Bảng kết quả</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* 2. TWO-MINUTE WORKED EXAMPLE (GOLDEN FIXTURE) */}
-      <section id="vi-du-mo-phong" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+      {/* 4. TWO-MINUTE WORKED EXAMPLE (GOLDEN FIXTURE BREAKDOWN) */}
+      <section id="vi-du-mo-phong" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xs overflow-hidden">
           <div className="p-6 sm:p-8 lg:p-10 border-b border-slate-100 bg-slate-50/60 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
             <div className="space-y-1.5">
               <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100/80 px-3 py-1 rounded-full">
                 <Sparkles className="w-3.5 h-3.5" />
-                Ví dụ thực tế trong 2 phút (Kịch bản minh họa chuẩn)
+                Ví dụ kiểm định chuẩn trong 2 phút (Golden Fixture Mục 4.6 PRD)
               </span>
               <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
                 Vì sao tháng đầu trả nợ rất nhẹ, nhưng tháng 13 lại hụt dòng tiền?
@@ -112,27 +380,27 @@ export default function DepositGuardHomePage() {
               <dl className="divide-y divide-slate-100 text-xs sm:text-sm bg-slate-50 rounded-2xl p-4 border border-slate-200/70">
                 <div className="py-2.5 flex justify-between gap-2">
                   <dt className="text-slate-600">Giá mua căn hộ / Vốn tự có:</dt>
-                  <dd className="font-bold text-slate-900">2,5 tỷ ₫ / 500 tr ₫</dd>
+                  <dd className="font-mono font-bold text-slate-900">2,5 tỷ ₫ / 500 tr ₫</dd>
                 </div>
                 <div className="py-2.5 flex justify-between gap-2">
                   <dt className="text-slate-600">Số tiền vay (240 tháng):</dt>
-                  <dd className="font-bold text-slate-900">{formatVND(2_000_000_000)}</dd>
+                  <dd className="font-mono font-bold text-slate-900">{formatVND(2_000_000_000)}</dd>
                 </div>
                 <div className="py-2.5 flex justify-between gap-2">
                   <dt className="text-slate-600">Lãi ưu đãi 12 tháng đầu:</dt>
-                  <dd className="font-bold text-emerald-700">7,0% / năm</dd>
+                  <dd className="font-mono font-bold text-emerald-700">7,0% / năm</dd>
                 </div>
                 <div className="py-2.5 flex justify-between gap-2">
                   <dt className="text-slate-600">Lãi dự kiến từ tháng 13:</dt>
-                  <dd className="font-bold text-amber-700">12,0% / năm</dd>
+                  <dd className="font-mono font-bold text-amber-700">12,0% / năm</dd>
                 </div>
                 <div className="py-2.5 flex justify-between gap-2">
                   <dt className="text-slate-600">Thu nhập ròng gia đình:</dt>
-                  <dd className="font-bold text-slate-900">{formatVND(55_000_000)}/tháng</dd>
+                  <dd className="font-mono font-bold text-slate-900">{formatVND(55_000_000)}/tháng</dd>
                 </div>
                 <div className="py-2.5 flex justify-between gap-2">
                   <dt className="text-slate-600">Chi phí sinh hoạt thiết yếu:</dt>
-                  <dd className="font-bold text-slate-900">{formatVND(30_000_000)}/tháng</dd>
+                  <dd className="font-mono font-bold text-slate-900">{formatVND(30_000_000)}/tháng</dd>
                 </div>
               </dl>
             </div>
@@ -140,14 +408,14 @@ export default function DepositGuardHomePage() {
             {/* Output Comparison Column */}
             <div className="lg:col-span-7 space-y-5">
               <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-                Diễn biến nghĩa vụ trả nợ & dòng tiền
+                Diễn biến nghĩa vụ trả nợ &amp; dòng tiền
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="p-4 rounded-2xl border border-emerald-200 bg-emerald-50/50 space-y-1.5">
                   <span className="text-[11px] font-bold uppercase text-emerald-800">
                     Tháng 1 (Đang ưu đãi 7%)
                   </span>
-                  <p className="text-xl font-extrabold text-slate-900">
+                  <p className="font-mono text-xl font-extrabold text-slate-900">
                     {formatVND(20_000_000)}
                   </p>
                   <p className="text-xs text-slate-600">
@@ -159,7 +427,7 @@ export default function DepositGuardHomePage() {
                   <span className="text-[11px] font-bold uppercase text-amber-900">
                     Tháng 13 (Hết ưu đãi → 12%)
                   </span>
-                  <p className="text-xl font-extrabold text-amber-900">
+                  <p className="font-mono text-xl font-extrabold text-amber-900">
                     {formatVND(27_333_333)}
                   </p>
                   <p className="text-xs text-slate-700">
@@ -201,11 +469,16 @@ export default function DepositGuardHomePage() {
         </div>
       </section>
 
-      {/* 3. THREE CLEAR STEPS */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      {/* 5. INTERACTIVE VISUAL INFOGRAPHIC GALLERY (FROM PLAN/Media/) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <InfographicGallery />
+      </section>
+
+      {/* 6. THREE CLEAR STEPS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
-            Quy trình 3 bước minh bạch
+            Quy trình thẩm định 3 bước minh bạch
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
             Kiểm tra toàn diện trước khi đặt cọc trong 3 bước
@@ -221,9 +494,9 @@ export default function DepositGuardHomePage() {
               <Home className="w-5 h-5" />
             </div>
             <div className="text-xs font-bold uppercase text-emerald-700">Bước 1</div>
-            <h3 className="text-lg font-bold text-slate-900">Mô tả căn nhà & vốn tự có</h3>
+            <h3 className="text-lg font-bold text-slate-900">Mô tả căn nhà &amp; vốn tự có</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Nhập giá mua dự kiến, số tiền đặt cọc/vốn tự có, chi phí sang tên, nội thất ban đầu và phí quản lý định kỳ hàng tháng.
+              Nhập giá mua dự kiến, số tiền đặt cọc/vốn tự có, chi phí sang tên, quỹ bảo trì 2%, nội thất ban đầu và phí quản lý định kỳ hàng tháng.
             </p>
           </div>
 
@@ -232,7 +505,7 @@ export default function DepositGuardHomePage() {
               <Wallet className="w-5 h-5" />
             </div>
             <div className="text-xs sm:text-sm font-bold uppercase text-emerald-700">Bước 2</div>
-            <h3 className="text-lg font-bold text-slate-900">Ngân sách & quỹ dự phòng gia đình</h3>
+            <h3 className="text-lg font-bold text-slate-900">Ngân sách &amp; quỹ dự phòng gia đình</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               Khai báo thu nhập thực nhận (Net), chi phí sinh hoạt thiết yếu, các khoản trả góp hiện hữu và ngưỡng quỹ dự phòng khẩn cấp không được phép chạm tới.
             </p>
@@ -243,7 +516,7 @@ export default function DepositGuardHomePage() {
               <TrendingUp className="w-5 h-5" />
             </div>
             <div className="text-xs sm:text-sm font-bold uppercase text-emerald-700">Bước 3</div>
-            <h3 className="text-lg font-bold text-slate-900">Gói vay & kiểm tra kịch bản sốc</h3>
+            <h3 className="text-lg font-bold text-slate-900">Gói vay &amp; kiểm tra kịch bản sốc</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               So sánh trả gốc đều (dư nợ giảm dần) và trả góp đều (niên kim), thời gian ưu đãi, ân hạn nợ gốc và thử nghiệm cú sốc lãi suất +2%, +4% hoặc giảm 20% thu nhập.
             </p>
@@ -251,8 +524,8 @@ export default function DepositGuardHomePage() {
         </div>
       </section>
 
-      {/* 4. WHAT REGULAR CALCULATORS MISS */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 7. WHAT REGULAR CALCULATORS MISS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 space-y-8">
           <div className="max-w-2xl space-y-2">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
@@ -277,7 +550,7 @@ export default function DepositGuardHomePage() {
 
             <div className="p-5 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-2">
               <Wallet className="w-5 h-5 text-emerald-400" />
-              <h3 className="font-bold text-sm text-white">Chi phí sinh hoạt & nợ hiện hữu</h3>
+              <h3 className="font-bold text-sm text-white">Chi phí sinh hoạt &amp; nợ hiện hữu</h3>
               <p className="text-xs text-slate-300 leading-relaxed">
                 Tỷ lệ trả nợ trên thu nhập (DTI) chỉ có ý nghĩa khi trừ đi chi phí ăn ở, học phí con cái và các khoản trả góp thẻ tín dụng/vay mua xe đang có.
               </p>
@@ -302,8 +575,8 @@ export default function DepositGuardHomePage() {
         </div>
       </section>
 
-      {/* 5. NON-ALARMIST RISK TAXONOMY & BANK OFFER GUIDE */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      {/* 8. NON-ALARMIST RISK TAXONOMY & BANK OFFER GUIDE */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-6 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 space-y-5">
           <div className="space-y-1.5">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
@@ -384,13 +657,13 @@ export default function DepositGuardHomePage() {
         </div>
       </section>
 
-      {/* 6. PRIVACY, FREE BETA COMMITMENT & TRUST LINKS */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 9. PRIVACY, FREE BETA COMMITMENT & ARCHONIC TRUST ARCHITECTURE */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-3">
             <Lock className="w-6 h-6 text-emerald-600" />
             <h3 className="text-base font-bold text-slate-900">
-              Quyền riêng tư & Xử lý trên thiết bị
+              Quyền riêng tư &amp; Xử lý trên thiết bị
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               Toàn bộ phép tính chạy trực tiếp trên trình duyệt của bạn. Thu nhập, số dư tiết kiệm, giá nhà và số tiền vay không bao giờ bị đính kèm vào URL hay gửi về máy chủ phân tích.
@@ -414,12 +687,12 @@ export default function DepositGuardHomePage() {
           </div>
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-3">
-            <Scale className="w-6 h-6 text-emerald-600" />
+            <Cpu className="w-6 h-6 text-emerald-600" />
             <h3 className="text-base font-bold text-slate-900">
-              Độc lập & Minh bạch phương pháp
+              Độc lập &amp; Kiểm định bởi Archonic
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Vận hành độc lập bởi Archonic (EvolveTech), không nhận hoa hồng ẩn để điều hướng kết quả sang bất kỳ ngân hàng hay sàn môi giới nào. Công thức mở hoàn toàn để đối chiếu.
+              Vận hành độc lập bởi Archonic (EvolveTech), không nhận hoa hồng ẩn để điều hướng kết quả sang bất kỳ ngân hàng hay sàn môi giới nào. Đã vượt qua 311+ bài kiểm thử toán học tự động.
             </p>
             <Link href="/lien-he" className="inline-block text-xs font-bold text-emerald-700 hover:underline">
               Góp ý hoặc báo cáo sai lệch phép tính →
