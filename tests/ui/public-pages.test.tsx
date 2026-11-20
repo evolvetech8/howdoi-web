@@ -70,6 +70,8 @@ describe('Milestone 3 & 4: Public Pages, Trust Architecture, SEO & Privacy (Evol
     expect(text).toContain('mình có đủ sức trả nợ.');
     expect(text).toContain('Kiểm tra miễn phí');
     expect(text).toContain('DepositGuard Live Stress-Test Terminal v1.1');
+    expect(text).toContain('DIỄN BIẾN DÒNG TIỀN 240 THÁNG');
+    expect(text).toContain('Giai đoạn 01');
     expect(text).toContain('Tự kiểm tra 5');
     expect(text).toContain('Hồ sơ #1 • TP.HCM');
     expect(text).toContain('Hồ sơ #2 • Hà Nội');

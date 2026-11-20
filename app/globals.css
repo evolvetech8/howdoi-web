@@ -5,6 +5,27 @@
 :root {
   --background: #f8fafc;
   --foreground: #0f172a;
+  --navy-institutional: #0B1D30;
+  --blue-royal: #1E40AF;
+  --hairline-light: rgba(15, 23, 42, 0.08);
+  --hairline-dark: rgba(255, 255, 255, 0.12);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
@@ -12,6 +33,34 @@ body {
   background: var(--background);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Apple / Wise Editorial Hairlines & Tabular Typography Utilities */
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .editorial-hairline-t {
+    border-top: 1px solid var(--hairline-light);
+  }
+
+  .editorial-hairline-b {
+    border-bottom: 1px solid var(--hairline-light);
+  }
+
+  .editorial-hairline-dark-t {
+    border-top: 1px solid var(--hairline-dark);
+  }
+
+  .editorial-hairline-dark-b {
+    border-bottom: 1px solid var(--hairline-dark);
+  }
+}
+
+.font-mono {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Custom scrollbar */
@@ -33,6 +82,6 @@ body {
 }
 
 ::selection {
-  background-color: #10b981;
+  background-color: #1E40AF;
   color: #ffffff;
 }

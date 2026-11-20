@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { SimulationProvider } from "@/lib/depositguard/context";
+import SmoothScrollProvider from "@/components/depositguard/common/SmoothScrollProvider";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
@@ -75,9 +76,11 @@ export default function RootLayout({
       >
         <LanguageProvider>
           <SimulationProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
+            <SmoothScrollProvider>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </SmoothScrollProvider>
           </SimulationProvider>
         </LanguageProvider>
         <SpeedInsights />
