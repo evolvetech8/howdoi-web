@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { GUIDES } from '@/content/guides-data';
+import React from "react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { GUIDES } from "@/content/guides-data";
 import {
   ArrowLeft,
   Clock,
@@ -12,9 +12,9 @@ import {
   ArrowRight,
   FileCheck2,
   ShieldCheck,
-} from 'lucide-react';
-import type { Metadata } from 'next';
-import DisclaimerBanner from '@/components/depositguard/common/DisclaimerBanner';
+} from "lucide-react";
+import type { Metadata } from "next";
+import DisclaimerBanner from "@/components/depositguard/common/DisclaimerBanner";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -29,10 +29,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const guide = GUIDES.find((g) => g.slug === slug);
-  if (!guide) return { title: 'Bài viết không tìm thấy — EvolveTech DepositGuard' };
+  if (!guide)
+    return { title: "Bài viết không tìm thấy — EvolveTech DepositGuard" };
 
   return {
-    title: `${guide.title} | EvolveTech DepositGuard`,
+    title: guide.title,
     description: guide.excerpt,
     alternates: {
       canonical: `https://www.evolvetech.biz.vn/huong-dan/${guide.slug}`,
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: guide.title,
       description: guide.excerpt,
-      type: 'article',
+      type: "article",
       publishedTime: guide.date,
       authors: [guide.author],
     },
@@ -103,10 +104,34 @@ export default async function GuideDetailPage({ params }: Props) {
         </div>
       </header>
 
+      <aside className="rounded-xl border border-blue-200 bg-blue-50 p-5 text-base space-y-2">
+        <p>
+          Biên soạn: EvolveTech / Archonic. Các mức lãi và tình huống trong bài
+          là minh họa, không phải báo giá hiện hành.
+        </p>
+        <p>
+          Đối chiếu phép tính tại{" "}
+          <Link className="underline" href="/bao-cao-mau">
+            báo cáo mẫu tính trực tiếp
+          </Link>{" "}
+          và{" "}
+          <Link className="underline" href="/cach-tinh">
+            phương pháp mô hình
+          </Link>
+          . Điều kiện khoản vay phải được ngân hàng xác nhận riêng.
+        </p>
+        <a
+          className="underline"
+          href="https://www.hsbc.com.vn/vi-vn/loans/products/home/"
+        >
+          Tham khảo cơ chế lãi cố định và thả nổi từ HSBC
+        </a>
+      </aside>
       {/* Key Takeaways Box */}
       <div className="bg-blue-50/80 border border-blue-200 rounded-2xl p-6 space-y-3">
         <h2 className="text-sm font-extrabold text-blue-950 uppercase tracking-wider flex items-center gap-2">
-          <Lightbulb className="w-4 h-4 text-blue-800" /> Điểm cốt lõi cần nhớ trước khi đặt cọc
+          <Lightbulb className="w-4 h-4 text-blue-800" /> Điểm cốt lõi cần nhớ
+          trước khi đặt cọc
         </h2>
         <ul className="space-y-2 text-xs sm:text-sm text-slate-900">
           {guide.content.keyTakeaways.map((item, idx) => (
@@ -125,7 +150,9 @@ export default async function GuideDetailPage({ params }: Props) {
             <span className="font-bold text-blue-400 uppercase tracking-wider">
               Đồ họa trực quan (Archonic Visual Research)
             </span>
-            <span className="text-[11px] text-slate-400">Mô hình DepositGuard v1.1</span>
+            <span className="text-[11px] text-slate-400">
+              Mô hình DepositGuard v1.1
+            </span>
           </div>
           <div className="flex justify-center bg-slate-950 rounded-2xl p-2 overflow-hidden">
             <img
@@ -145,7 +172,10 @@ export default async function GuideDetailPage({ params }: Props) {
       {/* Main Sections */}
       <div className="space-y-8 pt-2">
         {guide.content.sections.map((section, idx) => (
-          <section key={idx} className="space-y-3 bg-white p-6 rounded-2xl border border-slate-200/80">
+          <section
+            key={idx}
+            className="space-y-3 bg-white p-6 rounded-2xl border border-slate-200/80"
+          >
             <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
               {section.heading}
             </h2>
@@ -184,7 +214,8 @@ export default async function GuideDetailPage({ params }: Props) {
             Đưa giá căn nhà và thu nhập của bạn vào bộ mô phỏng DepositGuard
           </h4>
           <p className="text-xs text-slate-300">
-            Chạy hoàn toàn trên trình duyệt của bạn trong 2 phút — không cần đăng nhập hay để lại số điện thoại.
+            Chạy hoàn toàn trên trình duyệt của bạn trong 2 phút — không cần
+            đăng nhập hay để lại số điện thoại.
           </p>
         </div>
         <div className="flex flex-wrap gap-2.5 shrink-0">
@@ -217,7 +248,10 @@ export default async function GuideDetailPage({ params }: Props) {
             <ShieldCheck className="w-4 h-4 text-blue-700" />
           </span>
           <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
-            Đơn vị nghiên cứu &amp; phát triển mô hình chẩn đoán rủi ro tài chính mua nhà DepositGuard tại evolvetech.biz.vn. Cam kết 100% độc lập, không nhận hoa hồng ẩn từ ngân hàng hay sàn môi giới bất động sản.
+            Đơn vị nghiên cứu &amp; phát triển mô hình chẩn đoán rủi ro tài
+            chính mua nhà DepositGuard tại evolvetech.biz.vn. Cam kết 100% độc
+            lập, không nhận hoa hồng ẩn từ ngân hàng hay sàn môi giới bất động
+            sản.
           </p>
         </div>
       </div>

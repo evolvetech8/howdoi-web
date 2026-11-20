@@ -10,56 +10,45 @@ import type {
   StressScenarioInput,
   SimulationResult,
   AffordabilitySolverResult,
-} from './test-types';
+} from "./test-types";
 import {
   runSimulationReference,
   solveReverseAffordabilityReference,
-} from './reference-engine';
+} from "./reference-engine";
 
-let productionEngineModule: any = null;
-let resolved = false;
-
+import * as productionEngineModule from "../../../lib/depositguard/engine";
 async function resolveEngine(): Promise<any> {
-  if (resolved) return productionEngineModule;
-  try {
-    // Dynamic string indirection prevents TS compile-time missing module errors before M1 completion
-    const modulePath = '../../lib/depositguard/engine';
-    productionEngineModule = await import(/* @vite-ignore */ modulePath);
-  } catch {
-    productionEngineModule = null;
-  }
-  resolved = true;
   return productionEngineModule;
 }
 
 export async function runSimulation(
   loan: LoanInput,
   household: HouseholdInput,
-  scenario?: StressScenarioInput
+  scenario?: StressScenarioInput,
 ): Promise<SimulationResult> {
   const prod = await resolveEngine();
-  if (prod && typeof prod.runSimulation === 'function') {
+  if (prod && typeof prod.runSimulation === "function") {
     return prod.runSimulation(loan, household, scenario);
   }
-  if (prod && typeof prod.calculateSimulation === 'function') {
+  if (prod && typeof prod.calculateSimulation === "function") {
     return prod.calculateSimulation(loan, household, scenario);
   }
-  return runSimulationReference(loan, household, scenario);
+  throw new Error("Production simulation export missing");
 }
 
 export async function solveReverseAffordability(
   loan: LoanInput,
   household: HouseholdInput,
-  scenario?: StressScenarioInput
+  scenario?: StressScenarioInput,
 ): Promise<AffordabilitySolverResult> {
   const prod = await resolveEngine();
-  if (prod && typeof prod.solveReverseAffordability === 'function') {
+  if (prod && typeof prod.solveReverseAffordability === "function") {
     return prod.solveReverseAffordability(loan, household, scenario);
   }
-  if (prod && typeof prod.solveAffordability === 'function') {
+  if (prod && typeof prod.solveAffordability === "function") {
     return prod.solveAffordability(loan, household, scenario);
   }
-  return solveReverseAffordabilityReference(loan, household, scenario);
+  throw new Error("Production solver export missing");
 }
 
 export function isUsingProductionEngine(): boolean {

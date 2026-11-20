@@ -1,15 +1,22 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext, useState, useMemo, useEffect, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useEffect,
+  useCallback,
+} from "react";
 import {
   LoanInput,
   HouseholdInput,
   StressScenarioInput,
   SimulationResult,
   AffordabilitySolverResult,
-} from './engine/types';
-import { calculateSimulation } from './engine/cashflow';
-import { solveAffordability } from './engine/solver';
+} from "./engine/types";
+import { calculateSimulation } from "./engine/cashflow";
+import { solveAffordability } from "./engine/solver";
 import {
   validateStep1,
   validateStep2,
@@ -17,8 +24,9 @@ import {
   StepValidationResult,
   PropertyType,
   Region,
-} from './schemas';
-import { trackEvent } from './telemetry';
+} from "./schemas";
+import { trackFunnel } from "./funnel";
+import { trackEvent } from "./telemetry";
 
 export interface ExtendedLoanInput extends LoanInput {
   propertyType?: PropertyType;
@@ -32,13 +40,13 @@ export const DEFAULT_LOAN_INPUT: ExtendedLoanInput = {
   downPayment: 500_000_000,
   loanAmount: 2_000_000_000,
   loanTermMonths: 240,
-  repaymentMethod: 'EQUAL_PRINCIPAL',
+  repaymentMethod: "EQUAL_PRINCIPAL",
   promoInterestRate: 7.0,
   promoPeriodMonths: 12,
   postPromoRate: 12.0,
   gracePeriodMonths: 0,
-  propertyType: 'apartment',
-  region: 'hcm',
+  propertyType: "apartment",
+  region: "hcm",
 };
 
 export const DEFAULT_HOUSEHOLD_INPUT: HouseholdInput = {
@@ -61,16 +69,16 @@ export const DEFAULT_STRESS_SCENARIO: StressScenarioInput = {
 };
 
 export type ScenarioPresetKey =
-  | 'BASE'
-  | 'RATE_SHOCK_2PP'
-  | 'RATE_SHOCK_4PP'
-  | 'INCOME_SHOCK_3M'
-  | 'INCOME_SHOCK_6M'
-  | 'EXPENSE_SHOCK_10PCT'
-  | 'EXTREME_STRESS'
-  | 'CUSTOM';
+  | "BASE"
+  | "RATE_SHOCK_2PP"
+  | "RATE_SHOCK_4PP"
+  | "INCOME_SHOCK_3M"
+  | "INCOME_SHOCK_6M"
+  | "EXPENSE_SHOCK_10PCT"
+  | "EXTREME_STRESS"
+  | "CUSTOM";
 
-const SESSION_STORAGE_KEY = 'depositguard_simulation_v1';
+const SESSION_STORAGE_KEY = "depositguard_simulation_v1";
 
 export interface SimulationContextType {
   // Inputs
@@ -108,6 +116,7 @@ export interface SimulationContextType {
   resetScenario: () => void;
   resetSimulation: () => void;
   loadGoldenFixture: () => void;
+  loadScenario: (loan: ExtendedLoanInput, household: HouseholdInput) => void;
 
   // Corrective Levers
   applySafeLoanLever: () => void;
@@ -119,6 +128,7 @@ export interface SimulationContextType {
   baseResult: SimulationResult;
   solverResult: AffordabilitySolverResult;
   hasSimulated: boolean;
+  hasUserChanges: boolean;
   isSimulated: boolean;
   setHasSimulated: (simulated: boolean) => void;
 
@@ -131,49 +141,115 @@ export interface SimulationContextType {
 
 const SimulationContext = createContext<SimulationContextType | null>(null);
 
-export function SimulationProvider({ children }: { children: React.ReactNode }) {
+export function SimulationProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [loan, setLoan] = useState<ExtendedLoanInput>(DEFAULT_LOAN_INPUT);
-  const [household, setHousehold] = useState<HouseholdInput>(DEFAULT_HOUSEHOLD_INPUT);
-  const [stress, setStress] = useState<StressScenarioInput>(DEFAULT_STRESS_SCENARIO);
-  const [activePreset, setActivePreset] = useState<ScenarioPresetKey>('BASE');
+  const [household, setHousehold] = useState<HouseholdInput>(
+    DEFAULT_HOUSEHOLD_INPUT,
+  );
+  const [stress, setStress] = useState<StressScenarioInput>(
+    DEFAULT_STRESS_SCENARIO,
+  );
+  const [activePreset, setActivePreset] = useState<ScenarioPresetKey>("BASE");
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [hasSimulated, setHasSimulated] = useState<boolean>(false);
+  const [hydrated, setHydrated] = useState(false);
 
   // Hydrate from sessionStorage (tab-scoped memory) on client mount
   useEffect(() => {
     try {
-      if (typeof window !== 'undefined' && window.sessionStorage) {
+      if (typeof window !== "undefined" && window.sessionStorage) {
         const saved = sessionStorage.getItem(SESSION_STORAGE_KEY);
         if (saved) {
           const parsed = JSON.parse(saved);
+          if (!parsed.loan || !parsed.household || !parsed.stress)
+            throw new Error("Invalid session");
+          const stressBounds: Record<string, [number, number]> = {
+            rateShockPp: [0, 50],
+            incomeShockPercent: [-100, 100],
+            incomeShockDurationMonths: [1, 480],
+            expenseShockPercent: [-100, 1000],
+          };
+          for (const [key, [min, max]] of Object.entries(stressBounds)) {
+            const value = parsed.stress[key];
+            if (
+              typeof value !== "number" ||
+              !Number.isFinite(value) ||
+              value < min ||
+              value > max
+            )
+              throw new Error("Invalid stress");
+          }
+          if (
+            parsed.stress.incomeShockStartMonth !== undefined &&
+            (!Number.isInteger(parsed.stress.incomeShockStartMonth) ||
+              parsed.stress.incomeShockStartMonth < 1 ||
+              parsed.stress.incomeShockStartMonth > 480)
+          )
+            throw new Error("Invalid stress start");
+          const finite = (o: Record<string, unknown>) =>
+            Object.values(o).every(
+              (v) => typeof v !== "number" || Number.isFinite(v),
+            );
+          if (
+            !finite(parsed.loan) ||
+            !finite(parsed.household) ||
+            !finite(parsed.stress) ||
+            !validateStep1(parsed.loan).isValid ||
+            !validateStep3(parsed.loan).isValid ||
+            !validateStep2({
+              ...parsed.household,
+              downPayment: parsed.loan.downPayment,
+            }).isValid
+          )
+            throw new Error("Invalid inputs");
           if (parsed.loan) {
-            const price = parsed.loan.propertyPrice ?? parsed.loan.purchasePrice ?? DEFAULT_LOAN_INPUT.propertyPrice;
-            setLoan({ ...parsed.loan, propertyPrice: price, purchasePrice: price });
+            const price =
+              parsed.loan.propertyPrice ??
+              parsed.loan.purchasePrice ??
+              DEFAULT_LOAN_INPUT.propertyPrice;
+            setLoan({
+              ...parsed.loan,
+              propertyPrice: price,
+              purchasePrice: price,
+            });
           }
           if (parsed.household) setHousehold(parsed.household);
           if (parsed.stress) setStress(parsed.stress);
           if (parsed.activePreset) setActivePreset(parsed.activePreset);
-          if (typeof parsed.hasSimulated === 'boolean') setHasSimulated(parsed.hasSimulated);
+          if (typeof parsed.hasSimulated === "boolean")
+            setHasSimulated(parsed.hasSimulated);
         }
       }
     } catch {
       // Fallback silently if sessionStorage is unavailable or blocked
     }
+    setHydrated(true);
   }, []);
 
-  // Sync to sessionStorage on state updates
+  // Sync only after hydration has completed.
   useEffect(() => {
+    if (!hydrated) return;
     try {
-      if (typeof window !== 'undefined' && window.sessionStorage) {
+      if (typeof window !== "undefined" && window.sessionStorage) {
         sessionStorage.setItem(
           SESSION_STORAGE_KEY,
-          JSON.stringify({ loan, household, stress, activePreset, hasSimulated })
+          JSON.stringify({
+            loan,
+            household,
+            stress,
+            activePreset,
+            hasSimulated,
+          }),
         );
       }
     } catch {
       // Ignore quota errors
     }
-  }, [loan, household, stress, activePreset, hasSimulated]);
+  }, [loan, household, stress, activePreset, hasSimulated, hydrated]);
 
   // Synchronous memoized calculation engine executions
   const simulationResult = useMemo(() => {
@@ -196,18 +272,19 @@ export function SimulationProvider({ children }: { children: React.ReactNode }) 
         purchasePrice: loan.propertyPrice,
         propertyPrice: loan.propertyPrice,
       }),
-    [loan]
+    [loan],
   );
   const step2Validation = useMemo(
     () => validateStep2({ ...household, downPayment: loan.downPayment }),
-    [household, loan.downPayment]
+    [household, loan.downPayment],
   );
   const step3Validation = useMemo(() => validateStep3(loan), [loan]);
 
   // Cross-field balanced update for loan
   const updateLoan = useCallback((partial: Partial<ExtendedLoanInput>) => {
     setLoan((prev) => {
-      const price = partial.propertyPrice ?? partial.purchasePrice ?? prev.propertyPrice;
+      const price =
+        partial.propertyPrice ?? partial.purchasePrice ?? prev.propertyPrice;
       const updated = {
         ...prev,
         ...partial,
@@ -215,14 +292,30 @@ export function SimulationProvider({ children }: { children: React.ReactNode }) 
         purchasePrice: price,
       };
       if (
-        (partial.propertyPrice !== undefined || partial.purchasePrice !== undefined) &&
+        (partial.propertyPrice !== undefined ||
+          partial.purchasePrice !== undefined) &&
         partial.loanAmount === undefined
       ) {
-        updated.loanAmount = Math.max(0, updated.propertyPrice - updated.downPayment);
-      } else if (partial.downPayment !== undefined && partial.loanAmount === undefined) {
-        updated.loanAmount = Math.max(0, updated.propertyPrice - updated.downPayment);
-      } else if (partial.loanAmount !== undefined && partial.downPayment === undefined) {
-        updated.downPayment = Math.max(0, updated.propertyPrice - updated.loanAmount);
+        updated.loanAmount = Math.max(
+          0,
+          updated.propertyPrice - updated.downPayment,
+        );
+      } else if (
+        partial.downPayment !== undefined &&
+        partial.loanAmount === undefined
+      ) {
+        updated.loanAmount = Math.max(
+          0,
+          updated.propertyPrice - updated.downPayment,
+        );
+      } else if (
+        partial.loanAmount !== undefined &&
+        partial.downPayment === undefined
+      ) {
+        updated.downPayment = Math.max(
+          0,
+          updated.propertyPrice - updated.loanAmount,
+        );
       }
       return updated;
     });
@@ -234,43 +327,49 @@ export function SimulationProvider({ children }: { children: React.ReactNode }) 
 
   const updateStress = useCallback((partial: Partial<StressScenarioInput>) => {
     setStress((prev) => ({ ...prev, ...partial }));
-    setActivePreset('CUSTOM');
+    setActivePreset("CUSTOM");
   }, []);
 
   const applyPreset = useCallback((preset: ScenarioPresetKey) => {
     setActivePreset(preset);
     switch (preset) {
-      case 'BASE':
+      case "BASE":
         setStress(DEFAULT_STRESS_SCENARIO);
         break;
-      case 'RATE_SHOCK_2PP':
+      case "RATE_SHOCK_2PP":
         setStress({ ...DEFAULT_STRESS_SCENARIO, rateShockPp: 2 });
-        trackEvent('whatif_rate_shock_toggled', { shock_pp: 2 });
+        trackEvent("whatif_rate_shock_toggled", { shock_pp: 2 });
         break;
-      case 'RATE_SHOCK_4PP':
+      case "RATE_SHOCK_4PP":
         setStress({ ...DEFAULT_STRESS_SCENARIO, rateShockPp: 4 });
-        trackEvent('whatif_rate_shock_toggled', { shock_pp: 4 });
+        trackEvent("whatif_rate_shock_toggled", { shock_pp: 4 });
         break;
-      case 'INCOME_SHOCK_3M':
+      case "INCOME_SHOCK_3M":
         setStress({
           ...DEFAULT_STRESS_SCENARIO,
           incomeShockPercent: -20,
           incomeShockDurationMonths: 3,
         });
-        trackEvent('whatif_income_shock_toggled', { shock_percent: -20, duration_months: 3 });
+        trackEvent("whatif_income_shock_toggled", {
+          shock_percent: -20,
+          duration_months: 3,
+        });
         break;
-      case 'INCOME_SHOCK_6M':
+      case "INCOME_SHOCK_6M":
         setStress({
           ...DEFAULT_STRESS_SCENARIO,
           incomeShockPercent: -20,
           incomeShockDurationMonths: 6,
         });
-        trackEvent('whatif_income_shock_toggled', { shock_percent: -20, duration_months: 6 });
+        trackEvent("whatif_income_shock_toggled", {
+          shock_percent: -20,
+          duration_months: 6,
+        });
         break;
-      case 'EXPENSE_SHOCK_10PCT':
+      case "EXPENSE_SHOCK_10PCT":
         setStress({ ...DEFAULT_STRESS_SCENARIO, expenseShockPercent: 10 });
         break;
-      case 'EXTREME_STRESS':
+      case "EXTREME_STRESS":
         setStress({
           rateShockPp: 2,
           incomeShockPercent: -20,
@@ -278,9 +377,9 @@ export function SimulationProvider({ children }: { children: React.ReactNode }) 
           incomeShockStartMonth: 13,
           expenseShockPercent: 10,
         });
-        trackEvent('whatif_rate_shock_toggled', { shock_pp: 2 });
+        trackEvent("whatif_rate_shock_toggled", { shock_pp: 2 });
         break;
-      case 'CUSTOM':
+      case "CUSTOM":
       default:
         break;
     }
@@ -288,82 +387,107 @@ export function SimulationProvider({ children }: { children: React.ReactNode }) 
 
   const resetStressScenario = useCallback(() => {
     setStress(DEFAULT_STRESS_SCENARIO);
-    setActivePreset('BASE');
+    setActivePreset("BASE");
   }, []);
 
   const resetScenario = useCallback(() => {
     setLoan(DEFAULT_LOAN_INPUT);
     setHousehold(DEFAULT_HOUSEHOLD_INPUT);
     setStress(DEFAULT_STRESS_SCENARIO);
-    setActivePreset('BASE');
+    setActivePreset("BASE");
     setCurrentStep(1);
     setHasSimulated(false);
     try {
-      if (typeof window !== 'undefined' && window.sessionStorage) {
+      if (typeof window !== "undefined" && window.sessionStorage) {
         sessionStorage.removeItem(SESSION_STORAGE_KEY);
       }
     } catch {}
   }, []);
 
+  const loadScenario = useCallback(
+    (nextLoan: ExtendedLoanInput, nextHousehold: HouseholdInput) => {
+      setLoan({ ...DEFAULT_LOAN_INPUT, ...nextLoan });
+      setHousehold({ ...DEFAULT_HOUSEHOLD_INPUT, ...nextHousehold });
+      setStress(DEFAULT_STRESS_SCENARIO);
+      setActivePreset("BASE");
+      setCurrentStep(3);
+      setHasSimulated(true);
+    },
+    [],
+  );
+
   const loadGoldenFixture = useCallback(() => {
     setLoan(DEFAULT_LOAN_INPUT);
     setHousehold(DEFAULT_HOUSEHOLD_INPUT);
     setStress(DEFAULT_STRESS_SCENARIO);
-    setActivePreset('BASE');
+    setActivePreset("BASE");
+    setHasSimulated(true);
   }, []);
 
   const applySafeLoanLever = useCallback(() => {
     if (solverResult.maxSafeLoanAmount > 0) {
       updateLoan({ loanAmount: solverResult.maxSafeLoanAmount });
-      trackEvent('corrective_lever_viewed', { lever_type: 'loan_reduction' });
+      trackEvent("corrective_lever_viewed", { lever_type: "loan_reduction" });
     }
   }, [solverResult.maxSafeLoanAmount, updateLoan]);
 
   const applySafeEquityLever = useCallback(() => {
     if (solverResult.additionalEquityNeeded > 0) {
-      updateLoan({ downPayment: loan.downPayment + solverResult.additionalEquityNeeded });
-      trackEvent('corrective_lever_viewed', { lever_type: 'extra_down_payment' });
+      updateLoan({
+        downPayment: loan.downPayment + solverResult.additionalEquityNeeded,
+      });
+      trackEvent("corrective_lever_viewed", {
+        lever_type: "extra_down_payment",
+      });
     }
   }, [solverResult.additionalEquityNeeded, loan.downPayment, updateLoan]);
 
   const goToNextStep = useCallback((): boolean => {
     if (currentStep === 1) {
       if (!step1Validation.isValid) return false;
-      trackEvent('wizard_step_completed', { step: 1, step_name: 'property' });
+      trackEvent("wizard_step_completed", { step: 1, step_name: "property" });
       setCurrentStep(2);
-      trackEvent('wizard_step_viewed', { step: 2, step_name: 'household' });
+      trackEvent("wizard_step_viewed", { step: 2, step_name: "household" });
       return true;
     }
     if (currentStep === 2) {
       if (!step2Validation.isValid) return false;
-      trackEvent('wizard_step_completed', { step: 2, step_name: 'household' });
+      trackEvent("wizard_step_completed", { step: 2, step_name: "household" });
       setCurrentStep(3);
-      trackEvent('wizard_step_viewed', { step: 3, step_name: 'loan' });
+      trackEvent("wizard_step_viewed", { step: 3, step_name: "loan" });
       return true;
     }
     if (currentStep === 3) {
       if (!step3Validation.isValid) return false;
-      trackEvent('wizard_step_completed', {
+      trackEvent("wizard_step_completed", {
         step: 3,
-        step_name: 'loan',
+        step_name: "loan",
         repayment_method: loan.repaymentMethod,
       });
       setHasSimulated(true);
-      trackEvent('simulation_calculated', {
+      trackFunnel("wizard_completed");
+      trackEvent("simulation_calculated", {
         status: simulationResult.affordabilityStatus,
         has_deficit: simulationResult.firstNegativeCashFlowMonth !== null,
       });
       return true;
     }
     return true;
-  }, [currentStep, step1Validation.isValid, step2Validation.isValid, step3Validation.isValid, loan.repaymentMethod, simulationResult]);
+  }, [
+    currentStep,
+    step1Validation.isValid,
+    step2Validation.isValid,
+    step3Validation.isValid,
+    loan.repaymentMethod,
+    simulationResult,
+  ]);
 
   const goToPreviousStep = useCallback(() => {
     if (currentStep > 1) {
       const prevStep = (currentStep - 1) as 1 | 2;
       setCurrentStep(prevStep);
-      const stepName = prevStep === 1 ? 'property' : 'household';
-      trackEvent('wizard_step_viewed', { step: prevStep, step_name: stepName });
+      const stepName = prevStep === 1 ? "property" : "household";
+      trackEvent("wizard_step_viewed", { step: prevStep, step_name: stepName });
     }
   }, [currentStep]);
 
@@ -374,15 +498,22 @@ export function SimulationProvider({ children }: { children: React.ReactNode }) 
       if (step === 3) return step3Validation.isValid;
       return false;
     },
-    [step1Validation.isValid, step2Validation.isValid, step3Validation.isValid]
+    [step1Validation.isValid, step2Validation.isValid, step3Validation.isValid],
   );
 
   // Derived financial ratios
-  const equityRatioPercent = loan.propertyPrice > 0 ? (loan.downPayment / loan.propertyPrice) * 100 : 0;
-  const loanToValuePercent = loan.propertyPrice > 0 ? (loan.loanAmount / loan.propertyPrice) * 100 : 0;
+  const equityRatioPercent =
+    loan.propertyPrice > 0 ? (loan.downPayment / loan.propertyPrice) * 100 : 0;
+  const loanToValuePercent =
+    loan.propertyPrice > 0 ? (loan.loanAmount / loan.propertyPrice) * 100 : 0;
   const discretionarySurplusBeforeLoan =
-    household.monthlyNetIncome - household.essentialLivingExpenses - (household.existingDebtPayments || 0);
-  const upfrontCosts = loan.downPayment + (household.transactionCosts || 0) + (household.initialSetupCosts || 0);
+    household.monthlyNetIncome -
+    household.essentialLivingExpenses -
+    (household.existingDebtPayments || 0);
+  const upfrontCosts =
+    loan.downPayment +
+    (household.transactionCosts || 0) +
+    (household.initialSetupCosts || 0);
   const remainingCashAfterClosing = household.liquidSavings - upfrontCosts;
 
   return (
@@ -414,12 +545,16 @@ export function SimulationProvider({ children }: { children: React.ReactNode }) 
         resetScenario,
         resetSimulation: resetScenario,
         loadGoldenFixture,
+        loadScenario,
         applySafeLoanLever,
         applySafeEquityLever,
         simulationResult,
         activeResult: simulationResult,
         baseResult,
         solverResult,
+        hasUserChanges:
+          JSON.stringify(loan) !== JSON.stringify(DEFAULT_LOAN_INPUT) ||
+          JSON.stringify(household) !== JSON.stringify(DEFAULT_HOUSEHOLD_INPUT),
         hasSimulated,
         isSimulated: hasSimulated,
         setHasSimulated,
@@ -437,7 +572,7 @@ export function SimulationProvider({ children }: { children: React.ReactNode }) 
 export function useSimulation(): SimulationContextType {
   const context = useContext(SimulationContext);
   if (!context) {
-    throw new Error('useSimulation must be used within a SimulationProvider');
+    throw new Error("useSimulation must be used within a SimulationProvider");
   }
   return context;
 }

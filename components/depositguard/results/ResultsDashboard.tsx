@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { AlertCircle, ArrowRight } from 'lucide-react';
-import { useSimulation } from '@/lib/depositguard/context';
-import ResultsHeader from './ResultsHeader';
-import MetricCards from './MetricCards';
-import WhatIfControls from './WhatIfControls';
-import CorrectiveLevers from './CorrectiveLevers';
-import AmortizationChart from './AmortizationChart';
-import CashFlowChart from './CashFlowChart';
-import ScheduleTable from './ScheduleTable';
-import DisclaimerCard from './DisclaimerCard';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { AlertCircle, ArrowRight } from "lucide-react";
+import { useSimulation } from "@/lib/depositguard/context";
+import ServiceCard from "../common/ServiceCard";
+import ResultsHeader from "./ResultsHeader";
+import MetricCards from "./MetricCards";
+import WhatIfControls from "./WhatIfControls";
+import CorrectiveLevers from "./CorrectiveLevers";
+import AmortizationChart from "./AmortizationChart";
+import CashFlowChart from "./CashFlowChart";
+import ScheduleTable from "./ScheduleTable";
+import DisclaimerCard from "./DisclaimerCard";
 
 export default function ResultsDashboard() {
   const { hasSimulated, isSimulated, loan } = useSimulation();
@@ -24,12 +25,15 @@ export default function ResultsDashboard() {
   if (!mounted) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-        <div className="text-xs text-slate-400 font-medium">Đang tải kết quả mô phỏng...</div>
+        <div className="text-xs text-slate-400 font-medium">
+          Đang tải kết quả mô phỏng...
+        </div>
       </div>
     );
   }
 
-  const isReady = (hasSimulated || isSimulated) && loan && loan.propertyPrice > 0;
+  const isReady =
+    (hasSimulated || isSimulated) && loan && loan.propertyPrice > 0;
 
   // Direct access fallback guard: User opens /ket-qua without simulating
   if (!isReady) {
@@ -44,7 +48,9 @@ export default function ResultsDashboard() {
               Chưa Có Dữ Liệu Mô Phỏng
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Bạn chưa nhập thông tin bất động sản và dòng tiền gia đình. Vui lòng hoàn thành 3 bước kiểm tra nhanh (100% ẩn danh, không cần tài khoản) để xem báo cáo rủi ro.
+              Bạn chưa nhập thông tin bất động sản và dòng tiền gia đình. Vui
+              lòng hoàn thành 3 bước kiểm tra nhanh (100% ẩn danh, không cần tài
+              khoản) để xem báo cáo rủi ro.
             </p>
           </div>
           <Link
@@ -79,6 +85,7 @@ export default function ResultsDashboard() {
 
         {/* Corrective Levers & Reverse Solver Recommendations */}
         <CorrectiveLevers />
+        <ServiceCard />
 
         {/* Accessible Amortization Table */}
         <ScheduleTable />

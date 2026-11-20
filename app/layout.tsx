@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Be_Vietnam_Pro, JetBrains_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
+import FunnelView from "@/components/depositguard/common/FunnelView";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -23,7 +24,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "EvolveTech DepositGuard — Kiểm Tra Rủi Ro Tài Chính Trước Khi Đặt Cọc Mua Nhà",
+    default:
+      "EvolveTech DepositGuard — Kiểm Tra Rủi Ro Tài Chính Trước Khi Đặt Cọc Mua Nhà",
     template: "%s | EvolveTech DepositGuard",
   },
   description:
@@ -47,7 +49,8 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Archonic (EvolveTech)" }],
   openGraph: {
-    title: "EvolveTech DepositGuard — Đừng đặt cọc trước khi biết mình có đủ sức trả nợ",
+    title:
+      "EvolveTech DepositGuard — Đừng đặt cọc trước khi biết mình có đủ sức trả nợ",
     description:
       "Mô phỏng lịch trả nợ vay mua nhà, cú nhảy lãi suất tháng 13/25 và sức chịu đựng dòng tiền gia đình trước các kịch bản biến động.",
     url: "https://www.evolvetech.biz.vn",
@@ -57,7 +60,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EvolveTech DepositGuard — Kiểm Tra Tài Chính Trước Khi Đặt Cọc Mua Nhà",
+    title:
+      "EvolveTech DepositGuard — Kiểm Tra Tài Chính Trước Khi Đặt Cọc Mua Nhà",
     description:
       "Công cụ mô phỏng dòng tiền và rủi ro vay mua nhà 100% ẩn danh dành cho người mua nhà tại Việt Nam.",
   },
@@ -76,6 +80,7 @@ export default function RootLayout({
         <LanguageProvider>
           <SimulationProvider>
             <Navbar />
+            <FunnelView />
             <main className="flex-1">{children}</main>
             <Footer />
           </SimulationProvider>

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   ShieldCheck,
   Calculator,
@@ -17,15 +17,13 @@ import {
   Lock,
   CheckCircle2,
   Newspaper,
-} from 'lucide-react';
+} from "lucide-react";
 
 const NAV_ITEMS = [
-  { href: '/kiem-tra-mua-nha', label: 'Kiểm tra mua nhà', icon: Calculator },
-  { href: '/bao-cao-mau', label: 'Hồ sơ mẫu', icon: FileCheck2 },
-  { href: '/huong-dan', label: 'Cẩm nang', icon: Newspaper },
-  { href: '/cach-tinh', label: 'Cách tính', icon: BookOpen },
-  { href: '/cau-hoi-thuong-gap', label: 'Câu hỏi thường gặp', icon: HelpCircle },
-  { href: '/ve-evolvetech', label: 'Về EvolveTech', icon: Info },
+  { href: "/kiem-tra-mua-nha", label: "Kiểm tra miễn phí", icon: Calculator },
+  { href: "/bao-cao-mau", label: "Báo cáo mẫu", icon: FileCheck2 },
+  { href: "/ra-soat-ho-so-vay", label: "Rà soát hồ sơ vay", icon: Info },
+  { href: "/cach-tinh", label: "Cách tính", icon: BookOpen },
 ];
 
 export default function Navbar() {
@@ -40,20 +38,23 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5 font-semibold text-blue-300">
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-              <span>Archonic FinLab • Mô hình Toán học Tất định v1.1 (Sai số 0 VND)</span>
+              <span>DepositGuard • Mô phỏng tài chính trước mua nhà</span>
             </span>
             <span className="hidden md:inline text-slate-600">|</span>
             <span className="hidden md:inline-flex items-center gap-1 text-slate-300">
-              <span>Đã kiểm định qua 311+ kịch bản Stress-Test &amp; BigInt Oracle</span>
+              <span>Phương pháp và giả định công khai</span>
             </span>
           </div>
           <div className="hidden sm:flex items-center gap-3 text-slate-300">
             <span className="inline-flex items-center gap-1">
               <Lock className="w-3 h-3 text-blue-400" />
-              <span>100% On-Device (Luật Bảo vệ DLCN 91/2025/QH15)</span>
+              <span>Mô phỏng trên thiết bị</span>
             </span>
             <span className="text-slate-600">•</span>
-            <Link href="/lien-he" className="hover:text-white transition-colors font-medium">
+            <Link
+              href="/lien-he"
+              className="hover:text-white transition-colors font-medium"
+            >
               Liên hệ
             </Link>
           </div>
@@ -83,21 +84,27 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden xl:flex items-center gap-1.5" aria-label="Điều hướng chính">
+          <nav
+            className="hidden xl:flex items-center gap-1.5"
+            aria-label="Điều hướng chính"
+          >
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href || pathname?.startsWith(`${item.href}/`);
+              const isActive =
+                pathname === item.href || pathname?.startsWith(`${item.href}/`);
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={`text-xs font-semibold transition-colors flex items-center gap-1.5 py-2 px-2.5 rounded-xl ${
                     isActive
-                      ? 'text-blue-900 bg-blue-50 font-bold border border-blue-200/60'
-                      : 'text-slate-600 hover:text-blue-800 hover:bg-slate-50'
+                      ? "text-blue-900 bg-blue-50 font-bold border border-blue-200/60"
+                      : "text-slate-600 hover:text-blue-800 hover:bg-slate-50"
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-blue-700' : 'text-slate-400'}`} />
+                  <Icon
+                    className={`w-3.5 h-3.5 ${isActive ? "text-blue-700" : "text-slate-400"}`}
+                  />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -123,7 +130,11 @@ export default function Navbar() {
               aria-label="Mở menu điều hướng"
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
@@ -143,8 +154,8 @@ export default function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-2.5 py-2.5 px-3 rounded-xl text-sm font-semibold min-h-[44px] ${
                     isActive
-                      ? 'bg-blue-50 text-blue-900 border border-blue-200/70'
-                      : 'text-slate-700 hover:bg-slate-50 hover:text-blue-800'
+                      ? "bg-blue-50 text-blue-900 border border-blue-200/70"
+                      : "text-slate-700 hover:bg-slate-50 hover:text-blue-800"
                   }`}
                 >
                   <Icon className="w-4 h-4 text-blue-700 shrink-0" />
@@ -172,10 +183,18 @@ export default function Navbar() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <div className="flex items-center justify-between text-xs text-slate-500 px-2 pt-1">
-              <Link href="/bao-mat" onClick={() => setMobileMenuOpen(false)} className="hover:text-blue-800">
+              <Link
+                href="/bao-mat"
+                onClick={() => setMobileMenuOpen(false)}
+                className="hover:text-blue-800"
+              >
                 Chính sách bảo mật (Luật 91/2025/QH15)
               </Link>
-              <Link href="/support" onClick={() => setMobileMenuOpen(false)} className="hover:text-blue-800">
+              <Link
+                href="/support"
+                onClick={() => setMobileMenuOpen(false)}
+                className="hover:text-blue-800"
+              >
                 App Store Support
               </Link>
             </div>

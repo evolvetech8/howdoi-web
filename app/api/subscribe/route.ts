@@ -1,76 +1,44 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
-
-interface SubscriberRecord {
-  email: string;
-  target?: string;
-  createdAt: string;
-}
-
+import { z } from "zod";
+import { createHash } from "node:crypto";
+import { readBody, persist, failure } from "@/lib/server/intake";
+import { database } from "@/lib/server/database";
+const schema = z
+  .object({
+    email: z
+      .string()
+      .trim()
+      .email()
+      .max(254)
+      .transform((v) => v.toLowerCase()),
+    target: z.enum(["both", "ios", "newsletter", "web"]).default("both"),
+  })
+  .strict();
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { email, target = 'both' } = body;
-
-    if (!email || !email.includes('@')) {
-      return NextResponse.json(
-        { success: false, message: 'Email không hợp lệ.' },
-        { status: 400 }
-      );
-    }
-
-    const newSubscriber: SubscriberRecord = {
-      email: email.trim().toLowerCase(),
-      target,
-      createdAt: new Date().toISOString(),
-    };
-
-    // Ensure data directory exists
-    const dataDir = path.join(process.cwd(), 'data');
-    const filePath = path.join(dataDir, 'subscribers.json');
-
-    try {
-      await fs.mkdir(dataDir, { recursive: true });
-    } catch (e) {
-      // ignore if exists
-    }
-
-    let subscribers: SubscriberRecord[] = [];
-    try {
-      const fileContent = await fs.readFile(filePath, 'utf-8');
-      subscribers = JSON.parse(fileContent);
-    } catch (e) {
-      subscribers = [];
-    }
-
-    // Check duplicate
-    const exists = subscribers.some((sub) => sub.email === newSubscriber.email);
-    if (!exists) {
-      subscribers.push(newSubscriber);
-      await fs.writeFile(filePath, JSON.stringify(subscribers, null, 2), 'utf-8');
-    }
-
-    return NextResponse.json({
-      success: true,
-      message: 'Đăng ký thành công! Cảm ơn bạn đã tham gia cộng đồng EvolveTech.',
-    });
-  } catch (error) {
-    console.error('Subscription error:', error);
-    return NextResponse.json(
-      { success: false, message: 'Có lỗi phía máy chủ, vui lòng thử lại sau.' },
-      { status: 500 }
+    const result = schema.safeParse(await readBody(request));
+    if (!result.success) throw new Error("INVALID");
+    const h = createHash("sha256")
+      .update("subscriber:" + result.data.email)
+      .digest("hex");
+    const id = `${h.slice(0, 8)}-${h.slice(8, 12)}-4${h.slice(13, 16)}-a${h.slice(17, 20)}-${h.slice(20, 32)}`;
+    return await persist(
+      "subscribe",
+      {
+        email: result.data.email,
+        target: result.data.target,
+        submissionId: id,
+      },
+      request,
     );
+  } catch (e) {
+    return failure(e);
   }
 }
-
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'data', 'subscribers.json');
-    const fileContent = await fs.readFile(filePath, 'utf-8');
-    const subscribers: SubscriberRecord[] = JSON.parse(fileContent);
-    return NextResponse.json({ count: subscribers.length });
-  } catch (e) {
-    return NextResponse.json({ count: 0 });
+    const count = await database("rpc/subscriber_count", {});
+    return Response.json({ count });
+  } catch {
+    return Response.json({ count: null }, { status: 503 });
   }
 }

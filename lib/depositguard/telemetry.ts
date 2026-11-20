@@ -9,25 +9,25 @@
 
 // 1. Permitted Safe Event Identifiers (Exactly 10)
 export type TelemetryEventName =
-  | 'wizard_step_viewed'
-  | 'wizard_step_completed'
-  | 'simulation_calculated'
-  | 'whatif_rate_shock_toggled'
-  | 'whatif_income_shock_toggled'
-  | 'corrective_lever_viewed'
-  | 'methodology_viewed'
-  | 'faq_accordion_opened'
-  | 'schedule_table_expanded'
-  | 'feedback_submitted';
+  | "wizard_step_viewed"
+  | "wizard_step_completed"
+  | "simulation_calculated"
+  | "whatif_rate_shock_toggled"
+  | "whatif_income_shock_toggled"
+  | "corrective_lever_viewed"
+  | "methodology_viewed"
+  | "faq_accordion_opened"
+  | "schedule_table_expanded"
+  | "feedback_submitted";
 
 export type WizardStepNumber = 1 | 2 | 3;
-export type WizardStepName = 'property' | 'household' | 'loan';
+export type WizardStepName = "property" | "household" | "loan";
 export type CorrectiveLeverType =
-  | 'loan_reduction'
-  | 'extra_down_payment'
-  | 'price_adjustment'
-  | 'term_extension';
-export type AffordabilityStatus = 'SAFE' | 'VULNERABLE' | 'DEFICIT';
+  | "loan_reduction"
+  | "extra_down_payment"
+  | "price_adjustment"
+  | "term_extension";
+export type AffordabilityStatus = "SAFE" | "VULNERABLE" | "DEFICIT";
 
 // 2. Strongly Typed Safe Payloads (Zero Monetary Values)
 export interface TelemetryPayloadMap {
@@ -38,7 +38,7 @@ export interface TelemetryPayloadMap {
   wizard_step_completed: {
     step: WizardStepNumber;
     step_name: WizardStepName;
-    repayment_method?: 'EQUAL_PRINCIPAL' | 'ANNUITY';
+    repayment_method?: "EQUAL_PRINCIPAL" | "ANNUITY";
     time_spent_ms?: number;
   };
   simulation_calculated: {
@@ -63,15 +63,17 @@ export interface TelemetryPayloadMap {
     question_id: string;
   };
   schedule_table_expanded: {
-    view_mode?: 'summary' | 'full';
+    view_mode?: "summary" | "full";
   };
   feedback_submitted: {
-    category: 'ux' | 'calculation' | 'bug' | 'feature' | 'other';
+    category: "ux" | "calculation" | "bug" | "feature" | "other";
     helpful?: boolean;
   };
 }
 
-export interface TelemetryRecord<E extends TelemetryEventName = TelemetryEventName> {
+export interface TelemetryRecord<
+  E extends TelemetryEventName = TelemetryEventName,
+> {
   event: E;
   payload: TelemetryPayloadMap[E];
   timestamp: string; // ISO 8601
@@ -79,86 +81,88 @@ export interface TelemetryRecord<E extends TelemetryEventName = TelemetryEventNa
 
 // 3. Forbidden Sensitive Keys (PII & Raw Monetary Fields)
 export const FORBIDDEN_SENSITIVE_KEYS = new Set([
-  'name',
-  'fullname',
-  'email',
-  'phone',
-  'phonenumber',
-  'cccd',
-  'cmnd',
-  'idcard',
-  'address',
-  'employer',
-  'company',
-  'salary',
-  'income',
-  'monthlynetincome',
-  'netincome',
-  'expenses',
-  'essentialexpenses',
-  'livingexpenses',
-  'propertyprice',
-  'price',
-  'purchaseprice',
-  'downpayment',
-  'loanamount',
-  'liquidsavings',
-  'savings',
-  'emergencyreserve',
-  'reservebalance',
-  'debt',
-  'existingdebt',
-  'totaldebtservice',
-  'payment',
-  'month1payment',
-  'postpromopayment',
-  'paymentjumpamount',
-  'cashflow',
-  'surplus',
-  'shortfall',
-  'vnd',
+  "name",
+  "fullname",
+  "email",
+  "phone",
+  "phonenumber",
+  "cccd",
+  "cmnd",
+  "idcard",
+  "address",
+  "employer",
+  "company",
+  "salary",
+  "income",
+  "monthlynetincome",
+  "netincome",
+  "expenses",
+  "essentialexpenses",
+  "livingexpenses",
+  "propertyprice",
+  "price",
+  "purchaseprice",
+  "downpayment",
+  "loanamount",
+  "liquidsavings",
+  "savings",
+  "emergencyreserve",
+  "reservebalance",
+  "debt",
+  "existingdebt",
+  "totaldebtservice",
+  "payment",
+  "month1payment",
+  "postpromopayment",
+  "paymentjumpamount",
+  "cashflow",
+  "surplus",
+  "shortfall",
+  "vnd",
 ]);
 
 /**
  * Validates that an object contains zero forbidden keys and zero raw currency numbers.
  * Throws in development/test if any violation is detected.
  */
-export function sanitizeTelemetryPayload<T extends Record<string, any>>(payload: T): T {
-  if (!payload || typeof payload !== 'object') {
+export function sanitizeTelemetryPayload<T extends Record<string, any>>(
+  payload: T,
+): T {
+  if (!payload || typeof payload !== "object") {
     return payload;
   }
 
   for (const [key, value] of Object.entries(payload)) {
-    const normalizedKey = key.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const normalizedKey = key.toLowerCase().replace(/[^a-z0-9]/g, "");
 
     // Check 1: Forbidden key blacklist
     if (FORBIDDEN_SENSITIVE_KEYS.has(normalizedKey)) {
       throw new Error(
-        `[DepositGuard Privacy Violation] Forbidden sensitive key detected in telemetry payload: "${key}"`
+        `[DepositGuard Privacy Violation] Forbidden sensitive key detected in telemetry payload: "${key}"`,
       );
     }
 
     // Check 2: Raw monetary value guard
     // Legitimate numbers in telemetry: step (1..3), shock_pp (0..10), shock_percent (-50..0),
     // duration_months (1..12), time_spent_ms / calculation_time_ms (< 100,000,000)
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       const isAllowedDurationOrTime =
-        normalizedKey === 'timespentms' ||
-        normalizedKey === 'calculationtimems' ||
-        normalizedKey === 'durationmonths' ||
-        normalizedKey === 'step' ||
-        normalizedKey === 'shockpp' ||
-        normalizedKey === 'shockpercent';
+        normalizedKey === "timespentms" ||
+        normalizedKey === "calculationtimems" ||
+        normalizedKey === "durationmonths" ||
+        normalizedKey === "step" ||
+        normalizedKey === "shockpp" ||
+        normalizedKey === "shockpercent";
 
       if (!isAllowedDurationOrTime && Math.abs(value) > 1000) {
         throw new Error(
-          `[DepositGuard Privacy Violation] Suspected raw currency number detected in field "${key}": ${value}. Monetary values are strictly forbidden.`
+          `[DepositGuard Privacy Violation] Suspected raw currency number detected in field "${key}": ${value}. Monetary values are strictly forbidden.`,
         );
       }
     }
 
     // Check 3: Recursive scan for nested objects
-    if (typeof value === 'object' && value !== null) {
+    if (typeof value === "object" && value !== null) {
       sanitizeTelemetryPayload(value);
     }
   }
@@ -188,7 +192,7 @@ export function clearTelemetryLog(): void {
  */
 export function trackEvent<E extends TelemetryEventName>(
   event: E,
-  payload: TelemetryPayloadMap[E]
+  payload: TelemetryPayloadMap[E],
 ): void {
   try {
     const sanitized = sanitizeTelemetryPayload(payload);
@@ -200,19 +204,14 @@ export function trackEvent<E extends TelemetryEventName>(
 
     telemetryBuffer.push(record);
 
-    // Fail-safe sandbox dispatch
-    if (typeof window !== 'undefined') {
-      const endpoint = (window as any).__DEPOSITGUARD_TELEMETRY_ENDPOINT__;
-      if (endpoint && typeof navigator !== 'undefined' && navigator.sendBeacon) {
-        navigator.sendBeacon(endpoint, JSON.stringify(record));
-      }
-    }
+    // Detailed diagnostic events stay in memory only. Public funnel uses a separate strict schema.
+    if (telemetryBuffer.length > 200) telemetryBuffer.shift();
   } catch (error) {
-    if (process.env.NODE_ENV === 'test') {
+    if (process.env.NODE_ENV === "test") {
       throw error; // Fail fast during automated test runs
     }
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('[DepositGuard Telemetry Error]', error);
+    if (process.env.NODE_ENV === "development") {
+      console.warn("[DepositGuard Telemetry Error]", error);
     }
   }
 }

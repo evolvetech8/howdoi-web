@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Landmark, ArrowRight, HelpCircle } from 'lucide-react';
-import { useSimulation } from '@/lib/depositguard/context';
-import DualNumberInput from '../common/DualNumberInput';
-import WizardSummaryPreview from './WizardSummaryPreview';
-import { formatMonthsToYears } from '@/lib/depositguard/formatters';
+import React from "react";
+import { Landmark, ArrowRight, HelpCircle } from "lucide-react";
+import { useSimulation } from "@/lib/depositguard/context";
+import DualNumberInput from "../common/DualNumberInput";
+import WizardSummaryPreview from "./WizardSummaryPreview";
+import { formatMonthsToYears } from "@/lib/depositguard/formatters";
 
 export default function Step3Loan() {
   const { loan, updateLoan, step3Validation } = useSimulation();
@@ -14,7 +14,7 @@ export default function Step3Loan() {
     updateLoan({ loanTermMonths: months });
   };
 
-  const handleMethodChange = (method: 'EQUAL_PRINCIPAL' | 'ANNUITY') => {
+  const handleMethodChange = (method: "EQUAL_PRINCIPAL" | "ANNUITY") => {
     updateLoan({ repaymentMethod: method });
   };
 
@@ -35,36 +35,36 @@ export default function Step3Loan() {
   };
 
   const termPresets = [
-    { label: '15 năm', value: 180 },
-    { label: '20 năm', value: 240 },
-    { label: '25 năm', value: 300 },
-    { label: '30 năm', value: 360 },
+    { label: "15 năm", value: 180 },
+    { label: "20 năm", value: 240 },
+    { label: "25 năm", value: 300 },
+    { label: "30 năm", value: 360 },
   ];
 
   const promoRatePresets = [
-    { label: '6,5%', value: 6.5 },
-    { label: '7,0%', value: 7.0 },
-    { label: '7,5%', value: 7.5 },
-    { label: '8,0%', value: 8.0 },
+    { label: "6,5%", value: 6.5 },
+    { label: "7,0%", value: 7.0 },
+    { label: "7,5%", value: 7.5 },
+    { label: "8,0%", value: 8.0 },
   ];
 
   const promoPeriodPresets = [
-    { label: '12 tháng (1 năm)', value: 12 },
-    { label: '24 tháng (2 năm)', value: 24 },
-    { label: '36 tháng (3 năm)', value: 36 },
+    { label: "12 tháng (1 năm)", value: 12 },
+    { label: "24 tháng (2 năm)", value: 24 },
+    { label: "36 tháng (3 năm)", value: 36 },
   ];
 
   const postPromoPresets = [
-    { label: '10,5%', value: 10.5 },
-    { label: '11,5%', value: 11.5 },
-    { label: '12,0%', value: 12.0 },
-    { label: '13,0%', value: 13.0 },
+    { label: "10,5%", value: 10.5 },
+    { label: "11,5%", value: 11.5 },
+    { label: "12,0%", value: 12.0 },
+    { label: "13,0%", value: 13.0 },
   ];
 
   const gracePresets = [
-    { label: 'Không ân hạn', value: 0 },
-    { label: '12 tháng', value: 12 },
-    { label: '24 tháng', value: 24 },
+    { label: "Không ân hạn", value: 0 },
+    { label: "12 tháng", value: 12 },
+    { label: "24 tháng", value: 24 },
   ];
 
   return (
@@ -78,7 +78,8 @@ export default function Step3Loan() {
           Lựa chọn phương thức trả nợ & kịch bản lãi suất
         </h2>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Mô phỏng chính xác sự khác biệt giữa dư nợ giảm dần và niên kim, kèm nguy cơ bật tăng lãi suất sau ưu đãi.
+          Mô phỏng chính xác sự khác biệt giữa dư nợ giảm dần và niên kim, kèm
+          nguy cơ bật tăng lãi suất sau ưu đãi.
         </p>
       </div>
 
@@ -94,42 +95,49 @@ export default function Step3Loan() {
           {/* Equal Principal */}
           <button
             type="button"
-            onClick={() => handleMethodChange('EQUAL_PRINCIPAL')}
+            onClick={() => handleMethodChange("EQUAL_PRINCIPAL")}
             className={`p-4 rounded-2xl border text-left transition-all ${
-              loan.repaymentMethod === 'EQUAL_PRINCIPAL'
-                ? 'border-blue-700 bg-blue-50/60 ring-2 ring-blue-700/30 shadow-2xs'
-                : 'border-slate-200 bg-white hover:border-slate-300'
+              loan.repaymentMethod === "EQUAL_PRINCIPAL"
+                ? "border-blue-700 bg-blue-50/60 ring-2 ring-blue-700/30 shadow-2xs"
+                : "border-slate-200 bg-white hover:border-slate-300"
             }`}
           >
             <div className="flex justify-between items-center mb-1">
-              <span className="font-bold text-sm text-slate-900">Dư nợ giảm dần</span>
+              <span className="font-bold text-sm text-slate-900">
+                Dư nợ giảm dần
+              </span>
               <span className="text-[10px] font-bold text-blue-800 bg-blue-100/80 px-2 py-0.5 rounded-full">
-                Tiết kiệm lãi nhất
+                Gốc cố định mỗi tháng
               </span>
             </div>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Tiền gốc cố định mỗi tháng, tiền lãi tính trên dư nợ thực tế giảm dần. Số tiền trả tháng đầu cao nhất và giảm dần về sau.
+              Tiền gốc cố định mỗi tháng, tiền lãi tính trên dư nợ thực tế giảm
+              dần. Khoản trả giảm khi giữ nguyên lãi suất; có thể tăng khi hết
+              ưu đãi.
             </p>
           </button>
 
           {/* Annuity */}
           <button
             type="button"
-            onClick={() => handleMethodChange('ANNUITY')}
+            onClick={() => handleMethodChange("ANNUITY")}
             className={`p-4 rounded-2xl border text-left transition-all ${
-              loan.repaymentMethod === 'ANNUITY'
-                ? 'border-blue-700 bg-blue-50/60 ring-2 ring-blue-700/30 shadow-2xs'
-                : 'border-slate-200 bg-white hover:border-slate-300'
+              loan.repaymentMethod === "ANNUITY"
+                ? "border-blue-700 bg-blue-50/60 ring-2 ring-blue-700/30 shadow-2xs"
+                : "border-slate-200 bg-white hover:border-slate-300"
             }`}
           >
             <div className="flex justify-between items-center mb-1">
-              <span className="font-bold text-sm text-slate-900">Trả góp đều (Niên kim)</span>
+              <span className="font-bold text-sm text-slate-900">
+                Trả góp đều (Niên kim)
+              </span>
               <span className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full">
                 Ổn định dòng tiền
               </span>
             </div>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Tổng tiền trả (gốc + lãi) cố định hàng tháng trong suốt thời hạn ưu đãi. Dễ lập kế hoạch chi tiêu nhưng tổng lãi cao hơn.
+              Tổng tiền trả (gốc + lãi) cố định hàng tháng trong suốt thời hạn
+              ưu đãi. Dễ lập kế hoạch chi tiêu nhưng tổng lãi cao hơn.
             </p>
           </button>
         </div>

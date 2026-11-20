@@ -33,22 +33,24 @@ export interface Guide {
 export const GUIDES: Guide[] = [
   {
     slug: "cu-nhay-lai-suat-thang-13-va-25",
-    title: "Điều gì xảy ra với khoản vay mua nhà sau 12–24 tháng đầu ưu đãi? Giải phẫu cú sốc lãi thả nổi",
+    title:
+      "Điều gì xảy ra với khoản vay mua nhà sau 12–24 tháng đầu ưu đãi? Giải phẫu cú sốc lãi thả nổi",
     excerpt:
       "Vì sao năm đầu trả nợ 20 triệu/tháng rất nhẹ nhàng nhưng sang tháng thứ 13 lại vọt lên 27,33 triệu/tháng? Phân tích toán học về vách đá lãi suất thả nổi và bẫy ân hạn nợ gốc.",
     category: "Vay mua nhà & Lãi suất",
     readTime: "7 phút đọc",
     date: "14/11/2026",
-    author: "Archonic FinLab (EvolveTech)",
+    author: "EvolveTech / Archonic",
     relatedTool: "/kiem-tra-mua-nha",
-    infographicUrl: "/media/infographics/fg_05_grace_period_month_25_cliff_4x5.png",
+    infographicUrl:
+      "/media/infographics/fg_05_grace_period_month_25_cliff_4x5.png",
     scenarioBadge: "Kịch bản chuẩn: Vay 2,0 tỷ • 240 tháng • 7% → 12%/năm",
     isHomebuyerFeatured: true,
     content: {
       introduction:
         "Khi đi xem căn hộ hoặc nhà phố tại Việt Nam, con số mà người mua thường được nghe nhiều nhất là mức lãi suất ưu đãi năm đầu: chỉ từ 6,0% đến 7,5%/năm. Nhưng hợp đồng tín dụng mua nhà kéo dài 15 đến 25 năm, trong khi lãi suất ưu đãi chỉ tồn tại đúng 12 hoặc 24 tháng đầu tiên.",
       keyTakeaways: [
-        "Sau thời gian ưu đãi, lãi suất chuyển sang thả nổi = Lãi suất cơ sở / Tiết kiệm 12T + Biên độ (3,5% – 4,5%/năm), thường dao động 11% – 13,5%/năm.",
+        "Sau thời gian ưu đãi, lãi suất chuyển sang thả nổi = Lãi suất cơ sở / Tiết kiệm 12T + Biên độ (theo hợp đồng); mức lãi sau ưu đãi cần xác nhận với ngân hàng.",
         "Với khoản vay 2,0 tỷ (240 tháng, gốc đều), tiền trả tháng 1 là 20,00 triệu nhưng tháng 13 nhảy vọt lên 27,33 triệu (+7,33 triệu/tháng).",
         "Nếu kết hợp ân hạn nợ gốc 24 tháng, tháng thứ 25 sẽ chịu 'cú sốc kép': vừa bắt đầu trả nợ gốc bị nén vào 18 năm còn lại, vừa chịu lãi suất thả nổi.",
       ],
@@ -71,7 +73,8 @@ export const GUIDES: Guide[] = [
           ],
         },
         {
-          heading: "3. Cách dùng DepositGuard để tìm điểm cân bằng trước khi đặt cọc",
+          heading:
+            "3. Cách dùng DepositGuard để tìm điểm cân bằng trước khi đặt cọc",
           body: [
             "Trước khi ký thỏa thuận đặt cọc, hãy nhập thông số gói vay vào bộ mô phỏng DepositGuard và bật nút 'Sốc lãi suất +2%' trên trang kết quả.",
             "Nếu dòng tiền tháng 13 bị âm, Bộ giải ngược (Reverse Affordability Solver) sẽ chỉ rõ bạn cần giảm khoản vay xuống bao nhiêu (ví dụ từ 2,0 tỷ về 1,64 tỷ) để dòng tiền gia đình luôn dương ngay cả khi hết ưu đãi.",
@@ -84,15 +87,17 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "thu-nhap-rong-vs-ty-le-tra-no-dti-dsr",
-    title: "Thu nhập ròng vs Nghĩa vụ trả nợ: Tỷ lệ DTI/DSR nói lên điều gì (và bỏ sót điều gì)?",
+    title:
+      "Thu nhập ròng vs Nghĩa vụ trả nợ: Tỷ lệ DTI/DSR nói lên điều gì (và bỏ sót điều gì)?",
     excerpt:
       "Ngân hàng duyệt cho bạn vay 70% giá trị căn nhà không có nghĩa là gia đình bạn sẽ sống ổn sau khi trả nợ. Sự khác biệt sống còn giữa chuẩn duyệt vay ngân hàng và dòng tiền sinh tồn của hộ gia đình.",
     category: "Dòng tiền gia đình",
     readTime: "8 phút đọc",
     date: "14/11/2026",
-    author: "Archonic FinLab (EvolveTech)",
+    author: "EvolveTech / Archonic",
     relatedTool: "/kiem-tra-mua-nha",
-    infographicUrl: "/media/infographics/fg_03_reverse_affordability_matrix_4x5.png",
+    infographicUrl:
+      "/media/infographics/fg_03_reverse_affordability_matrix_4x5.png",
     scenarioBadge: "Ma trận tra cứu: Lương 25tr – 80tr → Trần vay an toàn",
     isHomebuyerFeatured: true,
     content: {
@@ -105,7 +110,8 @@ export const GUIDES: Guide[] = [
       ],
       sections: [
         {
-          heading: "1. Vì sao DTI 45% với người độc thân thì ổn, nhưng với gia đình có 2 con nhỏ lại là khủng hoảng?",
+          heading:
+            "1. Vì sao DTI 45% với người độc thân thì ổn, nhưng với gia đình có 2 con nhỏ lại là khủng hoảng?",
           body: [
             "Chỉ số DTI (Debt-to-Income — Tỷ lệ trả nợ trên thu nhập) truyền thống chỉ lấy Tổng tiền trả nợ chia cho Thu nhập.",
             "Nhưng một gia đình tại TP.HCM hoặc Hà Nội có 2 con nhỏ phải chi cố định 28 – 35 triệu/tháng cho tiền ăn học, sữa bỉm, điện nước, phí quản lý chung cư và hiếu hỉ. Nếu tổng thu nhập Net là 55 triệu mà tiền trả nợ tháng 13 chiếm 27,33 triệu (DTI ~ 49,7%), gia đình sẽ lập tức thiếu hụt tiền mặt dù DTI vẫn dưới mốc 50%!",
@@ -113,7 +119,8 @@ export const GUIDES: Guide[] = [
           tip: "Trên DepositGuard, chúng tôi không bao giờ phán xét khả năng vay chỉ bằng một con số % DTI đơn lẻ, mà luôn đối chiếu trực tiếp với Chi phí sinh hoạt thiết yếu và Quỹ dự phòng của chính gia đình bạn.",
         },
         {
-          heading: "2. Ma trận tham khảo: Thu nhập bao nhiêu thì nên vay tối đa bấy nhiêu?",
+          heading:
+            "2. Ma trận tham khảo: Thu nhập bao nhiêu thì nên vay tối đa bấy nhiêu?",
           body: [
             "Với giả định kỳ hạn 20 năm và lãi suất thả nổi sau ưu đãi ở mức 11,5% – 12,0%/năm, ngưỡng vay an toàn (để nghĩa vụ trả nợ sau ưu đãi không vượt quá ~38–40% thu nhập ròng) thường nằm trong khoảng:",
             "• Thu nhập ròng 35 – 40 triệu/tháng: Khoản vay an toàn khoảng 900 triệu – 1,15 tỷ đồng.",
@@ -128,15 +135,17 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "5-hang-muc-tai-chinh-truoc-khi-dat-coc",
-    title: "5 hạng mục tài chính sống còn phải kiểm tra trước khi xuống tiền đặt cọc mua nhà",
+    title:
+      "5 hạng mục tài chính sống còn phải kiểm tra trước khi xuống tiền đặt cọc mua nhà",
     excerpt:
       "Đặt cọc 100–300 triệu nhưng ngân hàng định giá thấp hơn giá mua hoặc thiếu 350 triệu tiền thuế phí & quỹ bảo trì lúc nhận nhà? Checklist 5 bước bảo vệ tiền cọc cho người mua nhà Việt Nam.",
     category: "Thẩm định trước đặt cọc",
     readTime: "9 phút đọc",
     date: "14/11/2026",
-    author: "Archonic FinLab (EvolveTech)",
+    author: "EvolveTech / Archonic",
     relatedTool: "/kiem-tra-mua-nha",
-    infographicUrl: "/media/infographics/fg_01_bank_valuation_shortfall_trap_4x5.png",
+    infographicUrl:
+      "/media/infographics/fg_01_bank_valuation_shortfall_trap_4x5.png",
     scenarioBadge: "Checklist thực chiến: Bảo vệ 100–300 triệu tiền cọc",
     isHomebuyerFeatured: true,
     content: {
@@ -149,7 +158,8 @@ export const GUIDES: Guide[] = [
       ],
       sections: [
         {
-          heading: "1. Bẫy chênh lệch định giá ngân hàng (Valuation Shortfall Trap)",
+          heading:
+            "1. Bẫy chênh lệch định giá ngân hàng (Valuation Shortfall Trap)",
           body: [
             "Ví dụ bạn mua căn hộ hoặc nhà phố giá 3,0 tỷ đồng và dự tính có sẵn 900 triệu (30%), còn lại vay ngân hàng 2,1 tỷ (70%).",
             "Tuy nhiên, sau khi bạn đã chuyển 200 triệu tiền đặt cọc, công ty thẩm định giá của ngân hàng chỉ định giá tài sản đó ở mức 2,5 tỷ đồng theo khung giá an toàn. Khi đó, 70% của 2,5 tỷ chỉ là 1,75 tỷ đồng. Bạn lập tức bị hụt 350.000.000 ₫ tiền mặt phải tự xoay xở trong vòng 15–20 ngày trước hạn công chứng!",
@@ -176,15 +186,17 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "cach-doc-bang-chao-lai-suat-ngan-hang",
-    title: "Cách đọc bảng chào lãi suất ngân hàng: Lãi ưu đãi, biên độ thả nổi, ân hạn gốc và phí phạt trả trước",
+    title:
+      "Cách đọc bảng chào lãi suất ngân hàng: Lãi ưu đãi, biên độ thả nổi, ân hạn gốc và phí phạt trả trước",
     excerpt:
       "Giải mã tờ rơi và hợp đồng tín dụng ngân hàng: Khi nào nên chọn Dư nợ giảm dần, khi nào chọn Niên kim (trả góp đều), và 5 câu hỏi bắt buộc phải hỏi tín dụng viên bằng văn bản.",
     category: "Vay mua nhà & Lãi suất",
     readTime: "8 phút đọc",
     date: "14/11/2026",
-    author: "Archonic FinLab (EvolveTech)",
+    author: "EvolveTech / Archonic",
     relatedTool: "/kiem-tra-mua-nha",
-    infographicUrl: "/media/infographics/fg_02_equal_principal_vs_annuity_4x5.png",
+    infographicUrl:
+      "/media/infographics/fg_02_equal_principal_vs_annuity_4x5.png",
     scenarioBadge: "So sánh trực quan: Dư nợ giảm dần vs Niên kim",
     isHomebuyerFeatured: true,
     content: {
@@ -197,7 +209,8 @@ export const GUIDES: Guide[] = [
       ],
       sections: [
         {
-          heading: "1. Dư nợ giảm dần (Gốc đều) vs Niên kim (Trả góp đều): Chọn cách nào?",
+          heading:
+            "1. Dư nợ giảm dần (Gốc đều) vs Niên kim (Trả góp đều): Chọn cách nào?",
           body: [
             "• Dư nợ giảm dần (Equal Principal): Tiền gốc trả mỗi tháng bằng nhau (= Tổng vay / Số tháng). Tiền lãi tính trên dư nợ thực tế còn lại nên giảm dần qua từng tháng. Tháng đầu tiên áp lực cao nhất, nhưng càng về sau càng nhẹ và khi lãi suất thả nổi tăng ở tháng 13, dư nợ gốc đã giảm được một phần.",
             "• Trả góp đều / Niên kim (Annuity): Tổng số tiền (Gốc + Lãi) mỗi tháng bằng nhau trong cùng một mức lãi suất. Nhờ vậy tháng đầu tiên số tiền phải đóng thấp hơn phương thức gốc đều khoảng 12–18%. Tuy nhiên, phần gốc trả được trong những năm đầu rất ít, nên khi bước sang tháng 13 với lãi suất thả nổi cao, khoản thanh toán niên kim được tính lại trên dư nợ còn rất lớn.",
@@ -220,15 +233,17 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "mua-nha-gia-dinh-tre-cu-soc-thu-nhap",
-    title: "Mua nhà khi có gia đình trẻ: Cú sốc giảm 20% thu nhập hoặc tăng chi phí nuôi con thay đổi sức chịu đựng ra sao?",
+    title:
+      "Mua nhà khi có gia đình trẻ: Cú sốc giảm 20% thu nhập hoặc tăng chi phí nuôi con thay đổi sức chịu đựng ra sao?",
     excerpt:
       "Trong 20 năm trả nợ mua nhà, xác suất một trong hai vợ chồng nghỉ thai sản, chuyển việc hoặc giảm thu nhập trong 3–6 tháng là gần như chắc chắn. Cách thiết kế bộ đệm tài chính không bao giờ gãy.",
     category: "Dòng tiền gia đình",
     readTime: "7 phút đọc",
     date: "14/11/2026",
-    author: "Archonic FinLab (EvolveTech)",
+    author: "EvolveTech / Archonic",
     relatedTool: "/kiem-tra-mua-nha",
-    infographicUrl: "/media/infographics/fg_06_rent_vs_buy_10yr_wealth_matrix_4x5.png",
+    infographicUrl:
+      "/media/infographics/fg_06_rent_vs_buy_10yr_wealth_matrix_4x5.png",
     scenarioBadge: "Stress-Test: Sốc thu nhập -20% & Bài toán Thuê vs Mua",
     isHomebuyerFeatured: true,
     content: {
@@ -241,7 +256,8 @@ export const GUIDES: Guide[] = [
       ],
       sections: [
         {
-          heading: "1. Kịch bản Stress-Test: Khi cú nhảy lãi suất Tháng 13 gặp lúc giảm 20% thu nhập",
+          heading:
+            "1. Kịch bản Stress-Test: Khi cú nhảy lãi suất Tháng 13 gặp lúc giảm 20% thu nhập",
           body: [
             "Hãy xét một cặp vợ chồng trẻ có tổng thu nhập ròng 55 triệu/tháng, chi tiêu 30 triệu/tháng và khoản trả nợ tháng 13 là 27,33 triệu/tháng.",
             "Nếu đúng vào năm thứ 2, người vợ nghỉ sinh hoặc một người bị giảm thu nhập khiến tổng thu nhập gia đình giảm 20% (từ 55 triệu xuống 44 triệu/tháng) trong 6 tháng: Dòng tiền hàng tháng sẽ thâm hụt tới -13,33 triệu/tháng. Chỉ trong vòng 6 tháng, gần 80 triệu đồng tiền tiết kiệm sẽ bốc hơi hoàn toàn.",
@@ -262,8 +278,10 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "quy-khan-cap-3-6-thang",
-    title: "Làm thế nào để xây dựng quỹ khẩn cấp 3–6 tháng khi thu nhập còn khiêm tốn?",
-    excerpt: "Quỹ khẩn cấp không phải là tiền để giàu lên, mà là 'tấm khiên' giữ cho bạn không rơi vào nợ nần khi biến cố ập đến. Hướng dẫn từng bước cho người mới.",
+    title:
+      "Làm thế nào để xây dựng quỹ khẩn cấp 3–6 tháng khi thu nhập còn khiêm tốn?",
+    excerpt:
+      "Quỹ khẩn cấp không phải là tiền để giàu lên, mà là 'tấm khiên' giữ cho bạn không rơi vào nợ nần khi biến cố ập đến. Hướng dẫn từng bước cho người mới.",
     category: "Tiết kiệm",
     readTime: "6 phút đọc",
     date: "08/09/2026",
@@ -271,7 +289,8 @@ export const GUIDES: Guide[] = [
     relatedTool: "/kiem-tra-mua-nha",
     infographicUrl: "/media/infographics/edu_02_quy_du_phong_sau_mua_4x5.png",
     content: {
-      introduction: "Nhiều người Việt chúng ta thường bắt đầu hành trình tài chính bằng việc hỏi 'Đầu tư gì để nhanh giàu?'. Nhưng sự thật cay đắng là: khi chưa có tấm khiên bảo vệ, một sự cố xe hỏng, ốm đau hay mất việc có thể cuốn phăng toàn bộ số tiền bạn tích góp được, thậm chí đẩy bạn vào vòng xoáy thẻ tín dụng và vay nặng lãi.",
+      introduction:
+        "Nhiều người Việt chúng ta thường bắt đầu hành trình tài chính bằng việc hỏi 'Đầu tư gì để nhanh giàu?'. Nhưng sự thật cay đắng là: khi chưa có tấm khiên bảo vệ, một sự cố xe hỏng, ốm đau hay mất việc có thể cuốn phăng toàn bộ số tiền bạn tích góp được, thậm chí đẩy bạn vào vòng xoáy thẻ tín dụng và vay nặng lãi.",
       keyTakeaways: [
         "Quỹ khẩn cấp tương đương 3-6 tháng chi tiêu thiết yếu tối thiểu (không phải toàn bộ lương).",
         "Để ở nơi an toàn, thanh khoản cao (tài khoản thanh toán ngân hàng số, gửi tiết kiệm kỳ hạn ngắn 1 tháng, chứng chỉ tiền gửi).",
@@ -302,20 +321,24 @@ export const GUIDES: Guide[] = [
           tip: "Không bao giờ để quỹ khẩn cấp vào cổ phiếu, crypto hay bất động sản vì khi cần gấp, thị trường đang giảm bạn sẽ buộc phải cắt lỗ.",
         },
       ],
-      conclusion: "Có trong tay 30-50 triệu tiền quỹ khẩn cấp sẽ mang lại cho bạn một cảm giác bình an lạ kỳ. Bạn sẽ không còn giật mình thon thót mỗi khi nhận tin báo viện phí hay sự cố bất ngờ.",
+      conclusion:
+        "Có trong tay 30-50 triệu tiền quỹ khẩn cấp sẽ mang lại cho bạn một cảm giác bình an lạ kỳ. Bạn sẽ không còn giật mình thon thót mỗi khi nhận tin báo viện phí hay sự cố bất ngờ.",
     },
   },
   {
     slug: "phan-bo-luong-10-15-trieu",
-    title: "Phân bổ lương 10–15 triệu: Làm sao để vừa sống thoải mái vừa có tích lũy?",
-    excerpt: "Thu nhập 10-15 triệu ở các đô thị lớn như Hà Nội hay TP.HCM là mức lương của hàng triệu bạn trẻ. Đây là công thức chi tiêu thực tế nhất.",
+    title:
+      "Phân bổ lương 10–15 triệu: Làm sao để vừa sống thoải mái vừa có tích lũy?",
+    excerpt:
+      "Thu nhập 10-15 triệu ở các đô thị lớn như Hà Nội hay TP.HCM là mức lương của hàng triệu bạn trẻ. Đây là công thức chi tiêu thực tế nhất.",
     category: "Quản lý nợ",
     readTime: "7 phút đọc",
     date: "05/09/2026",
     author: "Archonic (EvolveTech)",
     relatedTool: "/kiem-tra-mua-nha",
     content: {
-      introduction: "Lương 10 đến 15 triệu ở TP.HCM hay Hà Nội có vẻ như 'vừa đủ sống', nhưng nếu không kiểm soát, bạn sẽ rơi vào cái bẫy sống mòn từ kỳ lương này sang kỳ lương khác (Paycheck to paycheck).",
+      introduction:
+        "Lương 10 đến 15 triệu ở TP.HCM hay Hà Nội có vẻ như 'vừa đủ sống', nhưng nếu không kiểm soát, bạn sẽ rơi vào cái bẫy sống mòn từ kỳ lương này sang kỳ lương khác (Paycheck to paycheck).",
       keyTakeaways: [
         "Áp dụng linh hoạt quy tắc 50/30/20 hoặc điều chỉnh thành 60/20/20 cho người mới lập nghiệp.",
         "Kiểm soát chi phí cố định (Tiền phòng trọ không được vượt quá 25-30% thu nhập).",
@@ -339,26 +362,31 @@ export const GUIDES: Guide[] = [
           tip: "2.7 triệu mỗi tháng nghe có vẻ nhỏ, nhưng sau 3 năm với mức tăng trưởng 10%/năm, bạn sẽ có hơn 115 triệu đồng!",
         },
         {
-          heading: "3. 'Cắt giảm' có giới hạn, nhưng 'Gia tăng thu nhập' là vô hạn",
+          heading:
+            "3. 'Cắt giảm' có giới hạn, nhưng 'Gia tăng thu nhập' là vô hạn",
           body: [
             "Bạn không thể tiết kiệm nhiều hơn số tiền bạn kiếm được. Khi đã tối ưu hóa chi tiêu cơ bản, 80% năng lượng của bạn nên dành cho việc nâng cấp kỹ năng nghề nghiệp để tăng lương từ 15 triệu lên 25 triệu.",
           ],
         },
       ],
-      conclusion: "Tự do tài chính bắt đầu từ sự kỷ luật với những khoản tiền nhỏ nhất. Hãy thử áp dụng công thức này ngay trong kỳ lương sắp tới!",
+      conclusion:
+        "Tự do tài chính bắt đầu từ sự kỷ luật với những khoản tiền nhỏ nhất. Hãy thử áp dụng công thức này ngay trong kỳ lương sắp tới!",
     },
   },
   {
     slug: "lai-kep-ky-quan-cho-nguoi-tre",
-    title: "Sức mạnh của lãi kép: Tại sao bắt đầu với 1 triệu/tháng lúc 22 tuổi hơn đứt 5 triệu lúc 35 tuổi?",
-    excerpt: "Toán học không biết nói dối. Hiểu về lãi kép và thời gian là vũ khí mạnh nhất giúp người bình thường có thể đạt được tự do tài chính.",
+    title:
+      "Sức mạnh của lãi kép: Tại sao bắt đầu với 1 triệu/tháng lúc 22 tuổi hơn đứt 5 triệu lúc 35 tuổi?",
+    excerpt:
+      "Toán học không biết nói dối. Hiểu về lãi kép và thời gian là vũ khí mạnh nhất giúp người bình thường có thể đạt được tự do tài chính.",
     category: "Đầu tư",
     readTime: "5 phút đọc",
     date: "01/09/2026",
     author: "Archonic (EvolveTech)",
     relatedTool: "/kiem-tra-mua-nha",
     content: {
-      introduction: "Albert Einstein từng gọi lãi kép là kỳ quan thứ 8 của thế giới: 'Người hiểu nó sẽ kiếm được tiền từ nó; người không hiểu nó sẽ phải trả tiền cho nó'. Trong tài chính cá nhân, tài sản lớn nhất của bạn không phải là tiền, mà là THỜI GIAN.",
+      introduction:
+        "Albert Einstein từng gọi lãi kép là kỳ quan thứ 8 của thế giới: 'Người hiểu nó sẽ kiếm được tiền từ nó; người không hiểu nó sẽ phải trả tiền cho nó'. Trong tài chính cá nhân, tài sản lớn nhất của bạn không phải là tiền, mà là THỜI GIAN.",
       keyTakeaways: [
         "Yếu tố số mũ (thời gian) quan trọng hơn số tiền gốc bỏ ra ban đầu.",
         "Đầu tư đều đặn (DCA) giúp loại bỏ áp lực đoán đỉnh đoán đáy thị trường.",
@@ -383,19 +411,23 @@ export const GUIDES: Guide[] = [
           tip: "Hãy dùng hệ thống công cụ tài chính của EvolveTech để tận mắt nhìn thấy tương lai tài sản và dòng tiền của bạn sau 10, 20 năm.",
         },
       ],
-      conclusion: "Thời điểm tốt nhất để trồng cây là 20 năm trước. Thời điểm tốt thứ hai chính là ngay BÂY GIỜ.",
+      conclusion:
+        "Thời điểm tốt nhất để trồng cây là 20 năm trước. Thời điểm tốt thứ hai chính là ngay BÂY GIỜ.",
     },
   },
   {
     slug: "5-bay-tai-chinh-lua-dao-pho-bien",
-    title: "5 bẫy tâm lý và chiêu trò lừa đảo tài chính người Việt hay mắc phải nhất",
-    excerpt: "Từ các hội nhóm phím hàng cam kết lợi nhuận khủng 30%/tháng đến bẫy thẻ tín dụng trả góp 0%. Cách nhận diện để giữ chặt đồng tiền mồ hôi nước mắt.",
+    title:
+      "5 bẫy tâm lý và chiêu trò lừa đảo tài chính người Việt hay mắc phải nhất",
+    excerpt:
+      "Từ các hội nhóm phím hàng cam kết lợi nhuận khủng 30%/tháng đến bẫy thẻ tín dụng trả góp 0%. Cách nhận diện để giữ chặt đồng tiền mồ hôi nước mắt.",
     category: "Tâm lý tiền bạc",
     readTime: "8 phút đọc",
     date: "28/08/2026",
     author: "Archonic (EvolveTech)",
     content: {
-      introduction: "Kiếm tiền đã khó, giữ tiền còn khó hơn gấp mười lần. Ở Việt Nam, lòng tham và nỗi sợ bị bỏ lại phía sau (FOMO) là hai tử huyệt khiến hàng ngàn người mất sạch số tiền tích cóp cả đời.",
+      introduction:
+        "Kiếm tiền đã khó, giữ tiền còn khó hơn gấp mười lần. Ở Việt Nam, lòng tham và nỗi sợ bị bỏ lại phía sau (FOMO) là hai tử huyệt khiến hàng ngàn người mất sạch số tiền tích cóp cả đời.",
       keyTakeaways: [
         "Bất kỳ ai cam kết lợi nhuận > 15-20%/năm mà bảo 'không có rủi ro' đều là lừa đảo (Ponzi).",
         "Thẻ tín dụng là công cụ tài chính tuyệt vời nếu trả hết 100% đúng hạn, nhưng là 'hố đen nợ nần' nếu chỉ trả số tiền tối thiểu.",
@@ -424,19 +456,23 @@ export const GUIDES: Guide[] = [
           ],
         },
       ],
-      conclusion: "Bảo vệ vốn luôn là ưu tiên số một. Mất tiền có thể kiếm lại, nhưng mất niềm tin vào cuộc sống là cái giá quá đắt. Hãy trang bị kiến thức trước khi xuống tiền.",
+      conclusion:
+        "Bảo vệ vốn luôn là ưu tiên số một. Mất tiền có thể kiếm lại, nhưng mất niềm tin vào cuộc sống là cái giá quá đắt. Hãy trang bị kiến thức trước khi xuống tiền.",
     },
   },
   {
     slug: "bao-hiem-nhan-tho-hieu-dung",
-    title: "Bảo hiểm nhân thọ: Mua đúng để bảo vệ gia đình, tránh biến thành gánh nặng tài chính",
-    excerpt: "Rất nhiều người Việt bị mua sai gói bảo hiểm, đóng phí quá sức rồi bỏ dở mất trắng. Đây là cẩm nang giúp bạn hiểu đúng bản chất thật của bảo hiểm.",
+    title:
+      "Bảo hiểm nhân thọ: Mua đúng để bảo vệ gia đình, tránh biến thành gánh nặng tài chính",
+    excerpt:
+      "Rất nhiều người Việt bị mua sai gói bảo hiểm, đóng phí quá sức rồi bỏ dở mất trắng. Đây là cẩm nang giúp bạn hiểu đúng bản chất thật của bảo hiểm.",
     category: "Bảo hiểm",
     readTime: "7 phút đọc",
     date: "20/08/2026",
     author: "Archonic (EvolveTech)",
     content: {
-      introduction: "Bảo hiểm nhân thọ sinh ra không phải để sinh lời hay làm giàu. Mục đích duy nhất của nó là BẢO VỆ THU NHẬP của người trụ cột khi có rủi ro lớn về tính mạng hay sức khỏe xảy ra.",
+      introduction:
+        "Bảo hiểm nhân thọ sinh ra không phải để sinh lời hay làm giàu. Mục đích duy nhất của nó là BẢO VỆ THU NHẬP của người trụ cột khi có rủi ro lớn về tính mạng hay sức khỏe xảy ra.",
       keyTakeaways: [
         "Chỉ nên trích 8% - 12% thu nhập năm cho toàn bộ chi phí bảo hiểm của gia đình.",
         "Ưu tiên mua cho người trụ cột (người tạo ra tiền chính trong gia đình) trước tiên.",
@@ -458,7 +494,8 @@ export const GUIDES: Guide[] = [
           ],
         },
       ],
-      conclusion: "Một hợp đồng bảo hiểm tốt là hợp đồng bạn hiểu rõ từng điều khoản loại trừ và có mức phí vừa vặn với túi tiền để duy trì được suốt 15-20 năm.",
+      conclusion:
+        "Một hợp đồng bảo hiểm tốt là hợp đồng bạn hiểu rõ từng điều khoản loại trừ và có mức phí vừa vặn với túi tiền để duy trì được suốt 15-20 năm.",
     },
   },
 ];

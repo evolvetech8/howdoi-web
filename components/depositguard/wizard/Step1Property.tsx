@@ -1,16 +1,24 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Home, Percent, Building2 } from 'lucide-react';
-import { useSimulation } from '@/lib/depositguard/context';
-import FormattedCurrencyInput from '../common/FormattedCurrencyInput';
-import { formatCompactVND } from '@/lib/depositguard/formatters';
+import React from "react";
+import { Home, Percent, Building2 } from "lucide-react";
+import { useSimulation } from "@/lib/depositguard/context";
+import FormattedCurrencyInput from "../common/FormattedCurrencyInput";
+import { formatCompactVND } from "@/lib/depositguard/formatters";
 
 const PROPERTY_TYPES = [
-  { id: 'apartment', label: 'Căn hộ có sẵn', desc: 'Đã bàn giao, có sổ hồng' },
-  { id: 'future_apartment', label: 'Căn hộ hình thành tương lai', desc: 'Thanh toán theo tiến độ' },
-  { id: 'townhouse', label: 'Nhà phố / Nhà riêng', desc: 'Có sổ đỏ/sổ hồng riêng' },
-  { id: 'land', label: 'Đất nền', desc: 'Đã có giấy chứng nhận' },
+  { id: "apartment", label: "Căn hộ có sẵn", desc: "Đã bàn giao, có sổ hồng" },
+  {
+    id: "future_apartment",
+    label: "Căn hộ hình thành tương lai",
+    desc: "Chỉ mô phỏng giải ngân một lần",
+  },
+  {
+    id: "townhouse",
+    label: "Nhà phố / Nhà riêng",
+    desc: "Có sổ đỏ/sổ hồng riêng",
+  },
+  { id: "land", label: "Đất nền", desc: "Đã có giấy chứng nhận" },
 ];
 
 export default function Step1Property() {
@@ -35,26 +43,26 @@ export default function Step1Property() {
   };
 
   const pricePresets = [
-    { label: '1,5 tỷ', value: 1_500_000_000 },
-    { label: '2,0 tỷ', value: 2_000_000_000 },
-    { label: '2,5 tỷ', value: 2_500_000_000 },
-    { label: '3,5 tỷ', value: 3_500_000_000 },
-    { label: '5,0 tỷ', value: 5_000_000_000 },
+    { label: "1,5 tỷ", value: 1_500_000_000 },
+    { label: "2,0 tỷ", value: 2_000_000_000 },
+    { label: "2,5 tỷ", value: 2_500_000_000 },
+    { label: "3,5 tỷ", value: 3_500_000_000 },
+    { label: "5,0 tỷ", value: 5_000_000_000 },
   ];
 
   const priceValue = loan.propertyPrice ?? loan.purchasePrice ?? 0;
 
   const downPaymentPresets = [
     {
-      label: '20% (Tối thiểu)',
+      label: "20%",
       value: Math.round(priceValue * 0.2),
     },
     {
-      label: '30% (Khuyến nghị)',
+      label: "30%",
       value: Math.round(priceValue * 0.3),
     },
     {
-      label: '50% (An toàn)',
+      label: "50%",
       value: Math.round(priceValue * 0.5),
     },
   ];
@@ -70,7 +78,8 @@ export default function Step1Property() {
           Thông tin ngôi nhà bạn dự định mua
         </h2>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Ước tính giá mua và nguồn vốn tự có để xác định số tiền cần vay ngân hàng.
+          Ước tính giá mua và nguồn vốn tự có để xác định số tiền cần vay ngân
+          hàng.
         </p>
       </div>
 
@@ -81,7 +90,9 @@ export default function Step1Property() {
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {PROPERTY_TYPES.map((t) => {
-            const isSelected = loan.propertyType === t.id || (!loan.propertyType && t.id === 'apartment');
+            const isSelected =
+              loan.propertyType === t.id ||
+              (!loan.propertyType && t.id === "apartment");
             return (
               <button
                 key={t.id}
@@ -89,12 +100,16 @@ export default function Step1Property() {
                 onClick={() => updateLoan({ propertyType: t.id as any })}
                 className={`p-3 rounded-xl border text-left transition-all ${
                   isSelected
-                    ? 'border-blue-700 bg-blue-50/60 ring-1 ring-blue-700/30 shadow-2xs'
-                    : 'border-slate-200 bg-white hover:border-slate-300'
+                    ? "border-blue-700 bg-blue-50/60 ring-1 ring-blue-700/30 shadow-2xs"
+                    : "border-slate-200 bg-white hover:border-slate-300"
                 }`}
               >
-                <p className="text-xs font-bold text-slate-800 leading-snug">{t.label}</p>
-                <p className="text-[10px] text-slate-500 mt-0.5 leading-tight">{t.desc}</p>
+                <p className="text-xs font-bold text-slate-800 leading-snug">
+                  {t.label}
+                </p>
+                <p className="text-[10px] text-slate-500 mt-0.5 leading-tight">
+                  {t.desc}
+                </p>
               </button>
             );
           })}
@@ -111,7 +126,10 @@ export default function Step1Property() {
         max={15_000_000_000}
         step={50_000_000}
         presets={pricePresets}
-        error={step1Validation.errors.propertyPrice || step1Validation.errors.purchasePrice}
+        error={
+          step1Validation.errors.propertyPrice ||
+          step1Validation.errors.purchasePrice
+        }
         helperText="Tổng giá trị giao dịch nhà hoặc căn hộ (bao gồm VAT nếu là căn hộ mới)."
       />
 
@@ -127,7 +145,7 @@ export default function Step1Property() {
         presets={downPaymentPresets}
         error={step1Validation.errors.downPayment}
         warning={step1Validation.warnings.downPayment}
-        helperText="Số tiền bạn có sẵn để đặt cọc và trả đợt 1 mà không phải đi vay mượn thêm."
+        helperText="Tổng vốn tự có trả vào giá nhà, bao gồm tiền cọc. Không nhập lại tiền cọc như một khoản chi riêng."
       />
 
       {/* Auto-Calculated Loan Amount & LTV Indicator Card */}
@@ -143,13 +161,17 @@ export default function Step1Property() {
           </div>
           <div className="flex items-center gap-2">
             <div className="bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs text-right">
-              <span className="text-[10px] text-slate-400 block font-medium">Tỷ lệ vay (LTV)</span>
+              <span className="text-[10px] text-slate-400 block font-medium">
+                Tỷ lệ vay (LTV)
+              </span>
               <span className="text-xs sm:text-sm font-bold text-slate-800">
                 {loanToValuePercent.toFixed(1)}%
               </span>
             </div>
             <div className="bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs text-right">
-              <span className="text-[10px] text-slate-400 block font-medium">Tỷ lệ vốn tự có</span>
+              <span className="text-[10px] text-slate-400 block font-medium">
+                Tỷ lệ vốn tự có
+              </span>
               <span className="text-xs sm:text-sm font-bold text-blue-800">
                 {equityRatioPercent.toFixed(1)}%
               </span>
@@ -161,12 +183,16 @@ export default function Step1Property() {
         <div className="w-full bg-blue-700 h-2.5 rounded-full overflow-hidden flex shadow-inner">
           <div
             className="bg-blue-600 h-full transition-all duration-300"
-            style={{ width: `${Math.min(100, Math.max(0, equityRatioPercent))}%` }}
+            style={{
+              width: `${Math.min(100, Math.max(0, equityRatioPercent))}%`,
+            }}
             title={`Vốn tự có: ${equityRatioPercent.toFixed(1)}%`}
           />
           <div
             className="bg-amber-500 h-full transition-all duration-300"
-            style={{ width: `${Math.min(100, Math.max(0, loanToValuePercent))}%` }}
+            style={{
+              width: `${Math.min(100, Math.max(0, loanToValuePercent))}%`,
+            }}
             title={`Vay ngân hàng: ${loanToValuePercent.toFixed(1)}%`}
           />
         </div>
@@ -183,7 +209,8 @@ export default function Step1Property() {
 
         {loanToValuePercent > 80 && (
           <p className="text-xs text-amber-700 bg-amber-50 p-2.5 rounded-xl border border-amber-200/80 font-medium">
-            ⚠️ Tỷ lệ vay trên 80% thường yêu cầu thêm tài sản thế chấp bổ sung và lãi suất có thể cao hơn.
+            ⚠️ Tỷ lệ vay trên 80% thường yêu cầu thêm tài sản thế chấp bổ sung
+            và lãi suất có thể cao hơn.
           </p>
         )}
       </div>

@@ -36,3 +36,7 @@ body {
   background-color: #10b981;
   color: #ffffff;
 }
+
+/* Accessible controls and portable reports */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; }
+@media print { body > header, body > footer, nav, .print\:hidden { display: none !important; } body { background: white; color: #111; } article, main { max-width: none !important; } table { font-size: 10pt; } tr { break-inside: avoid; } }

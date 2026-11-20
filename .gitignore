@@ -37,3 +37,7 @@ next-env.d.ts
 # local large planning media & teamwork session logs
 /PLAN/
 /.agents/teamwork/
+
+# browser verification artifacts
+/test-results/
+/playwright-report/
