@@ -46,3 +46,11 @@ Nếu API lưu lỗi, tắt REPORT_SERVICE_ENABLED, giữ dữ liệu đã nhậ
 `npm run typecheck`, `npm test`, `npm run test:integration`, `npm run build`, `npm run test:browser`. Browser tests mock phản hồi contact, còn database tests chạy PostgreSQL nhúng; chúng không chứng minh email Resend đã đến inbox production. Trước bật bán cần chạy một hồ sơ sandbox với Supabase/Resend thật và kiểm tra inbox.
 
 User test với năm người thuộc nhóm mục tiêu chưa được thực hiện bởi automated tests. Cần kiểm tra họ tìm được người vận hành/phương pháp, hiểu lý do kiểm tra trước đặt cọc, hoàn tất mô phỏng và nhận ra giá trị báo cáo/cẩm nang.
+
+### Kiểm tra tốc độ trên máy kiểm soát
+
+CI dùng runner chia sẻ nên luôn kiểm tra đủ 24 kịch bản và 100 lần đổi trạng thái, nhưng không áp ngưỡng thời gian phụ thuộc phần cứng. Để kiểm tra riêng ngân sách 2 ms cho engine và 35 ms cho một lần đổi trạng thái trên máy benchmark không chạy tác vụ khác:
+
+```sh
+RUN_PERFORMANCE_ASSERTIONS=true npx vitest run tests/ui/challenger-reactivity-stress.test.tsx --maxWorkers=1
+```
